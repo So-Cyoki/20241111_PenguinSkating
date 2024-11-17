@@ -4,21 +4,29 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float speed = 5f;
-    private CharacterController controller;
+    public float moveSpeed = 5f;      // 前后移动速度
+    public float rotationSpeed = 100f; // 左右旋转速度
+    private Rigidbody rb;
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        // 获取 Rigidbody 组件
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
+        // 获取输入
+        float vertical = Input.GetAxis("Vertical");   // W/S 或 ↑/↓ 控制前后移动
+        float horizontal = Input.GetAxis("Horizontal"); // A/D 或 ←/→ 控制旋转
 
-        Vector3 move = transform.right * moveX + transform.forward * moveZ;
+        // 计算移动方向
+        Vector3 moveDirection = new Vector3(horizontal, 0, vertical).normalized;
 
-        controller.Move(move * speed * Time.deltaTime);
+        // 如果有输入，就设置刚体速度
+        if (moveDirection.magnitude > 0.1f)
+        {
+            rb.velocity = new Vector3(moveDirection.x * moveSpeed, rb.velocity.y, moveDirection.z * moveSpeed);
+        }
     }
 }
