@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public float _rotationSpeed;
     public float _jumpSpeed;
 
-    public bool _isJump;
+    bool _isJump;
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         _submergedVolume = _waterObject.submergedVolume;
-        if (_submergedVolume > 1f)
+        if (_submergedVolume > 1f && _rb.velocity.y < 0)
             _isJump = false;
     }
 
