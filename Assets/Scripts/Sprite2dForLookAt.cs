@@ -7,7 +7,7 @@ public class Sprite2dForLookAt : MonoBehaviour
     SpriteRenderer _sprite;
 
     public Transform _targetObj;
-    public Rigidbody _targetRb;
+    Rigidbody _targetRb;
     public Vector3 _offsetPos;
 
     public bool _isChangerAni = true;//是否根据方向切换动画
@@ -25,14 +25,17 @@ public class Sprite2dForLookAt : MonoBehaviour
 
     private void Update()
     {
-        //坐标永远跟随目标
-        transform.position = _targetObj.position + _offsetPos;
-        //面向摄像机
-        transform.LookAt(transform.position + Camera.main.transform.forward);
         if (_isChangerAni)
         {
             ChangerDirAni();
         }
+    }
+    private void LateUpdate()
+    {
+        //面向摄像机
+        transform.LookAt(transform.position + Camera.main.transform.forward);
+        //坐标永远跟随目标
+        transform.position = _targetObj.position + _offsetPos;
     }
 
     //自动翻转
@@ -41,12 +44,12 @@ public class Sprite2dForLookAt : MonoBehaviour
         //向左
         if (_targetRb.velocity.x < 0)
         {
-            _sprite.flipX = true;
+            _sprite.flipX = false;
         }
         //向右
         else
         {
-            _sprite.flipX = false;
+            _sprite.flipX = true;
         }
         //向上
         if (_targetRb.velocity.y > 0)
