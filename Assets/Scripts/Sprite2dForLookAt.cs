@@ -9,13 +9,19 @@ public class Sprite2dForLookAt : MonoBehaviour
     public Transform _targetObj;
     Rigidbody _targetRb;
     public Vector3 _offsetPos;
+    Vector3 _originalPos;
 
-    public bool _isChangerAni = true;//是否根据方向切换动画
+    [Tooltip("自动读取当前坐标来作为偏移值，手动偏移值将不再生效")]
+    public bool _isAutoOffset = true;
+    [Tooltip("是否根据方向切换动画")]
+    public bool _isChangerAni = true;
+
 
     private void Awake()
     {
         _sprite = GetComponent<SpriteRenderer>();
         _targetRb = _targetObj.GetComponent<Rigidbody>();
+        _originalPos = transform.localPosition;
     }
     private void Start()
     {
@@ -25,6 +31,10 @@ public class Sprite2dForLookAt : MonoBehaviour
 
     private void Update()
     {
+        if (_isAutoOffset)
+        {
+            _offsetPos = _originalPos;
+        }
         if (_isChangerAni)
         {
             ChangerDirAni();
@@ -42,7 +52,7 @@ public class Sprite2dForLookAt : MonoBehaviour
     void ChangerDirAni()
     {
         //向左
-        if (_targetRb.velocity.x < 0)
+        if (_targetRb.velocity.x < 1f)
         {
             _sprite.flipX = false;
         }

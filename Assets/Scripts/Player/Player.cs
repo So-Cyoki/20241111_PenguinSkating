@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        //是否进入水中判断
         _submergedVolume = _waterObject.submergedVolume;
         if (_submergedVolume > 1f && _rb.velocity.y < 0)
             _isJump = false;
