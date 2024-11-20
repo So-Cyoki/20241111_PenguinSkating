@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     NWH.DWP2.WaterObjects.WaterObject _waterObject;//水插件脚本
 
     float _submergedVolume;//浮力
-
     public float _speed;
     public float _rotationSpeed;
     public float _jumpSpeed;

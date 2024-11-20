@@ -6,6 +6,8 @@ public class CatchCollision : MonoBehaviour
 {
     Transform _catchTrans;
     Rigidbody _catchRb;
+    ItemBase _catchSprite;
+    public GameObject _lastCatchObj;//最后进入抓取范围的物体
     public Transform _itemParent;
 
     public Vector3 _transOffset;
@@ -17,6 +19,25 @@ public class CatchCollision : MonoBehaviour
 
     private void Update()
     {
+        //抓起来
+        if (Input.GetKeyDown(KeyCode.J) && _lastCatchObj != null)
+        {
+            if (!_isCatch)
+            {
+                Debug.Log("抓起来");
+                _catchTrans = _lastCatchObj.transform;
+                _catchScale = _catchTrans.localScale;
+                _catchRb = _catchTrans.GetComponent<Rigidbody>();
+                _catchRb.velocity = Vector3.zero;
+                _catchRb.useGravity = false;
+                _catchSprite = _catchTrans.GetComponent<ItemBase>();
+                _catchSprite._itemState = ItemState.CATCH;
+
+                _catchTrans.SetParent(transform);
+
+                _isCatch = true;
+            }
+        }
         //放下去
         if (Input.GetKeyDown(KeyCode.K) && _isCatch)
         {
@@ -26,9 +47,10 @@ public class CatchCollision : MonoBehaviour
             _catchRb.AddForce(_throwForce * _catchRb.mass * dir, ForceMode.Impulse);
             _catchTrans.SetParent(_itemParent);
             _catchTrans.localScale = _catchScale;
+            _catchSprite._itemState = ItemState.WATER;
+
             _isCatch = false;
         }
-
     }
     private void LateUpdate()
     {
@@ -38,23 +60,19 @@ public class CatchCollision : MonoBehaviour
             _catchTrans.localPosition = _transOffset;
         }
     }
-
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        //抓起来
-        if (Input.GetKeyDown(KeyCode.J) && other.gameObject.CompareTag("Item"))
+        //记录最后一个进入判定范围的
+        if (other.gameObject.CompareTag("Item"))
         {
-            if (!_isCatch)
-            {
-                Debug.Log("抓起来");
-                _catchTrans = other.transform;
-                _catchScale = _catchTrans.localScale;
-                _catchRb = _catchTrans.GetComponent<Rigidbody>();
-                _catchRb.velocity = Vector3.zero;
-                _catchRb.useGravity = false;
-                _catchTrans.SetParent(transform);
-                _isCatch = true;
-            }
+            _lastCatchObj = other.gameObject;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == _lastCatchObj)
+        {
+            _lastCatchObj = null;
         }
     }
 }
