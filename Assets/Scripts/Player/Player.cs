@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
 
     float _submergedVolume;//浮力
     public float _speed;
-    public float _rotationSpeed;
     public float _jumpSpeed;
 
     bool _isJump;
@@ -42,7 +41,7 @@ public class Player : MonoBehaviour
         {
             //旋转
             Quaternion targetRotation = Quaternion.LookRotation(moveDir, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * _rotationSpeed);
+            transform.rotation = targetRotation;
             //移动
             _rb.velocity = new(moveDir.x * _speed, _rb.velocity.y, moveDir.z * _speed);
         }

@@ -7,12 +7,12 @@ public class CatchCollision : MonoBehaviour
     Transform _catchTrans;
     Rigidbody _catchRb;
     ItemBase _catchSprite;
-    public GameObject _lastCatchObj;//最后进入抓取范围的物体
+    GameObject _lastCatchObj;//最后进入抓取范围的物体
     public Transform _itemParent;
 
     public Vector3 _transOffset;
     public float _throwForce;
-    public Vector3 _throwDir;
+    public Vector3 _throwAngle;
     Vector3 _catchScale;//被抓起物体的原本的大小
 
     public bool _isCatch;
@@ -33,7 +33,7 @@ public class CatchCollision : MonoBehaviour
                 _catchSprite = _catchTrans.GetComponent<ItemBase>();
                 _catchSprite._itemState = ItemState.CATCH;
 
-                _catchTrans.SetParent(transform);
+                _catchTrans.SetParent(transform.parent);
 
                 _isCatch = true;
             }
@@ -43,7 +43,8 @@ public class CatchCollision : MonoBehaviour
         {
             Debug.Log("放下");
             _catchRb.useGravity = true;
-            Vector3 dir = (transform.right * _throwDir.x + transform.up * _throwDir.y + transform.forward * _throwDir.z).normalized;
+            _catchRb.velocity = Vector3.zero;
+            Vector3 dir = (Quaternion.Euler(_throwAngle) * Vector3.forward).normalized;
             _catchRb.AddForce(_throwForce * _catchRb.mass * dir, ForceMode.Impulse);
             _catchTrans.SetParent(_itemParent);
             _catchTrans.localScale = _catchScale;
