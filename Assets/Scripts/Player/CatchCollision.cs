@@ -31,7 +31,7 @@ public class CatchCollision : MonoBehaviour
                 _catchRb.velocity = Vector3.zero;
                 _catchRb.useGravity = false;
                 _catchSprite = _catchTrans.GetComponent<ItemBase>();
-                _catchSprite._itemState = ItemState.CATCH;
+                _catchSprite.SetCatch(true);
 
                 _catchTrans.SetParent(transform.parent);
 
@@ -48,7 +48,7 @@ public class CatchCollision : MonoBehaviour
             _catchRb.AddForce(_throwForce * _catchRb.mass * dir, ForceMode.Impulse);
             _catchTrans.SetParent(_itemParent);
             _catchTrans.localScale = _catchScale;
-            _catchSprite._itemState = ItemState.WATER;
+            _catchSprite.SetCatch(false);
 
             _isCatch = false;
         }

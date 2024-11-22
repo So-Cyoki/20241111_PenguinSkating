@@ -14,7 +14,7 @@ public class Fish_run : FishStatesBase
             Random.Range(-fish._angleRun.y, fish._angleRun.y),
             Random.Range(-fish._angleRun.z, fish._angleRun.z));
         Vector3 randDir = randQuaternion * Vector3.forward;
-        if (fish._itemState == ItemState.WATER)
+        if (fish.GetState() == ItemState.WATER)
             fish._rb.AddForce(randSpeedForce * fish._rb.mass * randDir, ForceMode.Impulse);
 
         animator.SetTrigger("tIdle");

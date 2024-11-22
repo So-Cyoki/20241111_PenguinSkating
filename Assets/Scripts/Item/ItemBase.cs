@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum ItemState
 {
-    ICE, WATER, CATCH,
+    ICE, WATER, CATCH
 }
 
 public abstract class ItemBase : MonoBehaviour
@@ -15,7 +15,8 @@ public abstract class ItemBase : MonoBehaviour
 
     float _submergedVolume;//浮力
 
-    public ItemState _itemState = ItemState.WATER;
+    ItemState _itemState = ItemState.WATER;
+    public ItemState GetState() { return _itemState; }
 
     protected virtual void Awake()
     {
@@ -40,14 +41,29 @@ public abstract class ItemBase : MonoBehaviour
         }
     }
 
-    public void SetState(ItemState state)
+    /// <summary>
+    /// 处理被抓起和放下的状态变换
+    /// </summary>
+    /// <param name="flag">true:抓起/false:放下</param>
+    public virtual void SetCatch(bool flag)
     {
-        _itemState = state;
+        //被抓起
+        if (flag)
+        {
+            _itemState = ItemState.CATCH;
+            _animator.SetTrigger("tCatch");
+        }
+        //被放下
+        else
+        {
+            _itemState = ItemState.WATER;
+            _animator.SetTrigger("tExitCatch");
+        }
     }
 
     protected virtual void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Ice") && _itemState != ItemState.CATCH)
+        if (_itemState != ItemState.CATCH && other.gameObject.CompareTag("Ice"))
         {
             _itemState = ItemState.ICE;
         }
