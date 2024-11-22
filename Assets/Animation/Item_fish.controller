@@ -60,12 +60,6 @@ AnimatorController:
   m_Name: Item_fish
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: tCatch
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: tRun
     m_Type: 9
     m_DefaultFloat: 0
@@ -78,8 +72,8 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: tExitCatch
-    m_Type: 9
+  - m_Name: isCatch
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -199,7 +193,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: tCatch
+    m_ConditionEvent: isCatch
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1922410891603033607}
@@ -301,8 +295,8 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: tExitCatch
+  - m_ConditionMode: 2
+    m_ConditionEvent: isCatch
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1249787717291566789}

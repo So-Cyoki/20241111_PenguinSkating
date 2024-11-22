@@ -21239,6 +21239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 0}
+  _itemState: 0
   _speedForce: {x: 10, y: 20}
   _idleTime: {x: 1.5, y: 3}
   _angleRun: {x: 30, y: 90, z: 0}
@@ -21986,6 +21987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 0}
+  _itemState: 0
   _speedForce: {x: 10, y: 20}
   _idleTime: {x: 1.5, y: 3}
   _angleRun: {x: 30, y: 90, z: 0}
@@ -32122,7 +32124,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1485905772}
   serializedVersion: 4
-  m_Mass: 1200
+  m_Mass: 480.00018
   m_Drag: 0.05
   m_AngularDrag: 0.15
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -32242,6 +32244,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 0}
+  _itemState: 0
+  _spriteRen: {fileID: 1780109603}
+  _speedForce: {x: 5, y: 10}
+  _angleRun: {x: 0, y: 180, z: 0}
+  _idleTime: {x: 1, y: 2}
+  _sitDownTime: 2
+  _hungerTime: {x: 0, y: 0}
 --- !u!95 &1485905781
 Animator:
   serializedVersion: 5
@@ -32562,6 +32571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 0}
+  _itemState: 0
   _speedForce: {x: 10, y: 20}
   _idleTime: {x: 1.5, y: 3}
   _angleRun: {x: 30, y: 90, z: 0}
@@ -32801,6 +32811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 0}
+  _itemState: 0
   _speedForce: {x: 10, y: 20}
   _idleTime: {x: 1.5, y: 3}
   _angleRun: {x: 30, y: 90, z: 0}

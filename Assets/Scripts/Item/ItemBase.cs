@@ -17,6 +17,8 @@ public abstract class ItemBase : MonoBehaviour
     protected NWH.DWP2.WaterObjects.WaterObject _waterObject;//水插件脚本
     protected Animator _animator;
 
+    float _checkWaterTime = 0.3f;//多久检查一次是否水状态
+    float _currentCheckWaterTime = 0;
     float _submergedVolume;//浮力
 
     public ItemState _itemState = ItemState.ORIGINAL;
@@ -36,12 +38,18 @@ public abstract class ItemBase : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        //是否进入水中判断
-        if (_itemState == ItemState.ORIGINAL && _itemState != ItemState.WATER)
+        _submergedVolume = _waterObject.submergedVolume;//水浮力
+        //是否进入水中判断(为了减少进入水状态的误差，加入了时间机制，过一段时间才检查一次)
+        if (_itemState == ItemState.ORIGINAL)
         {
-            _submergedVolume = _waterObject.submergedVolume;
-            if (_submergedVolume > 1f)
-                _itemState = ItemState.WATER;
+            if (_submergedVolume > 1f && _rb.velocity != Vector3.zero)
+            {
+                _currentCheckWaterTime += Time.deltaTime;
+                if (_currentCheckWaterTime >= _checkWaterTime)
+                {
+                    _itemState = ItemState.WATER;
+                }
+            }
         }
     }
 
@@ -55,13 +63,14 @@ public abstract class ItemBase : MonoBehaviour
         if (flag)
         {
             _itemState = ItemState.CATCH;
-            _animator.SetTrigger("tCatch");
+            _animator.SetBool("isCatch", true);
+            _currentCheckWaterTime = 0;
         }
         //被放下
         else
         {
             _itemState = ItemState.ORIGINAL;
-            _animator.SetTrigger("tExitCatch");
+            _animator.SetBool("isCatch", false);
         }
     }
 
@@ -71,6 +80,7 @@ public abstract class ItemBase : MonoBehaviour
         if (_itemState == ItemState.ORIGINAL && other.gameObject.CompareTag("Ice"))
         {
             _itemState = ItemState.ICE;
+            _currentCheckWaterTime = 0;
         }
     }
     protected virtual void OnCollisionExit(Collision other)
