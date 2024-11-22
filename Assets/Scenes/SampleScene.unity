@@ -32042,8 +32042,8 @@ GameObject:
   - component: {fileID: 1485905775}
   - component: {fileID: 1485905774}
   - component: {fileID: 1485905773}
-  - component: {fileID: 1485905780}
   - component: {fileID: 1485905781}
+  - component: {fileID: 1485905780}
   m_Layer: 0
   m_Name: Kid
   m_TagString: Item

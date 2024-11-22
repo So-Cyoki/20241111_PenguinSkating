@@ -6,6 +6,10 @@ public enum ItemState
 {
     ICE, WATER, CATCH
 }
+//物体本身有3个状态：冰块上、水上、被抓住
+//这3个状态是高于状态机的，所以可以通过这3个状态进行判断，做一些特殊的逻辑
+//而且每个物体上还有状态机，是使用动画系统制作的
+//注意：状态机上需要有tCatch和tExitCatch，因为这个是用来处理被抓起和被放下的逻辑的
 
 public abstract class ItemBase : MonoBehaviour
 {
@@ -63,6 +67,7 @@ public abstract class ItemBase : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision other)
     {
+        //是否在冰块上判断
         if (_itemState != ItemState.CATCH && other.gameObject.CompareTag("Ice"))
         {
             _itemState = ItemState.ICE;

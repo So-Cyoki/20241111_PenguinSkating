@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fish_run : FishStatesBase
 {
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
+    public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
         var fish = GetFishMain(animator);
 
