@@ -21204,7 +21204,7 @@ GameObject:
   - component: {fileID: 1094056054}
   m_Layer: 0
   m_Name: Item_fish (2)
-  m_TagString: Item
+  m_TagString: Item_fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21791,7 +21791,7 @@ GameObject:
   - component: {fileID: 1254761791}
   m_Layer: 0
   m_Name: Item_fish
-  m_TagString: Item
+  m_TagString: Item_fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32246,11 +32246,12 @@ MonoBehaviour:
   _rb: {fileID: 0}
   _itemState: 0
   _spriteRen: {fileID: 1780109603}
-  _speedForce: {x: 5, y: 10}
+  _speedForce: {x: 1, y: 5}
   _angleRun: {x: 0, y: 180, z: 0}
   _idleTime: {x: 1, y: 2}
   _sitDownTime: 2
-  _hungerTime: {x: 0, y: 0}
+  _hungerTime: {x: 5, y: 8}
+  _isHunger: 0
 --- !u!95 &1485905781
 Animator:
   serializedVersion: 5
@@ -32536,7 +32537,7 @@ GameObject:
   - component: {fileID: 1514696988}
   m_Layer: 0
   m_Name: Item_fish (3)
-  m_TagString: Item
+  m_TagString: Item_fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32776,7 +32777,7 @@ GameObject:
   - component: {fileID: 1527798295}
   m_Layer: 0
   m_Name: Item_fish (1)
-  m_TagString: Item
+  m_TagString: Item_fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

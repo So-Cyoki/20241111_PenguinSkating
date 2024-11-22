@@ -25,6 +25,7 @@ public class CatchCollision : MonoBehaviour
             if (!_isCatch)
             {
                 Debug.Log("抓起来");
+
                 _catchTrans = _lastCatchObj.transform;
                 _catchScale = _catchTrans.localScale;
                 _catchRb = _catchTrans.GetComponent<Rigidbody>();
@@ -42,6 +43,7 @@ public class CatchCollision : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K) && _isCatch)
         {
             Debug.Log("放下");
+
             _catchRb.useGravity = true;
             _catchRb.velocity = Vector3.zero;
             Vector3 dir = (Quaternion.Euler(_throwAngle) * Vector3.forward).normalized;
@@ -61,10 +63,18 @@ public class CatchCollision : MonoBehaviour
             _catchTrans.localPosition = _transOffset;
         }
     }
+
+    //去掉拿着的东西
+    void CatchThingNull()
+    {
+        _lastCatchObj = null;
+        _isCatch = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         //记录最后一个进入判定范围的
-        if (other.gameObject.CompareTag("Item"))
+        if (other.gameObject.CompareTag("Item") || other.gameObject.CompareTag("Item_fish"))
         {
             _lastCatchObj = other.gameObject;
         }
@@ -75,5 +85,14 @@ public class CatchCollision : MonoBehaviour
         {
             _lastCatchObj = null;
         }
+    }
+
+    private void OnEnable()
+    {
+        Item_kid.OnEatFood += CatchThingNull;
+    }
+    private void OnDisable()
+    {
+        Item_kid.OnEatFood += CatchThingNull;
     }
 }

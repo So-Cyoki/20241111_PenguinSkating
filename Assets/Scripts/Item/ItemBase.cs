@@ -31,10 +31,8 @@ public abstract class ItemBase : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    protected virtual void Update()
-    {
-
-    }
+    protected virtual void Start() { }
+    protected virtual void Update() { }
 
     protected virtual void FixedUpdate()
     {

@@ -8,7 +8,10 @@ public class Kid_sitDown : KidStatesBase
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Item_kid main = GetKidMain(animator);
+
         _currentSitDownTime = 0;
+        main._spriteRen.color = Color.blue;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -20,5 +23,12 @@ public class Kid_sitDown : KidStatesBase
         {
             animator.SetTrigger("tIdle");
         }
+    }
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        Item_kid main = GetKidMain(animator);
+
+        main._spriteRen.color = Color.white;
     }
 }
