@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum ItemState
 {
-    ICE, WATER, CATCH
+    ORIGINAL, ICE, WATER, CATCH
 }
 //物体本身有3个状态：冰块上、水上、被抓住
 //这3个状态是高于状态机的，所以可以通过这3个状态进行判断，做一些特殊的逻辑
@@ -19,7 +19,7 @@ public abstract class ItemBase : MonoBehaviour
 
     float _submergedVolume;//浮力
 
-    ItemState _itemState = ItemState.WATER;
+    public ItemState _itemState = ItemState.ORIGINAL;
     public ItemState GetState() { return _itemState; }
 
     protected virtual void Awake()
@@ -37,7 +37,7 @@ public abstract class ItemBase : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         //是否进入水中判断
-        if (_itemState != ItemState.CATCH && _itemState != ItemState.WATER)
+        if (_itemState == ItemState.ORIGINAL && _itemState != ItemState.WATER)
         {
             _submergedVolume = _waterObject.submergedVolume;
             if (_submergedVolume > 1f)
@@ -60,7 +60,7 @@ public abstract class ItemBase : MonoBehaviour
         //被放下
         else
         {
-            _itemState = ItemState.WATER;
+            _itemState = ItemState.ORIGINAL;
             _animator.SetTrigger("tExitCatch");
         }
     }
@@ -68,9 +68,17 @@ public abstract class ItemBase : MonoBehaviour
     protected virtual void OnCollisionEnter(Collision other)
     {
         //是否在冰块上判断
-        if (_itemState != ItemState.CATCH && other.gameObject.CompareTag("Ice"))
+        if (_itemState == ItemState.ORIGINAL && other.gameObject.CompareTag("Ice"))
         {
             _itemState = ItemState.ICE;
+        }
+    }
+    protected virtual void OnCollisionExit(Collision other)
+    {
+        //是否在冰块上判断
+        if (_itemState == ItemState.ICE && other.gameObject.CompareTag("Ice"))
+        {
+            _itemState = ItemState.ORIGINAL;
         }
     }
 }
