@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 20911473}
   - component: {fileID: 20911472}
   - component: {fileID: 20911471}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DefaultWaterParticleSystem(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5145,7 +5145,7 @@ GameObject:
   - component: {fileID: 85745203}
   - component: {fileID: 85745201}
   - component: {fileID: 85745200}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: IcePlane
   m_TagString: Ice
   m_Icon: {fileID: 0}
@@ -5449,6 +5449,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_TagString
       value: Ice
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_LocalScale.x
@@ -10610,6 +10614,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ice
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -10687,7 +10695,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!108 &705507994
 Light:
@@ -10776,12 +10784,12 @@ GameObject:
   m_Component:
   - component: {fileID: 739541191}
   - component: {fileID: 739541190}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Wave
   m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &739541190
 MonoBehaviour:
@@ -10850,7 +10858,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &784900913
 Transform:
@@ -16017,6 +16025,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_TagString
       value: Ice
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_LocalScale.x
@@ -21445,6 +21457,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ice
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -21526,6 +21542,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_TagString
       value: Ice
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_LocalScale.x
@@ -21709,6 +21729,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_TagString
       value: Ice
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_LocalScale.x
@@ -22124,12 +22148,12 @@ GameObject:
   - component: {fileID: 1336664819}
   - component: {fileID: 1336664820}
   - component: {fileID: 1336664821}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Ocean
   m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1336664819
 Transform:
@@ -32246,11 +32270,19 @@ MonoBehaviour:
   _rb: {fileID: 0}
   _itemState: 0
   _spriteRen: {fileID: 1780109603}
-  _speedForce: {x: 1, y: 5}
+  _speedForce: {x: 3, y: 6}
   _angleRun: {x: 0, y: 180, z: 0}
-  _idleTime: {x: 1, y: 2}
-  _sitDownTime: 2
-  _hungerTime: {x: 5, y: 8}
+  _slowlyMultiply: 0.5
+  _idleTime: {x: 3, y: 5}
+  _sitDownTime: 5
+  _hungerTime: {x: 20, y: 30}
+  _originOffset: {x: 0, y: 0, z: 0}
+  _rayDir: {x: 0, y: -0.7, z: 1}
+  _rayLength: 5
+  _targetLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  _isDrawRay: 1
   _isHunger: 0
 --- !u!95 &1485905781
 Animator:
@@ -33018,6 +33050,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ice
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -33100,6 +33136,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ice
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -33175,6 +33215,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 784900913}
     m_Modifications:
+    - target: {fileID: -6860895033569716450, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_Name
       value: Island0
@@ -33186,6 +33230,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_TagString
       value: Ice
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_LocalScale.x
@@ -33263,6 +33311,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_TagString
       value: Ice
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 386033b9b0ae11a40bbd970400b6d7c6, type: 3}
       propertyPath: m_LocalScale.x

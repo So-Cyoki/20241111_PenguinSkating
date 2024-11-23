@@ -49,6 +49,12 @@ public abstract class ItemBase : MonoBehaviour
                 }
             }
         }
+        //退出水状态
+        if (_itemState == ItemState.WATER)
+        {
+            if (_submergedVolume <= 0f)
+                _itemState = ItemState.ORIGINAL;
+        }
     }
 
     /// <summary>

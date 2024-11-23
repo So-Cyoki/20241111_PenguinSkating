@@ -6,16 +6,16 @@ public class Fish_run : FishStatesBase
 {
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        var fish = GetFishMain(animator);
+        var main = GetFishMain(animator);
 
-        float randSpeedForce = Random.Range(fish._speedForce.x, fish._speedForce.y);
+        float randSpeedForce = Random.Range(main._speedForce.x, main._speedForce.y);
         Quaternion randQuaternion = Quaternion.Euler(
-            Random.Range(-fish._angleRun.x, fish._angleRun.x),
-            Random.Range(-fish._angleRun.y, fish._angleRun.y),
-            Random.Range(-fish._angleRun.z, fish._angleRun.z));
+            Random.Range(-main._angleRun.x, main._angleRun.x),
+            Random.Range(-main._angleRun.y, main._angleRun.y),
+            Random.Range(-main._angleRun.z, main._angleRun.z));
         Vector3 randDir = randQuaternion * Vector3.forward;
-        if (fish.GetState() == ItemState.WATER)
-            fish._rb.AddForce(randSpeedForce * fish._rb.mass * randDir, ForceMode.Impulse);
+        if (main.GetState() == ItemState.WATER)
+            main._rb.AddForce(randSpeedForce * main._rb.mass * randDir, ForceMode.Impulse);
 
         animator.SetTrigger("tIdle");
     }
