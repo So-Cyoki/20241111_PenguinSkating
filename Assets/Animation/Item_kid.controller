@@ -415,13 +415,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e58f45af0e51ef4daab8d6c85d8de40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _originOffset: {x: 0, y: 0, z: 0}
-  _rayDir: {x: 0, y: 0, z: 0}
-  _rayLength: 10
-  _targetLayer:
-    serializedVersion: 2
-    m_Bits: 16
-  _isDrawRay: 1
 --- !u!114 &5824383239130155391
 MonoBehaviour:
   m_ObjectHideFlags: 1

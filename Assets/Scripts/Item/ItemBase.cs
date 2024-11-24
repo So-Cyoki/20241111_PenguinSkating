@@ -81,18 +81,22 @@ public abstract class ItemBase : MonoBehaviour
     protected virtual void OnCollisionEnter(Collision other)
     {
         //是否在冰块上判断
-        if (_itemState == ItemState.ORIGINAL && other.gameObject.CompareTag("Ice"))
-        {
-            _itemState = ItemState.ICE;
-            _currentCheckWaterTime = 0;
-        }
+        if (_itemState == ItemState.ORIGINAL)
+            if (other.gameObject.CompareTag("Ice")
+            || other.gameObject.CompareTag("IceMountain"))
+            {
+                _itemState = ItemState.ICE;
+                _currentCheckWaterTime = 0;
+            }
     }
     protected virtual void OnCollisionExit(Collision other)
     {
         //是否在冰块上判断
-        if (_itemState == ItemState.ICE && other.gameObject.CompareTag("Ice"))
-        {
-            _itemState = ItemState.ORIGINAL;
-        }
+        if (_itemState == ItemState.ICE)
+            if (other.gameObject.CompareTag("Ice")
+            || other.gameObject.CompareTag("IceMountain"))
+            {
+                _itemState = ItemState.ORIGINAL;
+            }
     }
 }

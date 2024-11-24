@@ -28,7 +28,10 @@ public class Kid_Move : KidStatesBase
         float randSpeedForce = Random.Range(main._speedForce.x, main._speedForce.y);
         //移动
         if (main.GetState() == ItemState.ICE)
+        {
             main._rb.AddForce(randSpeedForce * main._rb.mass * animator.transform.forward, ForceMode.Impulse);
+            //Debug.Log("小企鹅移动");
+        }
 
         animator.SetTrigger("tIdle");
     }
