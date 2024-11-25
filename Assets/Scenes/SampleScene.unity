@@ -5448,8 +5448,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetObj: {fileID: 1499860299}
-  _offsetPos: {x: 0, y: 0, z: 0}
-  _isAutoOffset: 1
   _isChangerAni: 1
 --- !u!1 &314603146
 GameObject:
@@ -11843,25 +11841,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3834116120592401635, guid: 2ceab56f9e8887d48b73628fdbe9a932, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6608502143391850696, guid: 2ceab56f9e8887d48b73628fdbe9a932, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7575405519901952921, guid: 2ceab56f9e8887d48b73628fdbe9a932, type: 3}
       propertyPath: m_Name
       value: Kid
-      objectReference: {fileID: 0}
-    - target: {fileID: 8095269107075925261, guid: 2ceab56f9e8887d48b73628fdbe9a932, type: 3}
-      propertyPath: _hungerTime.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8095269107075925261, guid: 2ceab56f9e8887d48b73628fdbe9a932, type: 3}
-      propertyPath: _hungerTime.y
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -17,7 +17,7 @@ public abstract class ItemBase : MonoBehaviour
     protected NWH.DWP2.WaterObjects.WaterObject _waterObject;//水插件脚本
     protected Animator _animator;
 
-    Vector3 _playerPos;
+    protected Vector3 _playerPos = new(0, 0, 0);
     public float _destoryLength = 500;//销毁距离
     float _checkWaterTime = 0.3f;//多久检查一次是否水状态
     float _currentCheckWaterTime = 0;
@@ -39,7 +39,7 @@ public abstract class ItemBase : MonoBehaviour
         //检查是否需要超过距离需要销毁
         if ((_playerPos - transform.position).sqrMagnitude >= _destoryLength * _destoryLength)
         {
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
