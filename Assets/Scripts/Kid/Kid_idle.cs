@@ -7,6 +7,7 @@ public class Kid_idle : KidStatesBase
     float _currentIdleTime = 0;
     float _randIdleTime = 0;
     bool _isTakeSlowly;//是否已经减速了
+    //bool _isTakeHunger;//是否已经开始饿了
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
@@ -39,6 +40,11 @@ public class Kid_idle : KidStatesBase
         if (main._isHunger)
         {
             animator.SetTrigger("tHunger");
+            Debug.Log("a");
         }
+    }
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
     }
 }

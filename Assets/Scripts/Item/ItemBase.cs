@@ -9,7 +9,7 @@ public enum ItemState
 //物体本身有3个状态：冰块上、水上、被抓住
 //这3个状态是高于状态机的，所以可以通过这3个状态进行判断，做一些特殊的逻辑
 //而且每个物体上还有状态机，是使用动画系统制作的
-//注意：状态机上需要有tCatch和tExitCatch，因为这个是用来处理被抓起和被放下的逻辑的
+//注意：状态机上需要有isCatch，因为这个是用来处理被抓起和被放下的逻辑的
 
 public abstract class ItemBase : MonoBehaviour
 {
@@ -17,11 +17,13 @@ public abstract class ItemBase : MonoBehaviour
     protected NWH.DWP2.WaterObjects.WaterObject _waterObject;//水插件脚本
     protected Animator _animator;
 
+    Vector3 _playerPos;
+    public float _destoryLength = 500;//销毁距离
     float _checkWaterTime = 0.3f;//多久检查一次是否水状态
     float _currentCheckWaterTime = 0;
     float _submergedVolume;//浮力
 
-    public ItemState _itemState = ItemState.ORIGINAL;
+    [SerializeField] ItemState _itemState = ItemState.ORIGINAL;
     public ItemState GetState() { return _itemState; }
 
     protected virtual void Awake()
@@ -32,7 +34,14 @@ public abstract class ItemBase : MonoBehaviour
     }
 
     protected virtual void Start() { }
-    protected virtual void Update() { }
+    protected virtual void Update()
+    {
+        //检查是否需要超过距离需要销毁
+        if ((_playerPos - transform.position).sqrMagnitude >= _destoryLength * _destoryLength)
+        {
+            //Destroy(gameObject);
+        }
+    }
 
     protected virtual void FixedUpdate()
     {
@@ -55,6 +64,20 @@ public abstract class ItemBase : MonoBehaviour
             if (_submergedVolume <= 0f)
                 _itemState = ItemState.ORIGINAL;
         }
+    }
+
+    /// <summary>
+    /// 初始化
+    /// </summary>
+    /// <param name="pos">实例化坐标</param>
+    /// <param name="playerPos">玩家的坐标</param>
+    public virtual void Initial(Vector3 pos, Vector3 playerPos)
+    {
+        _itemState = ItemState.ORIGINAL;
+        transform.position = pos;
+        _playerPos = playerPos;
+
+        _currentCheckWaterTime = 0;
     }
 
     /// <summary>
