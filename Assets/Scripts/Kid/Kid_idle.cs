@@ -40,7 +40,6 @@ public class Kid_idle : KidStatesBase
         if (main._isHunger)
         {
             animator.SetTrigger("tHunger");
-            Debug.Log("a");
         }
     }
 

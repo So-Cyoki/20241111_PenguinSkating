@@ -17,7 +17,7 @@ public abstract class ItemBase : MonoBehaviour
     protected NWH.DWP2.WaterObjects.WaterObject _waterObject;//水插件脚本
     protected Animator _animator;
 
-    protected Vector3 _playerPos = new(0, 0, 0);
+    public Transform _playerTrans;
     public float _destoryLength = 500;//销毁距离
     float _checkWaterTime = 0.3f;//多久检查一次是否水状态
     float _currentCheckWaterTime = 0;
@@ -37,7 +37,7 @@ public abstract class ItemBase : MonoBehaviour
     protected virtual void Update()
     {
         //检查是否需要超过距离需要销毁
-        if ((_playerPos - transform.position).sqrMagnitude >= _destoryLength * _destoryLength)
+        if (_playerTrans != null && (_playerTrans.position - transform.position).sqrMagnitude >= _destoryLength * _destoryLength)
         {
             Destroy(gameObject);
         }
@@ -70,12 +70,12 @@ public abstract class ItemBase : MonoBehaviour
     /// 初始化
     /// </summary>
     /// <param name="pos">实例化坐标</param>
-    /// <param name="playerPos">玩家的坐标</param>
-    public virtual void Initial(Vector3 pos, Vector3 playerPos)
+    /// <param name="player">玩家的坐标</param>
+    public virtual void Initial(Vector3 pos, Transform player)
     {
         _itemState = ItemState.ORIGINAL;
         transform.position = pos;
-        _playerPos = playerPos;
+        _playerTrans = player;
 
         _currentCheckWaterTime = 0;
     }
@@ -100,7 +100,6 @@ public abstract class ItemBase : MonoBehaviour
             _animator.SetBool("isCatch", false);
         }
     }
-
     protected virtual void OnCollisionEnter(Collision other)
     {
         //是否在冰块上判断
