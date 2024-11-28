@@ -12,6 +12,7 @@ public class Item_icePlane : ItemBase
     float _currentUptakeTime;
     float _meltingSize;//融化后的大小
     float _size;//当前的大小(厚度不变)
+    float _maxSmallSize = 0.5f;//最小大小(再小就会设置成死亡)
 
     [HideInInspector] public bool _isDead;
 
@@ -58,7 +59,6 @@ public class Item_icePlane : ItemBase
         base.OnCollisionStay(other);
         if (!_isDead)
         {
-            Debug.Log("a");
             _currentUptakeTime -= Time.deltaTime;
             if (_currentUptakeTime < 0)
             {
@@ -66,10 +66,10 @@ public class Item_icePlane : ItemBase
                 {
                     _meltingSize -= _minimizeValue;
                     //判断是否死亡
-                    if (_meltingSize < 0.1f)
+                    if (_meltingSize < _maxSmallSize)
                     {
                         _isDead = true;
-                        _meltingSize = 0.1f;
+                        _meltingSize = _maxSmallSize;
                     }
                 }
                 _currentUptakeTime = _uptakeTime;

@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 5512243473788697626}
   - component: {fileID: 4073632360041063741}
   m_Layer: 0
-  m_Name: IceMountain
+  m_Name: IceMountainMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

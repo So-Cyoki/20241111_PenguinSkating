@@ -98,8 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetObj: {fileID: 3271218034354016098}
-  _offsetPos: {x: 0, y: 0, z: 0}
-  _isAutoOffset: 1
   _isChangerAni: 1
 --- !u!1 &4534407023554916455
 GameObject:
@@ -5240,7 +5238,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 0}
+  _playerTrans: {fileID: 0}
+  _destoryLength: 300
+  _addMassM: 5
   _itemState: 0
-  _speedForce: {x: 10, y: 20}
+  _speedForce: {x: 2, y: 7}
   _idleTime: {x: 1.5, y: 3}
   _angleRun: {x: 30, y: 90, z: 0}

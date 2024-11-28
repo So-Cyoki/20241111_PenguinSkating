@@ -14,6 +14,8 @@ public class IcePlane : MonoBehaviour
     float _currentMeltingTime;
     [Tooltip("单次融化Lerp值")] public float _meltingLerp;
 
+    public float _maxSmallSize;
+
     [Header("吸收变大")]
     public float _addValue;//增加的值
     [Tooltip("多久进行一次吸收")] public float _uptakeTime;
@@ -69,10 +71,10 @@ public class IcePlane : MonoBehaviour
             if (_currentMeltingTime > _meltingTime)
             {
                 _meltingSize -= _meltingValue;
-                if (_meltingSize < 0.1f)
+                if (_meltingSize < _maxSmallSize)
                 {
                     _isDead = true;
-                    _meltingSize = 0.1f;
+                    _meltingSize = _maxSmallSize;
                 }
                 _currentMeltingTime = 0;
             }
@@ -115,5 +117,16 @@ public class IcePlane : MonoBehaviour
             _spJoint.spring = _originalSpring;
             _spJoint.damper = _originalDamper;
         }
+    }
+    private void OnCollisionExit(Collision other)
+    {
+        //如果想要更黏住的吸收效果，就不要下面的这段代码
+        // if (other.gameObject.CompareTag("Ice"))
+        // {
+        //     _csItem = null;
+        //     _spJoint.connectedBody = null;
+        //     _spJoint.spring = 0;
+        //     _spJoint.damper = 0;
+        // }
     }
 }

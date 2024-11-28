@@ -5139,7 +5139,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 0}
-  _destoryLength: 500
+  _playerTrans: {fileID: 0}
+  _destoryLength: 300
+  _addMassM: 5
   _itemState: 0
   _spriteRen: {fileID: 3834116120592401635}
   _speedForce: {x: 3, y: 6}

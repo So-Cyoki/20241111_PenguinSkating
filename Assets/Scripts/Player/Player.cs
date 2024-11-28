@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     float _submergedVolume;//浮力
     public float _speed;
     public float _jumpSpeed;
+    public float _runSpeed;
 
     bool _isJump;
 
@@ -37,13 +38,19 @@ public class Player : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         Vector3 moveDir = new Vector3(horizontal, 0, vertical).normalized;
 
+        float currentSpeed = _speed;
+        //冲刺
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            currentSpeed = _runSpeed;
+        }
         if (moveDir.magnitude > 0.1f)
         {
             //旋转
             Quaternion targetRotation = Quaternion.LookRotation(moveDir, Vector3.up);
             transform.rotation = targetRotation;
             //移动
-            _rb.velocity = new(moveDir.x * _speed, _rb.velocity.y, moveDir.z * _speed);
+            _rb.velocity = new(moveDir.x * currentSpeed, _rb.velocity.y, moveDir.z * currentSpeed);
         }
         //跳跃
         if (Input.GetKeyDown(KeyCode.Space) && !_isJump)

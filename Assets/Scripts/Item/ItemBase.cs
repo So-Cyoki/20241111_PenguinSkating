@@ -18,21 +18,24 @@ public abstract class ItemBase : MonoBehaviour
     protected Animator _animator;
 
     public Transform _playerTrans;
-    public float _destoryLength = 500;//销毁距离
-    float _checkWaterTime = 0.3f;//多久检查一次是否水状态
+    public float _destoryLength = 300;//销毁距离
+    [Tooltip("增加质量倍率")] public float _addMassM = 1;
+    public float _originalMass;
+    readonly float _checkWaterTime = 0.3f;//多久检查一次是否水状态
     float _currentCheckWaterTime = 0;
     float _submergedVolume;//浮力
 
     [SerializeField] ItemState _itemState = ItemState.ORIGINAL;
+    ItemState _currentItemState = ItemState.ORIGINAL;
     public ItemState GetState() { return _itemState; }
 
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _originalMass = _rb.mass;
         _waterObject = GetComponent<NWH.DWP2.WaterObjects.WaterObject>();
         _animator = GetComponent<Animator>();
     }
-
     protected virtual void Start() { }
     protected virtual void Update()
     {
@@ -40,6 +43,24 @@ public abstract class ItemBase : MonoBehaviour
         if (_playerTrans != null && (_playerTrans.position - transform.position).sqrMagnitude >= _destoryLength * _destoryLength)
         {
             Destroy(gameObject);
+        }
+        if (_currentItemState != _itemState)
+        {
+            //重量变化机制(为了在冰上的时候更重)
+            if (!CompareTag("Ice"))//冰块就不需要改变重量了
+            {
+                switch (_itemState)
+                {
+                    case ItemState.ORIGINAL:
+                    case ItemState.CATCH:
+                        _rb.mass = _originalMass;
+                        break;
+                    case ItemState.ICE:
+                        _rb.mass *= _addMassM;
+                        break;
+                }
+            }
+            _currentItemState = _itemState;
         }
     }
 

@@ -5117,9 +5117,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 0}
   _playerTrans: {fileID: 0}
-  _destoryLength: 500
+  _destoryLength: 300
   _itemState: 0
-  _meltingUseTime: 0
-  _minimizeSpeed: 0
-  _uptakeTime: 0
+  _startSize: {x: 5, y: 13}
+  _minimizeValue: 1
+  _uptakeTime: 0.1
+  _meltingLerp: 0.01
   _isDead: 0
