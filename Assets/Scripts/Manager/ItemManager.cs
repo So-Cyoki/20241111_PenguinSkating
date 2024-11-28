@@ -48,7 +48,7 @@ public class ItemManager : MonoBehaviour
                 for (int i = 0; i < _creatPosCheck; i++)
                 {
                     //随机生成方向和距离
-                    Vector3 randDir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+                    Vector3 randDir = new Vector3(Random.Range(-0.2f, 1f), 0, Random.Range(-1f, 1f)).normalized;
                     float randLength = Random.Range(_creatLength.x, _creatLength.y);
                     //发射射线(如果想要省性能，可以只检测冰山的物理层)
                     Ray ray = new(_playerTrans.position, randDir);

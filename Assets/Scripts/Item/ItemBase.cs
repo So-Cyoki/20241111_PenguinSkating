@@ -111,6 +111,7 @@ public abstract class ItemBase : MonoBehaviour
                 _currentCheckWaterTime = 0;
             }
     }
+    protected virtual void OnCollisionStay(Collision other) { }
     protected virtual void OnCollisionExit(Collision other)
     {
         //是否在冰块上判断

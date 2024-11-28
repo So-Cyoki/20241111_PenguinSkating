@@ -5143,6 +5143,7 @@ GameObject:
   - component: {fileID: 85745205}
   - component: {fileID: 85745204}
   - component: {fileID: 85745203}
+  - component: {fileID: 85745209}
   - component: {fileID: 85745201}
   - component: {fileID: 85745200}
   - component: {fileID: 85745208}
@@ -5323,7 +5324,7 @@ Transform:
   m_GameObject: {fileID: 85745199}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.008, y: 0.46, z: 2.55}
+  m_LocalPosition: {x: -1.008, y: 0.5, z: 2.55}
   m_LocalScale: {x: 9, y: 0.5, z: 9}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5344,12 +5345,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meltingValue: 0.5
   _meltingTime: 5
-  _meltingUseTime: 0.3
-  _addSpeed: 0.1
-  _minimizeSpeed: 0.1
+  _meltingLerp: 0.1
+  _addValue: 0.1
   _uptakeTime: 0.1
-  _isDead: 0
-  _isMain: 1
+  _uptakeLerp: 0.01
+--- !u!145 &85745209
+SpringJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85745199}
+  m_ConnectedBody: {fileID: 0}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0, y: -0.5, z: 0}
+  serializedVersion: 2
+  m_Spring: 10000
+  m_Damper: 0.5
+  m_MinDistance: 0
+  m_MaxDistance: 1
+  m_Tolerance: 0.025
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 1
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &275045792
 GameObject:
   m_ObjectHideFlags: 0
@@ -10417,6 +10440,83 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1001 &572023035
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4119834214870162490, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: m_Name
+      value: Item_icePlane
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017458052607385865, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: _uptakeTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017458052607385865, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: _startSize.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017458052607385865, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: _startSize.y
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017458052607385865, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: _meltingSpeed
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7017458052607385865, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: _minimizeSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760857239401738421, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -31.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760857239401738421, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760857239401738421, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760857239401738421, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760857239401738421, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760857239401738421, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760857239401738421, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760857239401738421, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760857239401738421, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760857239401738421, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
 --- !u!1 &581873124
 GameObject:
   m_ObjectHideFlags: 0
@@ -10772,7 +10872,7 @@ MonoBehaviour:
   _playerTrans: {fileID: 1499860299}
   _itemParent: {fileID: 314603147}
   _itemIcePlane: {fileID: 4119834214870162490, guid: e243c4e3042f4a949b2cdbb72c4c1f5d, type: 3}
-  _creatLength: {x: 50, y: 100}
+  _creatLength: {x: 100, y: 150}
   _creatTime: 0.5
   _itemList:
   - item: {fileID: 8834793320488654762, guid: 7ce5872e059ec2f41bf850e5cee8d643, type: 3}
@@ -11796,3 +11896,4 @@ SceneRoots:
   - {fileID: 85745207}
   - {fileID: 314603147}
   - {fileID: 1499860299}
+  - {fileID: 572023035}

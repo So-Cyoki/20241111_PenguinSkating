@@ -4918,7 +4918,7 @@ GameObject:
   - component: {fileID: 2047987690863202430}
   - component: {fileID: 3058231765853753202}
   - component: {fileID: 4602728706515341117}
-  - component: {fileID: 8009914394837434620}
+  - component: {fileID: 7017458052607385865}
   m_Layer: 3
   m_Name: Item_icePlane
   m_TagString: Ice
@@ -5103,7 +5103,7 @@ MonoBehaviour:
   density: 0
   mass: 20250.006
   volume: 40.50001
---- !u!114 &8009914394837434620
+--- !u!114 &7017458052607385865
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5112,14 +5112,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4119834214870162490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4039f40a897382d49bbe6deecd690eb3, type: 3}
+  m_Script: {fileID: 11500000, guid: 379c20d67eca20643a10ef05a407ae19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meltingValue: 0.5
-  _meltingTime: 5
-  _meltingUseTime: 0.3
-  _addSpeed: 0.1
-  _minimizeSpeed: 0.1
-  _uptakeTime: 0.1
+  _rb: {fileID: 0}
+  _playerTrans: {fileID: 0}
+  _destoryLength: 500
+  _itemState: 0
+  _meltingUseTime: 0
+  _minimizeSpeed: 0
+  _uptakeTime: 0
   _isDead: 0
-  _isMain: 0
