@@ -61,7 +61,9 @@ public class ItemManager : MonoBehaviour
                     {
                         if (hit.collider.CompareTag("IceMountain")
                         || hit.collider.CompareTag("Ice")
-                        || hit.collider.CompareTag("Item"))
+                        || hit.collider.CompareTag("Item_icePlane")
+                        || hit.collider.CompareTag("Item_kid")
+                        || hit.collider.CompareTag("Item_fish"))
                         {
                             continue; //重新随机位置
                         }

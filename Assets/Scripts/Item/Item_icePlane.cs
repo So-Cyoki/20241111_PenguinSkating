@@ -12,7 +12,7 @@ public class Item_icePlane : ItemBase
     float _currentUptakeTime;
     float _meltingSize;//融化后的大小
     float _size;//当前的大小(厚度不变)
-    float _maxSmallSize = 0.5f;//最小大小(再小就会设置成死亡)
+    public float _maxSmallSize = 0.1f;//最小大小(再小就会设置成死亡)
 
     [HideInInspector] public bool _isDead;
 
@@ -29,7 +29,7 @@ public class Item_icePlane : ItemBase
         base.Start();
         _currentUptakeTime = 0;
         float randSize = Random.Range(_startSize.x, _startSize.y);
-        transform.localScale = new(randSize, 0.5f, randSize);
+        transform.localScale = new(randSize, transform.localScale.y, randSize);
         _meltingSize = randSize;
         _size = randSize;
         SetMassFromMaterial();

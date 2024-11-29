@@ -47,7 +47,7 @@ public abstract class ItemBase : MonoBehaviour
         if (_currentItemState != _itemState)
         {
             //重量变化机制(为了在冰上的时候更重)
-            if (!CompareTag("Ice"))//冰块就不需要改变重量了
+            if (!CompareTag("Ice") || !CompareTag("Item_icePlane"))//冰块就不需要改变重量了
             {
                 switch (_itemState)
                 {
@@ -126,6 +126,7 @@ public abstract class ItemBase : MonoBehaviour
         //是否在冰块上判断
         if (_itemState == ItemState.ORIGINAL)
             if (other.gameObject.CompareTag("Ice")
+            || other.gameObject.CompareTag("Item_icePlane")
             || other.gameObject.CompareTag("IceMountain"))
             {
                 _itemState = ItemState.ICE;
@@ -138,6 +139,7 @@ public abstract class ItemBase : MonoBehaviour
         //是否在冰块上判断
         if (_itemState == ItemState.ICE)
             if (other.gameObject.CompareTag("Ice")
+            || other.gameObject.CompareTag("Item_icePlane")
             || other.gameObject.CompareTag("IceMountain"))
             {
                 _itemState = ItemState.ORIGINAL;

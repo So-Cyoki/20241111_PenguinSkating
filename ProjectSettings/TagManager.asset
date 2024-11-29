@@ -6,9 +6,10 @@ TagManager:
   tags:
   - Water
   - Ice
-  - Item
   - Item_fish
   - IceMountain
+  - Item_icePlane
+  - Item_kid
   layers:
   - Default
   - TransparentFX

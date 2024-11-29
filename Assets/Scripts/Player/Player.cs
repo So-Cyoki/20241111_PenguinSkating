@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 
     float _submergedVolume;//浮力
     public float _speed;
-    public float _jumpSpeed;
+    public float _jumpForce;
     public float _runSpeed;
 
     bool _isJump;
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
         //跳跃
         if (Input.GetKeyDown(KeyCode.Space) && !_isJump)
         {
-            _rb.AddForce(_rb.mass * _jumpSpeed * Vector3.up, ForceMode.Impulse);
+            _rb.AddForce(_rb.mass * _jumpForce * Vector3.up, ForceMode.Impulse);
             _isJump = true;
         }
     }

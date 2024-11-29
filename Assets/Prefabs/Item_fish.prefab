@@ -5240,7 +5240,8 @@ MonoBehaviour:
   _rb: {fileID: 0}
   _playerTrans: {fileID: 0}
   _destoryLength: 300
-  _addMassM: 5
+  _addMassM: 10
+  _originalMass: 0
   _itemState: 0
   _speedForce: {x: 2, y: 7}
   _idleTime: {x: 1.5, y: 3}

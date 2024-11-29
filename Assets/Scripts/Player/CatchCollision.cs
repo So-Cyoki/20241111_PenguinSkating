@@ -6,16 +6,17 @@ public class CatchCollision : MonoBehaviour
 {
     Transform _catchTrans;
     Rigidbody _catchRb;
+    Collider _catchColl;
     ItemBase _catchSprite;
     GameObject _lastCatchObj;//最后进入抓取范围的物体
     public Transform _itemParent;
 
-    public Vector3 _transOffset;
+    public Vector3 _catchPosOffset;
     public float _throwForce;
     public Vector3 _throwAngle;
     Vector3 _catchScale;//被抓起物体的原本的大小
 
-    public bool _isCatch;
+    bool _isCatch;
 
     private void Update()
     {
@@ -31,6 +32,8 @@ public class CatchCollision : MonoBehaviour
                 _catchRb = _catchTrans.GetComponent<Rigidbody>();
                 _catchRb.velocity = Vector3.zero;
                 _catchRb.useGravity = false;
+                _catchColl = _catchTrans.GetComponent<Collider>();
+                _catchColl.enabled = false;
                 _catchSprite = _catchTrans.GetComponent<ItemBase>();
                 _catchSprite.SetCatch(true);
 
@@ -46,6 +49,7 @@ public class CatchCollision : MonoBehaviour
 
             _catchRb.useGravity = true;
             _catchRb.velocity = Vector3.zero;
+            _catchColl.enabled = true;
             Vector3 dir = (Quaternion.Euler(_throwAngle) * Vector3.forward).normalized;
             _catchRb.AddForce(_throwForce * _catchRb.mass * dir, ForceMode.Impulse);
             _catchTrans.SetParent(_itemParent);
@@ -60,7 +64,7 @@ public class CatchCollision : MonoBehaviour
         //改变抓取物体坐标
         if (_isCatch)
         {
-            _catchTrans.localPosition = _transOffset;
+            _catchTrans.localPosition = _catchPosOffset;
         }
     }
 
@@ -74,7 +78,7 @@ public class CatchCollision : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //记录最后一个进入判定范围的
-        if (other.gameObject.CompareTag("Item") || other.gameObject.CompareTag("Item_fish"))
+        if (other.gameObject.CompareTag("Item_kid") || other.gameObject.CompareTag("Item_fish"))
         {
             _lastCatchObj = other.gameObject;
         }

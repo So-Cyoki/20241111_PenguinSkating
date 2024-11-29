@@ -109,7 +109,7 @@ public class IcePlane : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Ice"))
+        if (other.gameObject.CompareTag("Item_icePlane"))
         {
             if (_csItem == null)
                 _csItem = other.gameObject.GetComponent<Item_icePlane>();
@@ -121,7 +121,7 @@ public class IcePlane : MonoBehaviour
     private void OnCollisionExit(Collision other)
     {
         //如果想要更黏住的吸收效果，就不要下面的这段代码
-        // if (other.gameObject.CompareTag("Ice"))
+        // if (other.gameObject.CompareTag("Item_icePlane"))
         // {
         //     _csItem = null;
         //     _spJoint.connectedBody = null;
