@@ -29,10 +29,10 @@ public class IceMountainManager : MonoBehaviour
 
     private void OnEnable()
     {
-        IceMountain.OnMoveMiddle += CreatNewMap;
+        IceMountainMap.OnMoveMiddle += CreatNewMap;
     }
     private void OnDisable()
     {
-        IceMountain.OnMoveMiddle -= CreatNewMap;
+        IceMountainMap.OnMoveMiddle -= CreatNewMap;
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class IceMountain : MonoBehaviour
+public class IceMountainMap : MonoBehaviour
 {
     //用于下一个地图块的连接点
     public Transform _endPoint;

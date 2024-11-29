@@ -25,7 +25,7 @@ public class CatchCollision : MonoBehaviour
         {
             if (!_isCatch)
             {
-                Debug.Log("抓起来");
+                //Debug.Log("抓起来");
 
                 _catchTrans = _lastCatchObj.transform;
                 _catchScale = _catchTrans.localScale;
@@ -45,7 +45,7 @@ public class CatchCollision : MonoBehaviour
         //放下去
         if (Input.GetKeyDown(KeyCode.K) && _isCatch)
         {
-            Debug.Log("放下");
+            //Debug.Log("放下");
 
             _catchRb.useGravity = true;
             _catchRb.velocity = Vector3.zero;
