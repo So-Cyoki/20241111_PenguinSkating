@@ -5141,7 +5141,7 @@ MonoBehaviour:
   _addMassM: 0
   _originalMass: 0
   _itemState: 0
-  _startSize: {x: 1, y: 2}
+  _startSize: {x: 0.6, y: 1.6}
   _minimizeValue: 0.2
   _uptakeTime: 0.1
   _meltingLerp: 0.01

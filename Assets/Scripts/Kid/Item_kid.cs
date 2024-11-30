@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class Item_kid : ItemBase
 {
-    public SpriteRenderer _spriteRen;
-
     [Header("基础属性")]
+    public SpriteRenderer _spriteRen;
     public Vector2 _speedForce;
     [Tooltip("输入角度")] public Vector3 _angleRun;//随机转多少角度移动
     [Tooltip("边缘减速倍率")] public float _slowlyMultiply;

@@ -20,7 +20,7 @@ public abstract class ItemBase : MonoBehaviour
     public Transform _playerTrans;
     public float _destoryLength = 300;//销毁距离
     [Tooltip("增加质量倍率")] public float _addMassM = 1;
-    public float _originalMass;
+    float _originalMass;
     readonly float _checkWaterTime = 0.3f;//多久检查一次是否水状态
     float _currentCheckWaterTime = 0;
     float _submergedVolume;//浮力

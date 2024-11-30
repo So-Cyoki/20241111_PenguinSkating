@@ -75,7 +75,13 @@ public class SeaWave : MonoBehaviour
         if (other.gameObject.CompareTag("Player")
         || other.gameObject.CompareTag("Ice"))
         {
+            //碰到Player和主要的冰块游戏就失败了
             Debug.Log("Player被浪冲走了!游戏失败!");
+        }
+        else
+        {
+            //其余的物体就删除
+            Destroy(other.gameObject);
         }
     }
 }
