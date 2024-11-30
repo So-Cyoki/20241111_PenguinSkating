@@ -5530,12 +5530,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meltingValue: 0.1
-  _meltingTime: 10
+  _meltingTime: 20
   _meltingLerp: 0.07
   _maxSmallSize: 0.8
   _addValue: 0.05
   _uptakeTime: 0.1
   _uptakeLerp: 0.01
+  _maxBigSize: 2.5
 --- !u!4 &7943022860376339126 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2b3d913fdc2e6ed459cd6e5c7bccae6d, type: 3}

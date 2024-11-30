@@ -20,6 +20,7 @@ public class IcePlane : MonoBehaviour
     public float _addValue;//增加的值
     [Tooltip("多久进行一次吸收")] public float _uptakeTime;
     [Tooltip("单次增加Lerp值")] public float _uptakeLerp;
+    public float _maxBigSize;
     float _currentUptakeTime;
     float _meltingSize;//融化后的大小
     float _size;//当前的大小(厚度不变)
@@ -86,6 +87,8 @@ public class IcePlane : MonoBehaviour
             if (_currentUptakeTime > _uptakeTime)
             {
                 _meltingSize += _addValue;
+                if (_meltingSize > _maxBigSize)
+                    _meltingSize = _maxBigSize;
                 _currentUptakeTime = 0;
             }
         }

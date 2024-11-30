@@ -5058,8 +5058,8 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8834793320488654762}
-  m_Enabled: 0
-  m_CastShadows: 1
+  m_Enabled: 1
+  m_CastShadows: 3
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -5241,7 +5241,6 @@ MonoBehaviour:
   _playerTrans: {fileID: 0}
   _destoryLength: 300
   _addMassM: 10
-  _originalMass: 0
   _itemState: 0
   _speedForce: {x: 2, y: 7}
   _idleTime: {x: 1.5, y: 3}

@@ -54,6 +54,10 @@ public class CatchCollision : MonoBehaviour
             _catchRb.AddForce(_throwForce * _catchRb.mass * dir, ForceMode.Impulse);
             _catchTrans.SetParent(_itemParent);
             _catchTrans.localScale = _catchScale;
+
+            _catchTrans = null;
+            _catchRb = null;
+            _catchColl = null;
             _catchSprite.SetCatch(false);
 
             _isCatch = false;
