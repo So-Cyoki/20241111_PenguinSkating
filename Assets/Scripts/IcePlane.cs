@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class IcePlane : MonoBehaviour
@@ -13,7 +12,6 @@ public class IcePlane : MonoBehaviour
     [Tooltip("多久融化一次")] public float _meltingTime;
     float _currentMeltingTime;
     [Tooltip("单次融化Lerp值")] public float _meltingLerp;
-
     public float _maxSmallSize;
 
     [Header("吸收变大")]
@@ -29,8 +27,12 @@ public class IcePlane : MonoBehaviour
     float _originalSpring;
     float _originalDamper;
 
-    bool _isDead;
+    int _kidCount;
 
+    bool _isDead;
+    bool _isEndToWave;
+
+    public static event Action<int> OnKidCount;
 
     private void Awake()
     {
@@ -109,9 +111,21 @@ public class IcePlane : MonoBehaviour
         _waterObjectMass.CalculateAndApplyFromMaterial();
         _rb.mass = _waterObjectMass.mass;
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        //当冰块碰到海浪，就代表游戏结束了
+        if (other.gameObject.CompareTag("SeaWave"))
+        {
+            _isEndToWave = true;
+        }
+    }
     private void OnCollisionEnter(Collision other)
     {
+        if (other.gameObject.CompareTag("Item_kid") && !_isEndToWave)
+        {
+            _kidCount++;//记录Kid数量
+            OnKidCount?.Invoke(_kidCount);
+        }
         if (other.gameObject.CompareTag("Item_icePlane"))
         {
             if (_csItem == null)
@@ -123,6 +137,11 @@ public class IcePlane : MonoBehaviour
     }
     private void OnCollisionExit(Collision other)
     {
+        if (other.gameObject.CompareTag("Item_kid") && !_isEndToWave)
+        {
+            _kidCount--;//记录Kid数量
+            OnKidCount?.Invoke(_kidCount);
+        }
         //如果想要更黏住的吸收效果，就不要下面的这段代码
         // if (other.gameObject.CompareTag("Item_icePlane"))
         // {

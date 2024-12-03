@@ -5532,7 +5532,7 @@ MonoBehaviour:
   _meltingValue: 0.1
   _meltingTime: 20
   _meltingLerp: 0.07
-  _maxSmallSize: 0.8
+  _maxSmallSize: 0.4
   _addValue: 0.05
   _uptakeTime: 0.1
   _uptakeLerp: 0.01

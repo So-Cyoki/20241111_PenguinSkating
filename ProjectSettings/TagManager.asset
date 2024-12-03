@@ -10,6 +10,7 @@ TagManager:
   - IceMountain
   - Item_icePlane
   - Item_kid
+  - SeaWave
   layers:
   - Default
   - TransparentFX

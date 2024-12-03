@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -7,19 +6,32 @@ public class Player : MonoBehaviour
     Rigidbody _rb;
     NWH.DWP2.WaterObjects.WaterObject _waterObject;//水插件脚本
 
+    public Transform _startPos;
     float _submergedVolume;//浮力
     public float _speed;
     public float _jumpForce;
     public float _runSpeed;
+    [Header("体力变量")]
+    public float _maxStamina;
+    float _currentStamina;
+    public float _addStamina;
+    public float _runStamina;
+    int _highScore;
 
     bool _isJump;
+
+    public static event Action<int> OnScoreUpdate;
+    public static event Action<float, float> OnStaminaUpdate;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _waterObject = GetComponent<NWH.DWP2.WaterObjects.WaterObject>();
     }
-
+    private void Start()
+    {
+        _currentStamina = _maxStamina;
+    }
     private void Update()
     {
         Move();
@@ -31,6 +43,16 @@ public class Player : MonoBehaviour
         if (_submergedVolume > 1f && _rb.velocity.y < 0)
             _isJump = false;
     }
+    private void LateUpdate()
+    {
+        //传输距离为分数
+        int length = (int)(transform.position - _startPos.position).magnitude;
+        if (_highScore < length)
+        {
+            _highScore = length;
+            OnScoreUpdate?.Invoke(_highScore);
+        }
+    }
 
     void Move()
     {
@@ -39,10 +61,14 @@ public class Player : MonoBehaviour
         Vector3 moveDir = new Vector3(horizontal, 0, vertical).normalized;
 
         float currentSpeed = _speed;
+        bool isUseStamina = false;
         //冲刺
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && _currentStamina > 0)
         {
             currentSpeed = _runSpeed;
+            _currentStamina -= _runStamina;
+            OnStaminaUpdate?.Invoke(_maxStamina, _currentStamina);
+            isUseStamina = true;
         }
         if (moveDir.magnitude > 0.1f)
         {
@@ -57,6 +83,20 @@ public class Player : MonoBehaviour
         {
             _rb.AddForce(_rb.mass * _jumpForce * Vector3.up, ForceMode.Impulse);
             _isJump = true;
+        }
+        //恢复体力
+        if (!isUseStamina)
+        {
+            if (_currentStamina < _maxStamina)
+            {
+                _currentStamina += _addStamina;
+                OnStaminaUpdate?.Invoke(_maxStamina, _currentStamina);
+            }
+            else
+            {
+                _currentStamina = _maxStamina;
+                OnStaminaUpdate?.Invoke(_maxStamina, _currentStamina);
+            }
         }
     }
 

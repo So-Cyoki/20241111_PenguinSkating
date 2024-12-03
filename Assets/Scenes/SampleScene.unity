@@ -458,6 +458,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94011186d31278b4aa806c44f6690eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scoreText: {fileID: 1905298871}
+  _kidNumText: {fileID: 270826309}
+  _playerSlider: {fileID: 1808083359}
 --- !u!1 &270826307
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,7 +518,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: X12
+  m_text: X99
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 30022bec2ef35c3449ac0514de5e1e07, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 30022bec2ef35c3449ac0514de5e1e07, type: 2}
@@ -6060,7 +6063,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693084476}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6302,9 +6305,9 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 705507995}
+  - {fileID: 693084477}
   - {fileID: 1336664819}
   - {fileID: 725641541}
-  - {fileID: 693084477}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &840784568
@@ -7450,9 +7453,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17620a7a5155eb64fa3c59b621ebfec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startPos: {fileID: 693084477}
   _speed: 5
   _jumpForce: 5
   _runSpeed: 10
+  _maxStamina: 100
+  _addStamina: 0.5
+  _runStamina: 0.5
 --- !u!1 &1520769653
 GameObject:
   m_ObjectHideFlags: 0
@@ -7655,6 +7662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemParent: {fileID: 314603147}
   _catchPosOffset: {x: 0, y: 0.3, z: 1}
+  _catchSpeed: 0.3
   _throwForce: 3
   _throwAngle: {x: -70, y: 0, z: 0}
 --- !u!1 &1808083357
@@ -7761,7 +7769,7 @@ GameObject:
   - component: {fileID: 1878526766}
   m_Layer: 0
   m_Name: SeaWave
-  m_TagString: Untagged
+  m_TagString: SeaWave
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8365,8 +8373,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _maxSmallSize
-      value: 0.4
+      propertyPath: _kidCount
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 7309511080738924556, guid: fc0857913d624134abbbe408056df5fa, type: 3}
       propertyPath: m_Name

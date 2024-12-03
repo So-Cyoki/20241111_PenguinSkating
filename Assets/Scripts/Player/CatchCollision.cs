@@ -12,6 +12,7 @@ public class CatchCollision : MonoBehaviour
     public Transform _itemParent;
 
     public Vector3 _catchPosOffset;
+    public float _catchSpeed;
     public float _throwForce;
     public Vector3 _throwAngle;
     Vector3 _catchScale;//被抓起物体的原本的大小
@@ -33,7 +34,7 @@ public class CatchCollision : MonoBehaviour
                 _catchRb.velocity = Vector3.zero;
                 _catchRb.useGravity = false;
                 _catchColl = _catchTrans.GetComponent<Collider>();
-                _catchColl.enabled = false;
+                //_catchColl.enabled = false;
                 _catchSprite = _catchTrans.GetComponent<ItemBase>();
                 _catchSprite.SetCatch(true);
 
@@ -49,7 +50,7 @@ public class CatchCollision : MonoBehaviour
 
             _catchRb.useGravity = true;
             _catchRb.velocity = Vector3.zero;
-            _catchColl.enabled = true;
+            //_catchColl.enabled = true;
             Vector3 dir = (Quaternion.Euler(_throwAngle) * Vector3.forward).normalized;
             _catchRb.AddForce(_throwForce * _catchRb.mass * dir, ForceMode.Impulse);
             _catchTrans.SetParent(_itemParent);
@@ -63,13 +64,11 @@ public class CatchCollision : MonoBehaviour
             _isCatch = false;
         }
     }
-    private void LateUpdate()
+    private void FixedUpdate()
     {
-        //改变抓取物体坐标
-        if (_isCatch)
-        {
-            _catchTrans.localPosition = _catchPosOffset;
-        }
+        //移动抓取目标到Offset位置
+        if (_catchTrans != null && _catchTrans.localPosition != _catchPosOffset)
+            _catchTrans.localPosition = Vector3.MoveTowards(_catchTrans.localPosition, _catchPosOffset, _catchSpeed);
     }
 
     //去掉拿着的东西
