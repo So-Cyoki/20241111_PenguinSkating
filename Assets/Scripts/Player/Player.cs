@@ -63,12 +63,15 @@ public class Player : MonoBehaviour
         float currentSpeed = _speed;
         bool isUseStamina = false;
         //冲刺
-        if (Input.GetKey(KeyCode.LeftShift) && _currentStamina > 0)
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            currentSpeed = _runSpeed;
-            _currentStamina -= _runStamina;
-            OnStaminaUpdate?.Invoke(_maxStamina, _currentStamina);
-            isUseStamina = true;
+            if (_currentStamina > 0)
+            {
+                currentSpeed = _runSpeed;
+                _currentStamina -= _runStamina;
+                OnStaminaUpdate?.Invoke(_maxStamina, _currentStamina);
+                isUseStamina = true;
+            }
         }
         if (moveDir.magnitude > 0.1f)
         {
