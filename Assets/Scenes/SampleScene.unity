@@ -6116,7 +6116,6 @@ GameObject:
   m_Component:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
-  - component: {fileID: 705507996}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -6201,29 +6200,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 784900913}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &705507996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705507993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_RenderingLayers: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_ShadowRenderingLayers: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 0
 --- !u!4 &725641541 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6182811634476045767, guid: e60014977565b9645a78819163000550, type: 3}
@@ -7070,7 +7046,7 @@ MonoBehaviour:
   _timeProvider: {fileID: 0}
   _primaryLight: {fileID: 705507994}
   _searchForPrimaryLightOnStartup: 1
-  _material: {fileID: 2100000, guid: f16638bd1157684438a193be4f746457, type: 2}
+  _material: {fileID: 2100000, guid: ef94c26e44a36e24a9dcbc5995a2bed1, type: 2}
   _waterTilePrefab: {fileID: 0}
   _layerName: 
   _layer: 4
@@ -8396,6 +8372,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
+      propertyPath: _kidCount
+      value: 85
+      objectReference: {fileID: 0}
     - target: {fileID: 7309511080738924556, guid: fc0857913d624134abbbe408056df5fa, type: 3}
       propertyPath: m_Name
       value: IcePlane
