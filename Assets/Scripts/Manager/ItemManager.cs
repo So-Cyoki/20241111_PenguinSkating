@@ -23,9 +23,6 @@ public class ItemManager : MonoBehaviour
     [Tooltip("总共几率加起来不要超过100%")]
     public List<ItemWithProbability> _itemList;
 
-    private void Update()
-    {
-    }
     private void FixedUpdate()
     {
         _currentCreatTime += Time.deltaTime;

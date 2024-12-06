@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class SeaWave : MonoBehaviour
@@ -16,6 +15,8 @@ public class SeaWave : MonoBehaviour
     public Vector2 _drawOffsetPos;
     [Tooltip("每一列放大多少")] public float _drawAddSize;
     public Vector2 _drawRandOffsetPos;
+
+    public static event Action OnGameOver;//游戏结束
 
     private void Start()
     {
@@ -38,8 +39,8 @@ public class SeaWave : MonoBehaviour
                 GameObject obj2 = Instantiate(_spriteObj, drawParent);
                 Vector3 pos1 = new(_drawOffsetPos.y * j + intervalsX, 0, _drawOffsetPos.x * i - (_drawAddSize * i * 10));
                 Vector3 pos2 = new(-_drawOffsetPos.y * j - intervalsX, 0, _drawOffsetPos.x * i - (_drawAddSize * i * 10));
-                pos1 += new Vector3(Random.Range(-_drawRandOffsetPos.y, _drawRandOffsetPos.y), 0, Random.Range(-_drawRandOffsetPos.x, _drawRandOffsetPos.x));
-                pos2 += new Vector3(Random.Range(-_drawRandOffsetPos.y, _drawRandOffsetPos.y), 0, Random.Range(-_drawRandOffsetPos.x, _drawRandOffsetPos.x));
+                pos1 += new Vector3(UnityEngine.Random.Range(-_drawRandOffsetPos.y, _drawRandOffsetPos.y), 0, UnityEngine.Random.Range(-_drawRandOffsetPos.x, _drawRandOffsetPos.x));
+                pos2 += new Vector3(UnityEngine.Random.Range(-_drawRandOffsetPos.y, _drawRandOffsetPos.y), 0, UnityEngine.Random.Range(-_drawRandOffsetPos.x, _drawRandOffsetPos.x));
                 obj1.transform.localPosition = pos1;
                 obj2.transform.localPosition = pos2;
                 float addSize = _drawAddSize * i;
@@ -52,7 +53,7 @@ public class SeaWave : MonoBehaviour
             {
                 GameObject rowObj = Instantiate(_spriteObj, drawParent);
                 Vector3 rowPos = new(intervalsX, 0, _drawOffsetPos.x * (i + 1) - (_drawAddSize * (i + 1) * 10));
-                rowPos += new Vector3(Random.Range(-_drawRandOffsetPos.y, _drawRandOffsetPos.y), 0, Random.Range(-_drawRandOffsetPos.x, _drawRandOffsetPos.x));
+                rowPos += new Vector3(UnityEngine.Random.Range(-_drawRandOffsetPos.y, _drawRandOffsetPos.y), 0, UnityEngine.Random.Range(-_drawRandOffsetPos.x, _drawRandOffsetPos.x));
                 rowObj.transform.localPosition = rowPos;
                 rowObj.transform.localScale *= _drawAddSize * (i + 1);
             }
@@ -77,6 +78,7 @@ public class SeaWave : MonoBehaviour
         {
             //碰到Player和主要的冰块游戏就失败了
             Debug.Log("Player被浪冲走了!游戏失败!");
+            OnGameOver?.Invoke();
         }
         else
         {

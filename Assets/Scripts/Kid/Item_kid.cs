@@ -68,8 +68,8 @@ public class Item_kid : ItemBase
         //肚子饿把鱼吃掉(如果想要难一些，可以加一个状态条件，必须在冰上的时候才吃东西)
         if (_isHunger && other.gameObject.CompareTag("Item_fish"))
         {
-            OnEatFood?.Invoke();
             Destroy(other.gameObject);
+            OnEatFood?.Invoke();
 
             _currentHungerTime = 0;
             _randHungerTime = UnityEngine.Random.Range(_hungerTime.x, _hungerTime.y);

@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class CatchCollision : MonoBehaviour
 {
-    [SerializeField] Transform _catchTrans;
-    [SerializeField] Rigidbody _catchRb;
-    [SerializeField] ItemBase _catchSprite;
-    [SerializeField] GameObject _lastCatchObj;//最后进入抓取范围的物体
     public Transform _itemParent;
 
     public Vector3 _catchPosOffset;
@@ -16,7 +12,13 @@ public class CatchCollision : MonoBehaviour
     public Vector3 _throwAngle;
     Vector3 _catchScale;//被抓起物体的原本的大小
 
-    bool _isCatch;
+    [Header("检查用变量")]
+    [SerializeField] Transform _catchTrans;
+    [SerializeField] GameObject _catchObj;
+    [SerializeField] Rigidbody _catchRb;
+    [SerializeField] ItemBase _catchSprite;
+    [SerializeField] GameObject _lastCatchObj;//最后进入抓取范围的物体
+    [SerializeField] bool _isCatch;
 
     private void Update()
     {
@@ -28,6 +30,7 @@ public class CatchCollision : MonoBehaviour
                 //Debug.Log("抓起来");
 
                 _catchTrans = _lastCatchObj.transform;
+                _catchObj = _lastCatchObj;
                 _catchScale = _catchTrans.localScale;
                 _catchRb = _catchTrans.GetComponent<Rigidbody>();
                 _catchRb.velocity = Vector3.zero;
@@ -53,10 +56,22 @@ public class CatchCollision : MonoBehaviour
             _catchTrans.localScale = _catchScale;
 
             _catchTrans = null;
+            _catchObj = null;
             _catchRb = null;
             _catchSprite.SetCatch(false);
             _catchSprite = null;
+            _lastCatchObj = null;
 
+            _isCatch = false;
+        }
+        //如果物体已经消失，那么就重置为空手状态
+        if (_isCatch && _catchObj == null)
+        {
+            _catchTrans = null;
+            _catchObj = null;
+            _catchRb = null;
+            _catchSprite = null;
+            _lastCatchObj = null;
             _isCatch = false;
         }
     }
@@ -68,12 +83,15 @@ public class CatchCollision : MonoBehaviour
     }
 
     //去掉拿着的东西
-    void CatchThingNull()
+    public void CatchThingNull()
     {
+        if (_catchObj != null)
+            Destroy(_catchTrans.gameObject);
         _catchTrans = null;
+        _catchObj = null;
         _catchRb = null;
-        //_catchSprite.SetCatch(false);
         _catchSprite = null;
+        _lastCatchObj = null;
         _isCatch = false;
     }
 
