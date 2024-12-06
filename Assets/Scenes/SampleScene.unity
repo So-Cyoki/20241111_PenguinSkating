@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &15610395
 Transform:
   m_ObjectHideFlags: 0
@@ -7768,6 +7768,9 @@ MonoBehaviour:
   _maxStamina: 100
   _addStamina: 0.5
   _runStamina: 0.5
+  _arrowMark: {fileID: 15610395}
+  _arrowStandPosOffset: {x: 0, y: -0.9, z: 0}
+  _arrowWaterPosOffset: {x: 0, y: 0.5, z: 0}
 --- !u!1 &1520769653
 GameObject:
   m_ObjectHideFlags: 0
@@ -7968,6 +7971,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd0c7bb4d8f48a49ae4c408f024080b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _catchTrans: {fileID: 0}
+  _catchRb: {fileID: 0}
+  _catchSprite: {fileID: 0}
+  _lastCatchObj: {fileID: 0}
   _itemParent: {fileID: 314603147}
   _catchPosOffset: {x: 0, y: 0.3, z: 1}
   _catchSpeed: 0.3
@@ -8680,10 +8687,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _kidCount
-      value: 85
-      objectReference: {fileID: 0}
     - target: {fileID: 7309511080738924556, guid: fc0857913d624134abbbe408056df5fa, type: 3}
       propertyPath: m_Name
       value: IcePlane
@@ -8798,7 +8801,7 @@ SceneRoots:
   - {fileID: 216837266}
   - {fileID: 1498439825}
   - {fileID: 784900913}
-  - {fileID: 5181780414677728390}
-  - {fileID: 314603147}
-  - {fileID: 1499860299}
   - {fileID: 1878526765}
+  - {fileID: 314603147}
+  - {fileID: 5181780414677728390}
+  - {fileID: 1499860299}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Kid_Move : KidStatesBase
 {
-    int _rotationNums = 10;//最多寻找多少次角度
+    readonly int _rotationNums = 10;//最多寻找多少次角度
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         var main = GetKidMain(animator);

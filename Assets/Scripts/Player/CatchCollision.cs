@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class CatchCollision : MonoBehaviour
 {
-    Transform _catchTrans;
-    Rigidbody _catchRb;
-    Collider _catchColl;
-    ItemBase _catchSprite;
-    GameObject _lastCatchObj;//最后进入抓取范围的物体
+    [SerializeField] Transform _catchTrans;
+    [SerializeField] Rigidbody _catchRb;
+    [SerializeField] ItemBase _catchSprite;
+    [SerializeField] GameObject _lastCatchObj;//最后进入抓取范围的物体
     public Transform _itemParent;
 
     public Vector3 _catchPosOffset;
@@ -33,8 +32,6 @@ public class CatchCollision : MonoBehaviour
                 _catchRb = _catchTrans.GetComponent<Rigidbody>();
                 _catchRb.velocity = Vector3.zero;
                 _catchRb.useGravity = false;
-                _catchColl = _catchTrans.GetComponent<Collider>();
-                //_catchColl.enabled = false;
                 _catchSprite = _catchTrans.GetComponent<ItemBase>();
                 _catchSprite.SetCatch(true);
 
@@ -50,7 +47,6 @@ public class CatchCollision : MonoBehaviour
 
             _catchRb.useGravity = true;
             _catchRb.velocity = Vector3.zero;
-            //_catchColl.enabled = true;
             Vector3 dir = (Quaternion.Euler(_throwAngle) * Vector3.forward).normalized;
             _catchRb.AddForce(_throwForce * _catchRb.mass * dir, ForceMode.Impulse);
             _catchTrans.SetParent(_itemParent);
@@ -58,8 +54,8 @@ public class CatchCollision : MonoBehaviour
 
             _catchTrans = null;
             _catchRb = null;
-            _catchColl = null;
             _catchSprite.SetCatch(false);
+            _catchSprite = null;
 
             _isCatch = false;
         }
@@ -74,7 +70,10 @@ public class CatchCollision : MonoBehaviour
     //去掉拿着的东西
     void CatchThingNull()
     {
-        _lastCatchObj = null;
+        _catchTrans = null;
+        _catchRb = null;
+        //_catchSprite.SetCatch(false);
+        _catchSprite = null;
         _isCatch = false;
     }
 

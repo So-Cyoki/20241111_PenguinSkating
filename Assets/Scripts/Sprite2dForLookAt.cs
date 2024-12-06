@@ -53,7 +53,7 @@ public class Sprite2dForLookAt : MonoBehaviour
     void ChangerDirAni()
     {
         //向左
-        if (_targetRb.velocity.x < 1f)
+        if (_targetRb.velocity.x < 0.1f)
         {
             _sprite.flipX = false;
         }

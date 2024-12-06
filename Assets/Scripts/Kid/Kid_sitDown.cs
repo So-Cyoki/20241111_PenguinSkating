@@ -11,7 +11,7 @@ public class Kid_sitDown : KidStatesBase
         Item_kid main = GetKidMain(animator);
 
         _currentSitDownTime = 0;
-        main._spriteRen.color = Color.blue;
+        //main._spriteRen.color = Color.blue;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -29,6 +29,6 @@ public class Kid_sitDown : KidStatesBase
     {
         Item_kid main = GetKidMain(animator);
 
-        main._spriteRen.color = Color.white;
+        //main._spriteRen.color = Color.white;
     }
 }

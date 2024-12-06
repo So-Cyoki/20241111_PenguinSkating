@@ -17,6 +17,10 @@ public class Player : MonoBehaviour
     public float _addStamina;
     public float _runStamina;
     int _highScore;
+    [Header("指示箭头")]
+    public Transform _arrowMark;
+    public Vector3 _arrowStandPosOffset;
+    public Vector3 _arrowWaterPosOffset;
 
     bool _isJump;
 
@@ -38,10 +42,18 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        //是否进入水中判断
         _submergedVolume = _waterObject.submergedVolume;
-        if (_submergedVolume > 1f && _rb.velocity.y < 0)
-            _isJump = false;
+        //是否进入水中判断
+        if (_submergedVolume > 1f && _rb.velocity != Vector3.zero)
+        {
+            _arrowMark.position = new(_arrowMark.position.x + _arrowWaterPosOffset.x, _arrowWaterPosOffset.y, _arrowMark.position.z + _arrowWaterPosOffset.z);
+            if (_rb.velocity.y < 0)
+                _isJump = false;//跳跃
+        }
+        else
+        {
+            _arrowMark.localPosition = _arrowStandPosOffset;
+        }
     }
     private void LateUpdate()
     {
