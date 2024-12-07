@@ -26,6 +26,9 @@ public class IcePlane : MonoBehaviour
     Item_icePlane _csItem;//捕获到的冰块脚本
     float _originalSpring;
     float _originalDamper;
+    Vector3 _originalPos;
+    Quaternion _originalRotation;
+    Vector3 _originalScale;
 
     int _kidCount;
 
@@ -53,6 +56,10 @@ public class IcePlane : MonoBehaviour
         _originalDamper = _spJoint.damper;
         _spJoint.spring = 0;
         _spJoint.damper = 0;
+
+        _originalPos = transform.position;
+        _originalRotation = transform.rotation;
+        _originalScale = transform.localScale;
     }
     private void Update()
     {
@@ -110,6 +117,16 @@ public class IcePlane : MonoBehaviour
     {
         _waterObjectMass.CalculateAndApplyFromMaterial();
         _rb.mass = _waterObjectMass.mass;
+    }
+    public void Inital()
+    {
+        transform.SetPositionAndRotation(_originalPos, _originalRotation);
+        transform.localScale = _originalScale;
+        _rb.velocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+        _currentMeltingTime = 0;
+        _currentUptakeTime = 0;
+        _kidCount = 0;
     }
     private void OnTriggerEnter(Collider other)
     {

@@ -669,7 +669,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: -1
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -719,7 +719,7 @@ MonoBehaviour:
   _start_player: {fileID: 1499860298}
   _start_icePlane: {fileID: 1868484015}
   _start_kidPrefabs: {fileID: 7575405519901952921, guid: 2ceab56f9e8887d48b73628fdbe9a932, type: 3}
-  _start_kid_originalPos: {x: 0.2, y: 15, z: 2}
+  _start_kid_originalPos: {x: 0.2, y: 20, z: 2}
   _start_SeaWave: {fileID: 1878526764}
   _end_Item: {fileID: 314603147}
   _end_playerCatchCS: {fileID: 1806654062}
@@ -782,7 +782,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: X99
+  m_text: X00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 30022bec2ef35c3449ac0514de5e1e07, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 30022bec2ef35c3449ac0514de5e1e07, type: 2}
@@ -6874,7 +6874,7 @@ Transform:
   m_GameObject: {fileID: 693084476}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: -15, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -7786,7 +7786,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: -15.000001, y: 15.550418, z: -18.624218}
+  m_LocalPosition: {x: -15.000001, y: 15.550417, z: -18.654219}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -8690,7 +8690,7 @@ Transform:
   m_GameObject: {fileID: 1499860298}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -15, y: 2, z: 0.03}
+  m_LocalPosition: {x: -15, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -9112,15 +9112,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd0c7bb4d8f48a49ae4c408f024080b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _catchTrans: {fileID: 0}
-  _catchRb: {fileID: 0}
-  _catchSprite: {fileID: 0}
-  _lastCatchObj: {fileID: 0}
   _itemParent: {fileID: 314603147}
   _catchPosOffset: {x: 0, y: 0.3, z: 1}
   _catchSpeed: 0.3
   _throwForce: 3
   _throwAngle: {x: -70, y: 0, z: 0}
+  _catchTrans: {fileID: 0}
+  _catchObj: {fileID: 0}
+  _catchRb: {fileID: 0}
+  _catchSprite: {fileID: 0}
+  _lastCatchObj: {fileID: 0}
+  _isCatch: 0
 --- !u!1 &1808083357
 GameObject:
   m_ObjectHideFlags: 0
@@ -9543,7 +9545,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00000000000M
+  m_text: 0000000000 m
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9761,7 +9763,7 @@ Transform:
   m_GameObject: {fileID: 2010021252}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.00000073055696, z: 0.00000061301}
+  m_LocalPosition: {x: 0, y: 0.00000073055696, z: -0.00000061301}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -9949,7 +9951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7943022860376339126, guid: fc0857913d624134abbbe408056df5fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7943022860376339126, guid: fc0857913d624134abbbe408056df5fa, type: 3}
       propertyPath: m_LocalPosition.y

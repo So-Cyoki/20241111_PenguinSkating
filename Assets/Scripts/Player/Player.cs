@@ -22,6 +22,9 @@ public class Player : MonoBehaviour
     public Vector3 _arrowStandPosOffset;
     public Vector3 _arrowWaterPosOffset;
 
+    Vector3 _originalPos;
+    Quaternion _originalRotation;
+
     bool _isJump;
 
     public static event Action<int> OnScoreUpdate;
@@ -35,6 +38,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _currentStamina = _maxStamina;
+        _originalPos = transform.position;
+        _originalRotation = transform.rotation;
     }
     private void Update()
     {
@@ -64,6 +69,14 @@ public class Player : MonoBehaviour
             _highScore = length;
             OnScoreUpdate?.Invoke(_highScore);
         }
+    }
+
+    public void Inital()
+    {
+        transform.SetPositionAndRotation(_originalPos, _originalRotation);
+        _rb.velocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+        _highScore = 0;
     }
 
     void Move()

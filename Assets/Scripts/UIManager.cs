@@ -24,11 +24,10 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI _endUI_highScore;
     public TextMeshProUGUI _endUI_score;
 
-    Vector3 _start_player_originalPos;
-    Vector3 _start_icePlane_originalPos;
-    Vector3 _start_icePlane_originalScale;
     Vector3 _start_SeaWave_originalPos;
     int _highScore;
+    int _score;
+    int _kidCount;
 
     private void Start()
     {
@@ -43,9 +42,6 @@ public class UIManager : MonoBehaviour
         _start_icePlane.SetActive(false);
         _start_SeaWave.SetActive(false);
         //保存位置用以重新开始游戏
-        _start_player_originalPos = _start_player.transform.position;
-        _start_icePlane_originalPos = _start_icePlane.transform.position;
-        _start_icePlane_originalScale = _start_icePlane.transform.localScale;
         _start_SeaWave_originalPos = _start_SeaWave.transform.position;
     }
 
@@ -81,6 +77,14 @@ public class UIManager : MonoBehaviour
         _scoreText.transform.parent.gameObject.SetActive(false);
         _playerSlider.transform.parent.gameObject.SetActive(false);
         _start_player.SetActive(false);
+        //游戏结束分数
+        int resultScore = _score * _kidCount;
+        _endUI_score.text = _score + " X " + _kidCount + " = " + resultScore;
+        if (resultScore > _highScore)
+        {
+            _highScore = resultScore;
+        }
+        _endUI_highScore.text = "" + _highScore;
     }
     void GameRestart()
     {
@@ -90,28 +94,24 @@ public class UIManager : MonoBehaviour
             Transform child = _end_Item.GetChild(i);
             Destroy(child.gameObject);
         }
-        //打开UI
+        //打开UI和重置UI数值
         _scoreText.transform.parent.gameObject.SetActive(true);
         _playerSlider.transform.parent.gameObject.SetActive(true);
-        //打开Player和删除Player手上的东西
+        _scoreText.text = "0000000000 m";
+        _kidNumText.text = "X00";
+        //打开Player和重置
         _start_player.SetActive(true);
         CatchCollision catchCS = _start_player.transform.Find("CatchCollison").GetComponent<CatchCollision>();
         catchCS.CatchThingNull();
-        //重置Player位置和刚体
-        _start_player.transform.SetPositionAndRotation(_start_player_originalPos, Quaternion.Euler(0, -90, 0));
-        Rigidbody rb = _start_player.GetComponent<Rigidbody>();
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        //重置IcePlane位置和刚体
-        _start_icePlane.transform.SetPositionAndRotation(_start_icePlane_originalPos, Quaternion.Euler(0, 0, 0));
-        _start_icePlane.transform.localScale = _start_icePlane_originalScale;
-        rb = _start_icePlane.GetComponent<Rigidbody>();
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        Player playerCS = _start_player.GetComponent<Player>();
+        playerCS.Inital();
+        //重置IcePlane
+        IcePlane icePlaneCS = _start_icePlane.GetComponent<IcePlane>();
+        icePlaneCS.Inital();
         //生成一个Kid
         Instantiate(_start_kidPrefabs, _start_kid_originalPos, Quaternion.Euler(0, -90, 0), _end_Item);
-        _start_SeaWave.SetActive(true);
         //重置SeaWave的位置
+        _start_SeaWave.SetActive(true);
         _start_SeaWave.transform.SetPositionAndRotation(_start_SeaWave_originalPos, Quaternion.Euler(0, 90, 0));
     }
 
@@ -120,18 +120,13 @@ public class UIManager : MonoBehaviour
         //游戏中界面
         string scoreText = score.ToString("D10");
         _scoreText.text = scoreText + " m";
-        //游戏结束界面
-        _endUI_score.text = "" + score;
-        if (score > _highScore)
-        {
-            _highScore = score;
-            _endUI_highScore.text = "" + _highScore;
-        }
+        _score = score;
     }
     void KidCountUpdate(int count)
     {
         string text = count.ToString("D2");
         _kidNumText.text = "X" + text;
+        _kidCount = count;
     }
     void PlayerStaminaUpdate(float max, float current)
     {

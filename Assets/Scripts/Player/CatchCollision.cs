@@ -28,7 +28,6 @@ public class CatchCollision : MonoBehaviour
             if (!_isCatch)
             {
                 //Debug.Log("抓起来");
-
                 _catchTrans = _lastCatchObj.transform;
                 _catchObj = _lastCatchObj;
                 _catchScale = _catchTrans.localScale;
@@ -47,7 +46,6 @@ public class CatchCollision : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K) && _isCatch)
         {
             //Debug.Log("放下");
-
             _catchRb.useGravity = true;
             _catchRb.velocity = Vector3.zero;
             Vector3 dir = (Quaternion.Euler(_throwAngle) * Vector3.forward).normalized;
@@ -55,24 +53,18 @@ public class CatchCollision : MonoBehaviour
             _catchTrans.SetParent(_itemParent);
             _catchTrans.localScale = _catchScale;
 
+            _catchSprite.SetCatch(false);
             _catchTrans = null;
             _catchObj = null;
             _catchRb = null;
-            _catchSprite.SetCatch(false);
             _catchSprite = null;
             _lastCatchObj = null;
-
             _isCatch = false;
         }
         //如果物体已经消失，那么就重置为空手状态
         if (_isCatch && _catchObj == null)
         {
-            _catchTrans = null;
-            _catchObj = null;
-            _catchRb = null;
-            _catchSprite = null;
-            _lastCatchObj = null;
-            _isCatch = false;
+            CatchThingNull();
         }
     }
     private void FixedUpdate()
