@@ -4936,7 +4936,7 @@ Transform:
   m_GameObject: {fileID: 7575405519901952921}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.21, y: 1.91, z: 0.14}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 1.5, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5139,17 +5139,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 0}
+  _coll: {fileID: 0}
   _playerTrans: {fileID: 0}
   _destoryLength: 300
   _addMassM: 7
   _itemState: 0
   _spriteRen: {fileID: 3834116120592401635}
+  _sprite2DForLookAtCS: {fileID: 0}
   _speedForce: {x: 3, y: 6}
   _angleRun: {x: 0, y: 180, z: 0}
   _slowlyMultiply: 0.5
   _idleTime: {x: 3, y: 5}
   _sitDownTime: 5
   _hungerTime: {x: 20, y: 30}
+  _hungerDeadTime: 15
+  _hungerGodTime: 3
+  _currentHungerDeadTime: 0
   _originOffset: {x: 0, y: 0, z: 0}
   _rayDir: {x: 0, y: -0.7, z: 1}
   _rayLength: 5

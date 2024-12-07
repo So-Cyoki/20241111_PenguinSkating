@@ -5,14 +5,18 @@ public class Item_kid : ItemBase
 {
     [Header("基础属性")]
     public SpriteRenderer _spriteRen;
+    [HideInInspector] public Sprite2dForLookAt _sprite2DForLookAtCS;
     public Vector2 _speedForce;
     [Tooltip("输入角度")] public Vector3 _angleRun;//随机转多少角度移动
     [Tooltip("边缘减速倍率")] public float _slowlyMultiply;
     public Vector2 _idleTime;
     public float _sitDownTime;
     public Vector2 _hungerTime;
+    public float _hungerDeadTime;
+    public float _hungerGodTime;//防止从别的状态计入饥饿状态，因为时间已经0的情况下立马死亡
     float _currentHungerTime;
     float _randHungerTime;//每次都会随机一个饥饿时间，吃饭后重置
+    [HideInInspector] public float _currentHungerDeadTime;
     ItemState _preState;
 
     [Header("射线属性")]
@@ -29,6 +33,7 @@ public class Item_kid : ItemBase
 
     protected override void Start()
     {
+        _sprite2DForLookAtCS = _spriteRen.GetComponent<Sprite2dForLookAt>();
         _isHunger = false;
         _randHungerTime = UnityEngine.Random.Range(_hungerTime.x, _hungerTime.y);
     }
@@ -72,6 +77,7 @@ public class Item_kid : ItemBase
             OnEatFood?.Invoke();
 
             _currentHungerTime = 0;
+            _currentHungerDeadTime = 0;
             _randHungerTime = UnityEngine.Random.Range(_hungerTime.x, _hungerTime.y);
             _animator.SetTrigger("tIdle");
             _isHunger = false;

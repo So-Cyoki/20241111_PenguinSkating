@@ -14,6 +14,7 @@ public enum ItemState
 public abstract class ItemBase : MonoBehaviour
 {
     [HideInInspector] public Rigidbody _rb;
+    [HideInInspector] public Collider _coll;
     protected NWH.DWP2.WaterObjects.WaterObject _waterObject;//水插件脚本
     protected Animator _animator;
 
@@ -32,6 +33,7 @@ public abstract class ItemBase : MonoBehaviour
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _coll = GetComponent<Collider>();
         _originalMass = _rb.mass;
         _waterObject = GetComponent<NWH.DWP2.WaterObjects.WaterObject>();
         _animator = GetComponent<Animator>();

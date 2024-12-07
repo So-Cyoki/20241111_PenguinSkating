@@ -35,15 +35,10 @@ public class Kid_idle : KidStatesBase
         {
             animator.SetTrigger("tMove");
         }
-
         //Hunger
         if (main._isHunger)
         {
             animator.SetTrigger("tHunger");
         }
-    }
-
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
     }
 }

@@ -122,6 +122,8 @@ public class IcePlane : MonoBehaviour
     {
         transform.SetPositionAndRotation(_originalPos, _originalRotation);
         transform.localScale = _originalScale;
+        _meltingSize = transform.localScale.x;
+        _size = transform.localScale.x;
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
         _currentMeltingTime = 0;

@@ -18,6 +18,12 @@ public class Kid_sitDown : KidStatesBase
     {
         Item_kid main = GetKidMain(animator);
 
+        //Hunger
+        if (main._isHunger)
+        {
+            animator.SetTrigger("tHunger");
+        }
+        //SitDonw Time
         _currentSitDownTime += Time.deltaTime;
         if (_currentSitDownTime > main._sitDownTime)
         {
