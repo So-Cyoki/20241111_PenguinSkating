@@ -44,6 +44,10 @@ public class IcePlane : MonoBehaviour
         _waterObjectMass = GetComponent<NWH.DWP2.WaterObjects.MassFromVolume>();
         if (_waterObjectMass == null)
             Debug.LogWarning("缺少水脚本！！");
+
+        _originalPos = transform.position;
+        _originalRotation = transform.rotation;
+        _originalScale = transform.localScale;
     }
     private void Start()
     {
@@ -56,10 +60,6 @@ public class IcePlane : MonoBehaviour
         _originalDamper = _spJoint.damper;
         _spJoint.spring = 0;
         _spJoint.damper = 0;
-
-        _originalPos = transform.position;
-        _originalRotation = transform.rotation;
-        _originalScale = transform.localScale;
     }
     private void Update()
     {

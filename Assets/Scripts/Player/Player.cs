@@ -34,12 +34,12 @@ public class Player : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _waterObject = GetComponent<NWH.DWP2.WaterObjects.WaterObject>();
+        _originalPos = transform.position;
+        _originalRotation = transform.rotation;
     }
     private void Start()
     {
         _currentStamina = _maxStamina;
-        _originalPos = transform.position;
-        _originalRotation = transform.rotation;
     }
     private void Update()
     {
