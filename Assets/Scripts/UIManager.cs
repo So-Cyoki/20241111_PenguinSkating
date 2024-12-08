@@ -25,7 +25,9 @@ public class UIManager : MonoBehaviour
     public Transform _end_Item;
     public CatchCollision _end_playerCatchCS;
     public TextMeshProUGUI _endUI_highScore;
-    public TextMeshProUGUI _endUI_score;
+    public TextMeshProUGUI _endUI_scoreLength;
+    public TextMeshProUGUI _endUI_scoreKidCount;
+    public TextMeshProUGUI _endUI_scoreResult;
 
     Vector3 _start_SeaWave_originalPos;
     int _highScore;
@@ -59,7 +61,6 @@ public class UIManager : MonoBehaviour
         //弹出游戏帮助
         if (_uiHelp.activeSelf && Input.GetKeyDown(KeyCode.Space))
         {
-            //GameStart_end();
             GameRestart();
             _uiHelp.SetActive(false);
         }
@@ -95,17 +96,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void GameStart_end()
-    {
-        //已经同步到GameRestart方法中了，这方法就不需要了，测试没问题后就可以删掉了
-        _scoreText.transform.parent.gameObject.SetActive(true);
-        _playerSlider.transform.parent.gameObject.SetActive(true);
-        _start_itemManager.SetActive(true);
-        _start_player.SetActive(true);
-        _start_icePlane.SetActive(true);
-        Instantiate(_start_kidPrefabs, _start_kid_originalPos, Quaternion.Euler(0, -90, 0), _end_Item);
-        _start_SeaWave.SetActive(true);
-    }
     void GameOver_start()
     {
         _uiGameOver.SetActive(true);
@@ -114,7 +104,9 @@ public class UIManager : MonoBehaviour
         _start_player.SetActive(false);
         //游戏结束分数
         int resultScore = _score * _kidCount;
-        _endUI_score.text = _score + " X " + _kidCount + " = " + resultScore;
+        _endUI_scoreLength.text = _score + " m";
+        _endUI_scoreKidCount.text = _kidCount + " kid";
+        _endUI_scoreResult.text = resultScore + "";
         if (resultScore > _highScore)
         {
             _highScore = resultScore;
