@@ -74,11 +74,21 @@ public class CatchCollision : MonoBehaviour
             _catchTrans.localPosition = Vector3.MoveTowards(_catchTrans.localPosition, _catchPosOffset, _catchSpeed);
     }
 
-    //去掉拿着的东西
+    //删除掉拿着的东西
     public void CatchThingNull()
     {
         if (_catchObj != null)
             Destroy(_catchTrans.gameObject);
+        _catchTrans = null;
+        _catchObj = null;
+        _catchRb = null;
+        _catchSprite = null;
+        _lastCatchObj = null;
+        _isCatch = false;
+    }
+    //拿着的东西被吃掉了
+    void CatchThingEat()
+    {
         _catchTrans = null;
         _catchObj = null;
         _catchRb = null;
@@ -105,10 +115,10 @@ public class CatchCollision : MonoBehaviour
 
     private void OnEnable()
     {
-        Item_kid.OnEatFood += CatchThingNull;
+        Item_kid.OnEatFood += CatchThingEat;
     }
     private void OnDisable()
     {
-        Item_kid.OnEatFood += CatchThingNull;
+        Item_kid.OnEatFood += CatchThingEat;
     }
 }

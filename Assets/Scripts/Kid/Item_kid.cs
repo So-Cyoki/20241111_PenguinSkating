@@ -4,7 +4,6 @@ using UnityEngine;
 public class Item_kid : ItemBase
 {
     [Header("基础属性")]
-    public SpriteRenderer _spriteRen;
     [HideInInspector] public Sprite2dForLookAt _sprite2DForLookAtCS;
     public Vector2 _speedForce;
     [Tooltip("输入角度")] public Vector3 _angleRun;//随机转多少角度移动
@@ -73,7 +72,8 @@ public class Item_kid : ItemBase
         //肚子饿把鱼吃掉(如果想要难一些，可以加一个状态条件，必须在冰上的时候才吃东西)
         if (_isHunger && other.gameObject.CompareTag("Item_fish"))
         {
-            Destroy(other.gameObject);
+            Item_fish item_FishCS = other.gameObject.GetComponent<Item_fish>();
+            item_FishCS.ToDead();
             OnEatFood?.Invoke();
 
             _currentHungerTime = 0;

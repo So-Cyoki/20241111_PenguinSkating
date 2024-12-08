@@ -15,6 +15,8 @@ public abstract class ItemBase : MonoBehaviour
 {
     [HideInInspector] public Rigidbody _rb;
     [HideInInspector] public Collider _coll;
+    [HideInInspector] public MeshRenderer _meshRen;
+    public SpriteRenderer _spriteRen;
     protected NWH.DWP2.WaterObjects.WaterObject _waterObject;//水插件脚本
     protected Animator _animator;
 
@@ -34,6 +36,7 @@ public abstract class ItemBase : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _coll = GetComponent<Collider>();
+        _meshRen = GetComponent<MeshRenderer>();
         _originalMass = _rb.mass;
         _waterObject = GetComponent<NWH.DWP2.WaterObjects.WaterObject>();
         _animator = GetComponent<Animator>();
@@ -88,6 +91,7 @@ public abstract class ItemBase : MonoBehaviour
                 _itemState = ItemState.ORIGINAL;
         }
     }
+    protected virtual void LateUpdate() { }
 
     /// <summary>
     /// 初始化

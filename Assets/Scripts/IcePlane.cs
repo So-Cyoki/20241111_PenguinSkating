@@ -129,6 +129,7 @@ public class IcePlane : MonoBehaviour
         _currentMeltingTime = 0;
         _currentUptakeTime = 0;
         _kidCount = 0;
+        _isEndToWave = false;
     }
     private void OnTriggerEnter(Collider other)
     {

@@ -97,6 +97,8 @@ public class UIManager : MonoBehaviour
         //打开UI和重置UI数值
         _scoreText.transform.parent.gameObject.SetActive(true);
         _playerSlider.transform.parent.gameObject.SetActive(true);
+        _kidCount = 0;
+        _highScore = 0;
         _scoreText.text = "0000000000 m";
         _kidNumText.text = "X00";
         //打开Player和重置
