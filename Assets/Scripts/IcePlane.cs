@@ -124,6 +124,7 @@ public class IcePlane : MonoBehaviour
         transform.localScale = _originalScale;
         _meltingSize = transform.localScale.x;
         _size = transform.localScale.x;
+        SetMassFromMaterial();
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
         _currentMeltingTime = 0;

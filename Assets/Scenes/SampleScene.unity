@@ -9156,7 +9156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1018192984
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12006,7 +12006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteObj: {fileID: 23037310}
   _playerTrans: {fileID: 1499860299}
-  _lerpSpeed: 0.001
+  _lerpSpeed: 0.002
   _waveForce: 20
   _drawNums: {x: 5, y: 30}
   _drawOffsetPos: {x: 1, y: 3}
@@ -12878,6 +12878,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 784900913}
     m_Modifications:
+    - target: {fileID: 5512243473788697626, guid: e60014977565b9645a78819163000550, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5873726290965156512, guid: e60014977565b9645a78819163000550, type: 3}
       propertyPath: m_Name
       value: IceMountainMap
@@ -12920,6 +12924,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6182811634476045767, guid: e60014977565b9645a78819163000550, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8133668033343785756, guid: e60014977565b9645a78819163000550, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
