@@ -33,6 +33,7 @@ public class CatchCollision : MonoBehaviour
                 _catchScale = _catchTrans.localScale;
                 _catchRb = _catchTrans.GetComponent<Rigidbody>();
                 _catchRb.velocity = Vector3.zero;
+                _catchRb.angularVelocity = Vector3.zero;
                 _catchRb.useGravity = false;
                 _catchSprite = _catchTrans.GetComponent<ItemBase>();
                 _catchSprite.SetCatch(true);
@@ -48,6 +49,7 @@ public class CatchCollision : MonoBehaviour
             //Debug.Log("放下");
             _catchRb.useGravity = true;
             _catchRb.velocity = Vector3.zero;
+            _catchRb.angularVelocity = Vector3.zero;
             Vector3 dir = (Quaternion.Euler(_throwAngle) * Vector3.forward).normalized;
             _catchRb.AddForce(_throwForce * _catchRb.mass * dir, ForceMode.Impulse);
             _catchTrans.SetParent(_itemParent);
@@ -89,6 +91,8 @@ public class CatchCollision : MonoBehaviour
     //拿着的东西被吃掉了
     void CatchThingEat()
     {
+        if (_catchTrans != null)
+            _catchTrans.SetParent(_itemParent);
         _catchTrans = null;
         _catchObj = null;
         _catchRb = null;

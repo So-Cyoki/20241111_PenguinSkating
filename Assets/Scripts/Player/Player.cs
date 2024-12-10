@@ -130,9 +130,17 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Ice"))
+        if (other.gameObject.CompareTag("Ice") && _rb.velocity.y < 0)
         {
             _isJump = false;
         }
+        //如果在水中碰到冰块，就是想要推冰块的时候，稍微调整一下Player的Y坐标
+        //但是实现出来的效果不是特别好，先不使用吧
+        // if (other.gameObject.CompareTag("Ice") && _submergedVolume > 0.1f)
+        // {
+        //     Vector3 pushPos = new(transform.position.x, 0.3f, transform.position.z);
+        //     Vector3 rbPos = Vector3.MoveTowards(_rb.position, pushPos, _speed * Time.fixedDeltaTime);
+        //     _rb.MovePosition(rbPos);
+        // }
     }
 }

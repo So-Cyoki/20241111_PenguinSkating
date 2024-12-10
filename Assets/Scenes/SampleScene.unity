@@ -8585,7 +8585,7 @@ MonoBehaviour:
   _playerTrans: {fileID: 1499860299}
   _itemParent: {fileID: 314603147}
   _creatLength: {x: 50, y: 100}
-  _creatTime: 1
+  _creatTime: 0.8
   _creatMax: 100
   _itemList:
   - item: {fileID: 8834793320488654762, guid: 7ce5872e059ec2f41bf850e5cee8d643, type: 3}
@@ -10736,6 +10736,7 @@ MonoBehaviour:
   _arrowMark: {fileID: 15610395}
   _arrowStandPosOffset: {x: 0, y: -0.9, z: 0}
   _arrowWaterPosOffset: {x: 0, y: 0.5, z: 0}
+  _isJump: 0
 --- !u!1 &1505386473
 GameObject:
   m_ObjectHideFlags: 0
@@ -12006,7 +12007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteObj: {fileID: 23037310}
   _playerTrans: {fileID: 1499860299}
-  _lerpSpeed: 0.002
+  _lerpSpeed: 0.0015
   _waveForce: 20
   _drawNums: {x: 5, y: 30}
   _drawOffsetPos: {x: 1, y: 3}
@@ -12824,6 +12825,10 @@ PrefabInstance:
     - target: {fileID: 7309511080738924556, guid: fc0857913d624134abbbe408056df5fa, type: 3}
       propertyPath: m_Name
       value: IcePlane
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943022860376339126, guid: fc0857913d624134abbbe408056df5fa, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7943022860376339126, guid: fc0857913d624134abbbe408056df5fa, type: 3}
       propertyPath: m_LocalPosition.x
