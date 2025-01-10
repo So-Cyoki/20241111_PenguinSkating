@@ -1,9 +1,11 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
+    PlayerInputActions _inputActions;
     [Header("游戏界面")]
     public GameObject _uiStart;
     public GameObject _uiGameOver;
@@ -38,6 +40,11 @@ public class UIManager : MonoBehaviour
 
     bool _isArrowGo;
 
+    private void Awake()
+    {
+        _inputActions = new PlayerInputActions();
+    }
+
     private void Start()
     {
         _uiStart.SetActive(true);
@@ -59,19 +66,22 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         //弹出游戏帮助
-        if (_uiHelp.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        if (_uiHelp.activeSelf
+        && _inputActions.UI.Enter.WasPressedThisFrame())
         {
             GameRestart();
             _uiHelp.SetActive(false);
         }
         //游戏开始
-        if (_uiStart.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        if (_uiStart.activeSelf
+        && _inputActions.UI.Enter.WasPressedThisFrame())
         {
             _uiHelp.SetActive(true);
             _uiStart.SetActive(false);
         }
         //游戏结束
-        if (_uiGameOver.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        if (_uiGameOver.activeSelf
+        && _inputActions.UI.Enter.WasPressedThisFrame())
         {
             _uiHelp.SetActive(true);
             _uiGameOver.SetActive(false);
@@ -168,6 +178,7 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
+        _inputActions.Enable();
         Player.OnScoreUpdate += ScoreUpdate;
         IcePlane.OnKidCount += KidCountUpdate;
         Player.OnStaminaUpdate += PlayerStaminaUpdate;
@@ -175,6 +186,7 @@ public class UIManager : MonoBehaviour
     }
     private void OnDisable()
     {
+        _inputActions.Disable();
         Player.OnScoreUpdate -= ScoreUpdate;
         IcePlane.OnKidCount -= KidCountUpdate;
         Player.OnStaminaUpdate -= PlayerStaminaUpdate;

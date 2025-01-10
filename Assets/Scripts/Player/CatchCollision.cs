@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CatchCollision : MonoBehaviour
 {
+    PlayerInputActions _inputActions;
     public Transform _itemParent;
 
     public Vector3 _catchPosOffset;
@@ -20,10 +20,14 @@ public class CatchCollision : MonoBehaviour
     [SerializeField] GameObject _lastCatchObj;//最后进入抓取范围的物体
     [SerializeField] bool _isCatch;
 
+    private void Awake()
+    {
+        _inputActions = new();
+    }
     private void Update()
     {
         //抓起来
-        if (Input.GetKeyDown(KeyCode.J) && _lastCatchObj != null)
+        if (_inputActions.GamePlay.Catch.WasPressedThisFrame() && _lastCatchObj != null)
         {
             if (!_isCatch)
             {
@@ -44,7 +48,7 @@ public class CatchCollision : MonoBehaviour
             }
         }
         //放下去
-        if (Input.GetKeyDown(KeyCode.K) && _isCatch)
+        if (_inputActions.GamePlay.Drop.WasPressedThisFrame() && _isCatch)
         {
             //Debug.Log("放下");
             _catchRb.useGravity = true;
@@ -119,10 +123,12 @@ public class CatchCollision : MonoBehaviour
 
     private void OnEnable()
     {
+        _inputActions.Enable();
         Item_kid.OnEatFood += CatchThingEat;
     }
     private void OnDisable()
     {
+        _inputActions.Disable();
         Item_kid.OnEatFood += CatchThingEat;
     }
 }

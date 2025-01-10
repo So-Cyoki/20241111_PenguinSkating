@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     Rigidbody _rb;
     NWH.DWP2.WaterObjects.WaterObject _waterObject;//水插件脚本
 
+    PlayerInputActions _inputActions;
     public Transform _startPos;
     float _submergedVolume;//浮力
     public float _speed;
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        _inputActions = new PlayerInputActions();
         _rb = GetComponent<Rigidbody>();
         _waterObject = GetComponent<NWH.DWP2.WaterObjects.WaterObject>();
         _originalPos = transform.position;
@@ -70,6 +73,14 @@ public class Player : MonoBehaviour
             OnScoreUpdate?.Invoke(_highScore);
         }
     }
+    private void OnEnable()
+    {
+        _inputActions.Enable();
+    }
+    private void OnDisable()
+    {
+        _inputActions.Disable();
+    }
 
     public void Inital()
     {
@@ -81,14 +92,16 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        float vertical = Input.GetAxis("Vertical");
-        float horizontal = Input.GetAxis("Horizontal");
-        Vector3 moveDir = new Vector3(horizontal, 0, vertical).normalized;
+        Vector2 dir = _inputActions.GamePlay.Move.ReadValue<Vector2>();
+        // float vertical = Input.GetAxis("Vertical");
+        // float horizontal = Input.GetAxis("Horizontal");
+        // Vector3 moveDir = new Vector3(horizontal, 0, vertical).normalized;
+        Vector3 moveDir = new Vector3(dir.x, 0, dir.y).normalized;
 
         float currentSpeed = _speed;
         bool isUseStamina = false;
         //冲刺
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (_inputActions.GamePlay.Run.IsPressed())
         {
             if (_currentStamina > 0)
             {
@@ -107,7 +120,7 @@ public class Player : MonoBehaviour
             _rb.velocity = new(moveDir.x * currentSpeed, _rb.velocity.y, moveDir.z * currentSpeed);
         }
         //跳跃
-        if (Input.GetKeyDown(KeyCode.Space) && !_isJump)
+        if (_inputActions.GamePlay.Jump.WasPressedThisFrame() && !_isJump)
         {
             _rb.AddForce(_rb.mass * _jumpForce * Vector3.up, ForceMode.Impulse);
             _isJump = true;
