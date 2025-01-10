@@ -921,6 +921,7 @@ MonoBehaviour:
   _start_kidPrefabs: {fileID: 7575405519901952921, guid: 2ceab56f9e8887d48b73628fdbe9a932, type: 3}
   _start_kid_originalPos: {x: 0.2, y: 20, z: 2}
   _start_SeaWave: {fileID: 1878526764}
+  _start_iceMountainManagerCS: {fileID: 1798331004}
   _end_Item: {fileID: 314603147}
   _end_playerCatchCS: {fileID: 1806654062}
   _endUI_highScore: {fileID: 656545789}
@@ -2138,7 +2139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 529449438}
   - component: {fileID: 529449440}
-  - component: {fileID: 529449439}
+  - component: {fileID: 529449441}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2161,26 +2162,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 216837266}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &529449439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529449437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &529449440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2196,6 +2177,37 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!114 &529449441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529449437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!1 &540594786
 GameObject:
   m_ObjectHideFlags: 0
@@ -10736,7 +10748,6 @@ MonoBehaviour:
   _arrowMark: {fileID: 15610395}
   _arrowStandPosOffset: {x: 0, y: -0.9, z: 0}
   _arrowWaterPosOffset: {x: 0, y: 0.5, z: 0}
-  _isJump: 0
 --- !u!1 &1505386473
 GameObject:
   m_ObjectHideFlags: 0
@@ -11484,6 +11495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e01eabe24239b244b65d207918f3336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _EnvironmentTrans: {fileID: 784900913}
+  _startPos: {x: -90, y: 0, z: 35}
   _iceMountainMapList:
   - {fileID: 5873726290965156512, guid: e60014977565b9645a78819163000550, type: 3}
 --- !u!1 &1806654057
@@ -12883,6 +12896,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 784900913}
     m_Modifications:
+    - target: {fileID: 4073632360041063741, guid: e60014977565b9645a78819163000550, type: 3}
+      propertyPath: _isStartMap
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5512243473788697626, guid: e60014977565b9645a78819163000550, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -12891,9 +12908,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: IceMountainMap
       objectReference: {fileID: 0}
+    - target: {fileID: 5873726290965156512, guid: e60014977565b9645a78819163000550, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6182811634476045767, guid: e60014977565b9645a78819163000550, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -90.8
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 6182811634476045767, guid: e60014977565b9645a78819163000550, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12901,7 +12922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6182811634476045767, guid: e60014977565b9645a78819163000550, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 34.9
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 6182811634476045767, guid: e60014977565b9645a78819163000550, type: 3}
       propertyPath: m_LocalRotation.w

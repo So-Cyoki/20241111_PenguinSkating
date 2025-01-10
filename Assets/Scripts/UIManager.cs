@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     public GameObject _start_kidPrefabs;
     public Vector3 _start_kid_originalPos;
     public GameObject _start_SeaWave;
+    public IceMountainManager _start_iceMountainManagerCS;
     [Header("游戏结束的对象&UI")]
     public Transform _end_Item;
     public CatchCollision _end_playerCatchCS;
@@ -155,6 +156,8 @@ public class UIManager : MonoBehaviour
         //重置SeaWave的位置
         _start_SeaWave.SetActive(true);
         _start_SeaWave.transform.SetPositionAndRotation(_start_SeaWave_originalPos, Quaternion.Euler(0, 90, 0));
+        //重置整个冰山地图
+        _start_iceMountainManagerCS.ResetMap();
     }
 
     void ScoreUpdate(int score)

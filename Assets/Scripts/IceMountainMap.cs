@@ -9,8 +9,9 @@ public class IceMountainMap : MonoBehaviour
     public Transform _colliderGrid;
     //父物体上的触发器，用于判断玩家是否经过地图块一半了
     BoxCollider _collider;
+    bool _isCreateNewMap;//是否已经创建了新的地图块
 
-    public static event Action<Vector3, GameObject> OnMoveMiddle;//触发了中间点的碰撞
+    public static event Action<Vector3> OnMoveMiddle;//触发了中间点的碰撞
 
     private void Awake()
     {
@@ -25,9 +26,10 @@ public class IceMountainMap : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && !_isCreateNewMap)
         {
-            OnMoveMiddle?.Invoke(_endPoint.position, gameObject);
+            OnMoveMiddle?.Invoke(_endPoint.position);
+            _isCreateNewMap = true;
         }
     }
 }
