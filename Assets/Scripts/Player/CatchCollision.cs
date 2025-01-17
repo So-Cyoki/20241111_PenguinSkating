@@ -5,6 +5,7 @@ public class CatchCollision : MonoBehaviour
 {
     PlayerInputActions _inputActions;
     public Transform _itemParent;
+    Player _playerCS;
 
     public Vector3 _catchPosOffset;
     public float _catchSpeed;
@@ -23,49 +24,34 @@ public class CatchCollision : MonoBehaviour
     private void Awake()
     {
         _inputActions = new();
+        _playerCS = transform.parent.GetComponent<Player>();
     }
     private void Update()
     {
-        //抓起来
-        if (_inputActions.GamePlay.Catch.WasPressedThisFrame() && _lastCatchObj != null)
+        switch (_playerCS._playerIndex)
         {
-            if (!_isCatch)
-            {
-                //Debug.Log("抓起来");
-                _catchTrans = _lastCatchObj.transform;
-                _catchObj = _lastCatchObj;
-                _catchScale = _catchTrans.localScale;
-                _catchRb = _catchTrans.GetComponent<Rigidbody>();
-                _catchRb.velocity = Vector3.zero;
-                _catchRb.angularVelocity = Vector3.zero;
-                _catchRb.useGravity = false;
-                _catchSprite = _catchTrans.GetComponent<ItemBase>();
-                _catchSprite.SetCatch(true);
-
-                _catchTrans.SetParent(transform.parent);
-
-                _isCatch = true;
-            }
-        }
-        //放下去
-        if (_inputActions.GamePlay.Drop.WasPressedThisFrame() && _isCatch)
-        {
-            //Debug.Log("放下");
-            _catchRb.useGravity = true;
-            _catchRb.velocity = Vector3.zero;
-            _catchRb.angularVelocity = Vector3.zero;
-            Vector3 dir = (Quaternion.Euler(_throwAngle) * Vector3.forward).normalized;
-            _catchRb.AddForce(_throwForce * _catchRb.mass * dir, ForceMode.Impulse);
-            _catchTrans.SetParent(_itemParent);
-            _catchTrans.localScale = _catchScale;
-
-            _catchSprite.SetCatch(false);
-            _catchTrans = null;
-            _catchObj = null;
-            _catchRb = null;
-            _catchSprite = null;
-            _lastCatchObj = null;
-            _isCatch = false;
+            case 1:
+                if (_inputActions.GamePlay.Catch.WasPressedThisFrame() && _lastCatchObj != null)
+                {
+                    if (!_isCatch)
+                        CatchThing();
+                }
+                if (_inputActions.GamePlay.Drop.WasPressedThisFrame() && _isCatch)
+                {
+                    DropThing();
+                }
+                break;
+            case 2:
+                if (_inputActions.GamePlay2.Catch.WasPressedThisFrame() && _lastCatchObj != null)
+                {
+                    if (!_isCatch)
+                        CatchThing();
+                }
+                if (_inputActions.GamePlay2.Drop.WasPressedThisFrame() && _isCatch)
+                {
+                    DropThing();
+                }
+                break;
         }
         //如果物体已经消失，那么就重置为空手状态
         if (_isCatch && _catchObj == null)
@@ -78,6 +64,50 @@ public class CatchCollision : MonoBehaviour
         //移动抓取目标到Offset位置
         if (_catchTrans != null && _catchTrans.localPosition != _catchPosOffset)
             _catchTrans.localPosition = Vector3.MoveTowards(_catchTrans.localPosition, _catchPosOffset, _catchSpeed);
+    }
+
+    void CatchThing()
+    {
+        //Debug.Log("抓起来");
+        //首先判断一下是否被Player拿着,是的情况就先把拿着物体的那个Player的CatchThing置空
+        if (IsCatchThing(_lastCatchObj))
+        {
+            Player playerCS = _lastCatchObj.transform.parent.GetComponent<Player>();
+            playerCS._catchCollisionCS.CatchThingRob();
+        }
+        _catchTrans = _lastCatchObj.transform;
+        _catchObj = _lastCatchObj;
+        _catchScale = _catchTrans.localScale;
+        _catchRb = _catchTrans.GetComponent<Rigidbody>();
+        _catchRb.velocity = Vector3.zero;
+        _catchRb.angularVelocity = Vector3.zero;
+        _catchRb.useGravity = false;
+        _catchSprite = _catchTrans.GetComponent<ItemBase>();
+        _catchSprite.SetCatch(true);
+
+        _catchTrans.SetParent(transform.parent);
+
+        _isCatch = true;
+    }
+    void DropThing()
+    {
+        //Debug.Log("放下");
+        _catchRb.useGravity = true;
+        _catchRb.velocity = Vector3.zero;
+        _catchRb.angularVelocity = Vector3.zero;
+        Vector3 dir = (Quaternion.Euler(_throwAngle) * Vector3.forward).normalized;
+        _catchRb.AddForce(_throwForce * _catchRb.mass * dir, ForceMode.Impulse);
+        _catchTrans.SetParent(_itemParent);
+        _catchTrans.localScale = _catchScale;
+
+        _catchSprite.SetCatch(false);
+        _catchTrans = null;
+        _catchObj = null;
+        _catchRb = null;
+        _catchSprite = null;
+        _lastCatchObj = null;
+
+        _isCatch = false;
     }
 
     //删除掉拿着的东西
@@ -103,6 +133,25 @@ public class CatchCollision : MonoBehaviour
         _catchSprite = null;
         _lastCatchObj = null;
         _isCatch = false;
+    }
+    //拿着的东西被抢走
+    void CatchThingRob()
+    {
+        _catchTrans = null;
+        _catchObj = null;
+        _catchRb = null;
+        _catchSprite = null;
+        _lastCatchObj = null;
+        _isCatch = false;
+    }
+    //判断当前物体是否被Player拿着
+    bool IsCatchThing(GameObject obj)
+    {
+        Transform parent = obj.transform.parent;
+        if (parent.CompareTag("Player"))
+            return true;
+        else
+            return false;
     }
 
     private void OnTriggerEnter(Collider other)

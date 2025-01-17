@@ -1,13 +1,14 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     Rigidbody _rb;
     NWH.DWP2.WaterObjects.WaterObject _waterObject;//水插件脚本
 
+    [Tooltip("P1:1,P2:2")] public int _playerIndex = 1;
     PlayerInputActions _inputActions;
+    [HideInInspector] public CatchCollision _catchCollisionCS;
     public Transform _startPos;
     float _submergedVolume;//浮力
     public float _speed;
@@ -42,11 +43,23 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
+        _catchCollisionCS = transform.Find("CatchCollison").GetComponent<CatchCollision>();
+        if (_catchCollisionCS == null)
+            Debug.LogError("CatchCollision is null");
         _currentStamina = _maxStamina;
     }
     private void Update()
     {
-        Move();
+        //其实应该用PlayerInput的组件的方式，但是我懒得弄了，2P就直接这样用Move2
+        switch (_playerIndex)
+        {
+            case 1:
+                Move();
+                break;
+            case 2:
+                Move_2P();
+                break;
+        }
     }
     private void FixedUpdate()
     {
@@ -93,9 +106,6 @@ public class Player : MonoBehaviour
     void Move()
     {
         Vector2 dir = _inputActions.GamePlay.Move.ReadValue<Vector2>();
-        // float vertical = Input.GetAxis("Vertical");
-        // float horizontal = Input.GetAxis("Horizontal");
-        // Vector3 moveDir = new Vector3(horizontal, 0, vertical).normalized;
         Vector3 moveDir = new Vector3(dir.x, 0, dir.y).normalized;
 
         float currentSpeed = _speed;
@@ -103,7 +113,7 @@ public class Player : MonoBehaviour
         //冲刺
         if (_inputActions.GamePlay.Run.IsPressed())
         {
-            if (_currentStamina > 0)
+            if (_currentStamina - _runStamina > 0)
             {
                 currentSpeed = _runSpeed;
                 _currentStamina -= _runStamina;
@@ -121,6 +131,53 @@ public class Player : MonoBehaviour
         }
         //跳跃
         if (_inputActions.GamePlay.Jump.WasPressedThisFrame() && !_isJump)
+        {
+            _rb.AddForce(_rb.mass * _jumpForce * Vector3.up, ForceMode.Impulse);
+            _isJump = true;
+        }
+        //恢复体力
+        if (!isUseStamina)
+        {
+            if (_currentStamina < _maxStamina)
+            {
+                _currentStamina += _addStamina;
+                OnStaminaUpdate?.Invoke(_maxStamina, _currentStamina);
+            }
+            else
+            {
+                _currentStamina = _maxStamina;
+                OnStaminaUpdate?.Invoke(_maxStamina, _currentStamina);
+            }
+        }
+    }
+    void Move_2P()
+    {
+        Vector2 dir = _inputActions.GamePlay2.Move.ReadValue<Vector2>();
+        Vector3 moveDir = new Vector3(dir.x, 0, dir.y).normalized;
+
+        float currentSpeed = _speed;
+        bool isUseStamina = false;
+        //冲刺
+        if (_inputActions.GamePlay2.Run.IsPressed())
+        {
+            if (_currentStamina - _runStamina > 0)
+            {
+                currentSpeed = _runSpeed;
+                _currentStamina -= _runStamina;
+                OnStaminaUpdate?.Invoke(_maxStamina, _currentStamina);
+                isUseStamina = true;
+            }
+        }
+        if (moveDir.magnitude > 0.1f)
+        {
+            //旋转
+            Quaternion targetRotation = Quaternion.LookRotation(moveDir, Vector3.up);
+            transform.rotation = targetRotation;
+            //移动
+            _rb.velocity = new(moveDir.x * currentSpeed, _rb.velocity.y, moveDir.z * currentSpeed);
+        }
+        //跳跃
+        if (_inputActions.GamePlay2.Jump.WasPressedThisFrame() && !_isJump)
         {
             _rb.AddForce(_rb.mass * _jumpForce * Vector3.up, ForceMode.Impulse);
             _isJump = true;

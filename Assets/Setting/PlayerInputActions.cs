@@ -131,17 +131,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""78ba26ef-6aad-44fa-a6ee-59087f17f571"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""50a40695-1d89-4c9c-a313-a37ca716ba09"",
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
@@ -181,6 +170,134 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""GamePlay2"",
+            ""id"": ""d04779ee-ebb2-423a-aa6b-3a1b5e6ad914"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""f89fd525-6226-4cc5-af91-acd770cb3b1d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""f74e48c1-c373-4d23-83dc-466608ccdde8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""520b14c0-c430-4564-8164-367cb5f60fb7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Catch"",
+                    ""type"": ""Button"",
+                    ""id"": ""05edb1fa-40c7-433b-8a14-ce77014ae682"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""26458ee5-2995-4d71-9743-6f948b361ba9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""JoinGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""6e3d8068-0e89-421e-81ff-cd83022cb85f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""af82294a-87f3-4425-9c9a-4545df42fcd9"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5113bcb2-cf28-4a1f-a826-3d11c3511728"",
+                    ""path"": ""<XInputController>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa8dc828-2e0e-4406-a139-f60dad5745da"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Catch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ddf5e247-8c1d-4f72-a5a3-0c40bed93216"",
+                    ""path"": ""<XInputController>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6022b1a9-c404-4426-835c-ad1bf47e9c9c"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ffa4cc3f-a3f7-48d9-bb38-1a77b28a28fe"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JoinGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -244,6 +361,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_GamePlay_Run = m_GamePlay.FindAction("Run", throwIfNotFound: true);
         m_GamePlay_Catch = m_GamePlay.FindAction("Catch", throwIfNotFound: true);
         m_GamePlay_Drop = m_GamePlay.FindAction("Drop", throwIfNotFound: true);
+        // GamePlay2
+        m_GamePlay2 = asset.FindActionMap("GamePlay2", throwIfNotFound: true);
+        m_GamePlay2_Move = m_GamePlay2.FindAction("Move", throwIfNotFound: true);
+        m_GamePlay2_Jump = m_GamePlay2.FindAction("Jump", throwIfNotFound: true);
+        m_GamePlay2_Run = m_GamePlay2.FindAction("Run", throwIfNotFound: true);
+        m_GamePlay2_Catch = m_GamePlay2.FindAction("Catch", throwIfNotFound: true);
+        m_GamePlay2_Drop = m_GamePlay2.FindAction("Drop", throwIfNotFound: true);
+        m_GamePlay2_JoinGame = m_GamePlay2.FindAction("JoinGame", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Enter = m_UI.FindAction("Enter", throwIfNotFound: true);
@@ -253,6 +378,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     ~@PlayerInputActions()
     {
         UnityEngine.Debug.Assert(!m_GamePlay.enabled, "This will cause a leak and performance issues, PlayerInputActions.GamePlay.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_GamePlay2.enabled, "This will cause a leak and performance issues, PlayerInputActions.GamePlay2.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, PlayerInputActions.UI.Disable() has not been called.");
     }
 
@@ -390,6 +516,92 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     }
     public GamePlayActions @GamePlay => new GamePlayActions(this);
 
+    // GamePlay2
+    private readonly InputActionMap m_GamePlay2;
+    private List<IGamePlay2Actions> m_GamePlay2ActionsCallbackInterfaces = new List<IGamePlay2Actions>();
+    private readonly InputAction m_GamePlay2_Move;
+    private readonly InputAction m_GamePlay2_Jump;
+    private readonly InputAction m_GamePlay2_Run;
+    private readonly InputAction m_GamePlay2_Catch;
+    private readonly InputAction m_GamePlay2_Drop;
+    private readonly InputAction m_GamePlay2_JoinGame;
+    public struct GamePlay2Actions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public GamePlay2Actions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_GamePlay2_Move;
+        public InputAction @Jump => m_Wrapper.m_GamePlay2_Jump;
+        public InputAction @Run => m_Wrapper.m_GamePlay2_Run;
+        public InputAction @Catch => m_Wrapper.m_GamePlay2_Catch;
+        public InputAction @Drop => m_Wrapper.m_GamePlay2_Drop;
+        public InputAction @JoinGame => m_Wrapper.m_GamePlay2_JoinGame;
+        public InputActionMap Get() { return m_Wrapper.m_GamePlay2; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GamePlay2Actions set) { return set.Get(); }
+        public void AddCallbacks(IGamePlay2Actions instance)
+        {
+            if (instance == null || m_Wrapper.m_GamePlay2ActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GamePlay2ActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
+            @Catch.started += instance.OnCatch;
+            @Catch.performed += instance.OnCatch;
+            @Catch.canceled += instance.OnCatch;
+            @Drop.started += instance.OnDrop;
+            @Drop.performed += instance.OnDrop;
+            @Drop.canceled += instance.OnDrop;
+            @JoinGame.started += instance.OnJoinGame;
+            @JoinGame.performed += instance.OnJoinGame;
+            @JoinGame.canceled += instance.OnJoinGame;
+        }
+
+        private void UnregisterCallbacks(IGamePlay2Actions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
+            @Catch.started -= instance.OnCatch;
+            @Catch.performed -= instance.OnCatch;
+            @Catch.canceled -= instance.OnCatch;
+            @Drop.started -= instance.OnDrop;
+            @Drop.performed -= instance.OnDrop;
+            @Drop.canceled -= instance.OnDrop;
+            @JoinGame.started -= instance.OnJoinGame;
+            @JoinGame.performed -= instance.OnJoinGame;
+            @JoinGame.canceled -= instance.OnJoinGame;
+        }
+
+        public void RemoveCallbacks(IGamePlay2Actions instance)
+        {
+            if (m_Wrapper.m_GamePlay2ActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGamePlay2Actions instance)
+        {
+            foreach (var item in m_Wrapper.m_GamePlay2ActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GamePlay2ActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GamePlay2Actions @GamePlay2 => new GamePlay2Actions(this);
+
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
@@ -450,6 +662,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnCatch(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
+    }
+    public interface IGamePlay2Actions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
+        void OnCatch(InputAction.CallbackContext context);
+        void OnDrop(InputAction.CallbackContext context);
+        void OnJoinGame(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

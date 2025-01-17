@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     [Header("游戏开始的对象")]
     public GameObject _start_itemManager;
     public GameObject _start_player;
+    public GameObject _start_player2;
     public GameObject _start_icePlane;
     public GameObject _start_kidPrefabs;
     public Vector3 _start_kid_originalPos;
@@ -58,6 +59,7 @@ public class UIManager : MonoBehaviour
         //关闭全部游戏开始时候的对象
         _start_itemManager.SetActive(false);
         _start_player.SetActive(false);
+        _start_player2.SetActive(false);
         _start_icePlane.SetActive(false);
         _start_SeaWave.SetActive(false);
         //保存位置用以重新开始游戏
@@ -79,6 +81,13 @@ public class UIManager : MonoBehaviour
         {
             _uiHelp.SetActive(true);
             _uiStart.SetActive(false);
+        }
+        //游戏中
+        if (_scoreText.transform.parent.gameObject.activeSelf
+        && _start_player2.activeSelf == false
+        && _inputActions.GamePlay2.JoinGame.WasPressedThisFrame())
+        {
+            Player2Start();
         }
         //游戏结束
         if (_uiGameOver.activeSelf
@@ -113,6 +122,7 @@ public class UIManager : MonoBehaviour
         _scoreText.transform.parent.gameObject.SetActive(false);
         _playerSlider.transform.parent.gameObject.SetActive(false);
         _start_player.SetActive(false);
+        _start_player2.SetActive(false);
         //游戏结束分数
         int resultScore = _score * _kidCount;
         _endUI_scoreLength.text = _score + " m";
@@ -152,12 +162,24 @@ public class UIManager : MonoBehaviour
         IcePlane icePlaneCS = _start_icePlane.GetComponent<IcePlane>();
         icePlaneCS.Inital();
         //生成一个Kid
-        Instantiate(_start_kidPrefabs, _start_kid_originalPos, Quaternion.Euler(0, -90, 0), _end_Item);
+        GameObject itemKid = Instantiate(_start_kidPrefabs, _start_kid_originalPos, Quaternion.Euler(0, -90, 0), _end_Item);
+        ItemBase itemBase = itemKid.GetComponent<ItemBase>();
+        itemBase.Initial(_start_kid_originalPos, _start_player.transform);
         //重置SeaWave的位置
         _start_SeaWave.SetActive(true);
         _start_SeaWave.transform.SetPositionAndRotation(_start_SeaWave_originalPos, Quaternion.Euler(0, 90, 0));
         //重置整个冰山地图
         _start_iceMountainManagerCS.ResetMap();
+    }
+
+    void Player2Start()
+    {
+        _start_player2.SetActive(true);
+        CatchCollision catchCS = _start_player2.transform.Find("CatchCollison").GetComponent<CatchCollision>();
+        catchCS.CatchThingNull();
+        Player playerCS = _start_player2.GetComponent<Player>();
+        playerCS.Inital();
+        _start_player2.transform.position = new Vector3(5, 7, 0) + _start_player.transform.position;
     }
 
     void ScoreUpdate(int score)
