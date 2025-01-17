@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     float _currentStamina;
     public float _addStamina;
     public float _runStamina;
+    [Tooltip("恢复多少体力后才可以再次奔跑")] public float _staminaRecoverRun = 0.5f;
+    public bool _isUseStaminaOver;
     int _highScore;
     [Header("指示箭头")]
     public Transform _arrowMark;
@@ -31,7 +33,7 @@ public class Player : MonoBehaviour
     bool _isJump;
 
     public static event Action<int> OnScoreUpdate;
-    public static event Action<float, float> OnStaminaUpdate;
+    public static event Action<int, float, float, bool> OnStaminaUpdate;
 
     private void Awake()
     {
@@ -113,12 +115,14 @@ public class Player : MonoBehaviour
         //冲刺
         if (_inputActions.GamePlay.Run.IsPressed())
         {
-            if (_currentStamina - _runStamina > 0)
+            if (_currentStamina > 0 && !_isUseStaminaOver)
             {
                 currentSpeed = _runSpeed;
                 _currentStamina -= _runStamina;
-                OnStaminaUpdate?.Invoke(_maxStamina, _currentStamina);
+                OnStaminaUpdate?.Invoke(_playerIndex, _maxStamina, _currentStamina, _isUseStaminaOver);
                 isUseStamina = true;
+                if (_currentStamina <= 0)
+                    _isUseStaminaOver = true;
             }
         }
         if (moveDir.magnitude > 0.1f)
@@ -141,13 +145,15 @@ public class Player : MonoBehaviour
             if (_currentStamina < _maxStamina)
             {
                 _currentStamina += _addStamina;
-                OnStaminaUpdate?.Invoke(_maxStamina, _currentStamina);
+                OnStaminaUpdate?.Invoke(_playerIndex, _maxStamina, _currentStamina, _isUseStaminaOver);
             }
             else
             {
                 _currentStamina = _maxStamina;
-                OnStaminaUpdate?.Invoke(_maxStamina, _currentStamina);
+                OnStaminaUpdate?.Invoke(_playerIndex, _maxStamina, _currentStamina, _isUseStaminaOver);
             }
+            if (_isUseStaminaOver && _currentStamina >= _maxStamina * _staminaRecoverRun)
+                _isUseStaminaOver = false;
         }
     }
     void Move_2P()
@@ -160,12 +166,14 @@ public class Player : MonoBehaviour
         //冲刺
         if (_inputActions.GamePlay2.Run.IsPressed())
         {
-            if (_currentStamina - _runStamina > 0)
+            if (_currentStamina > 0 && !_isUseStaminaOver)
             {
                 currentSpeed = _runSpeed;
                 _currentStamina -= _runStamina;
-                OnStaminaUpdate?.Invoke(_maxStamina, _currentStamina);
+                OnStaminaUpdate?.Invoke(_playerIndex, _maxStamina, _currentStamina, _isUseStaminaOver);
                 isUseStamina = true;
+                if (_currentStamina <= 0)
+                    _isUseStaminaOver = true;
             }
         }
         if (moveDir.magnitude > 0.1f)
@@ -188,13 +196,15 @@ public class Player : MonoBehaviour
             if (_currentStamina < _maxStamina)
             {
                 _currentStamina += _addStamina;
-                OnStaminaUpdate?.Invoke(_maxStamina, _currentStamina);
+                OnStaminaUpdate?.Invoke(_playerIndex, _maxStamina, _currentStamina, _isUseStaminaOver);
             }
             else
             {
                 _currentStamina = _maxStamina;
-                OnStaminaUpdate?.Invoke(_maxStamina, _currentStamina);
+                OnStaminaUpdate?.Invoke(_playerIndex, _maxStamina, _currentStamina, _isUseStaminaOver);
             }
+            if (_isUseStaminaOver && _currentStamina >= _maxStamina * _staminaRecoverRun)
+                _isUseStaminaOver = false;
         }
     }
 

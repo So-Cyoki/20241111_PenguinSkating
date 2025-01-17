@@ -14,6 +14,12 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI _scoreText;
     public TextMeshProUGUI _kidNumText;
     public Slider _playerSlider;
+    public Slider _playerSlider2;
+    public Image _playerSliderImage;
+    public Image _playerSlider2Image;
+    public Color _playerSliderImageColor_over;
+    Color _playerSliderImageColor_original;
+    public GameObject _player2JoinMessage;
     public GameObject _arrowGo;
     public float _arrowGoTime;
     [Header("游戏开始的对象")]
@@ -55,6 +61,8 @@ public class UIManager : MonoBehaviour
         _uiHelp.SetActive(false);
         _scoreText.transform.parent.gameObject.SetActive(false);
         _playerSlider.transform.parent.gameObject.SetActive(false);
+        _playerSlider2.transform.parent.gameObject.SetActive(false);
+        _player2JoinMessage.SetActive(false);
         _arrowGo.SetActive(false);
         //关闭全部游戏开始时候的对象
         _start_itemManager.SetActive(false);
@@ -64,6 +72,8 @@ public class UIManager : MonoBehaviour
         _start_SeaWave.SetActive(false);
         //保存位置用以重新开始游戏
         _start_SeaWave_originalPos = _start_SeaWave.transform.position;
+        //其他操作
+        _playerSliderImageColor_original = _playerSliderImage.color;
     }
 
     private void Update()
@@ -121,6 +131,8 @@ public class UIManager : MonoBehaviour
         _uiGameOver.SetActive(true);
         _scoreText.transform.parent.gameObject.SetActive(false);
         _playerSlider.transform.parent.gameObject.SetActive(false);
+        _playerSlider2.transform.parent.gameObject.SetActive(false);
+        _player2JoinMessage.SetActive(false);
         _start_player.SetActive(false);
         _start_player2.SetActive(false);
         //游戏结束分数
@@ -151,6 +163,7 @@ public class UIManager : MonoBehaviour
         _kidNumText.text = "X00";
         _arrowGo.SetActive(true);
         _isArrowGo = true;
+        _player2JoinMessage.SetActive(true);
         //打开Player和重置
         _start_player.SetActive(true);
         CatchCollision catchCS = _start_player.transform.Find("CatchCollison").GetComponent<CatchCollision>();
@@ -180,6 +193,8 @@ public class UIManager : MonoBehaviour
         Player playerCS = _start_player2.GetComponent<Player>();
         playerCS.Inital();
         _start_player2.transform.position = new Vector3(5, 7, 0) + _start_player.transform.position;
+        _playerSlider2.transform.parent.gameObject.SetActive(true);
+        _player2JoinMessage.SetActive(false);
     }
 
     void ScoreUpdate(int score)
@@ -195,10 +210,26 @@ public class UIManager : MonoBehaviour
         _kidNumText.text = "X" + text;
         _kidCount = count;
     }
-    void PlayerStaminaUpdate(float max, float current)
+    void PlayerStaminaUpdate(int playerIndex, float max, float current, bool isUseStaminaOver)
     {
         float value = current / max;
-        _playerSlider.value = value;
+        switch (playerIndex)
+        {
+            case 1:
+                _playerSlider.value = value;
+                if (isUseStaminaOver)
+                    _playerSliderImage.color = _playerSliderImageColor_over;
+                else
+                    _playerSliderImage.color = _playerSliderImageColor_original;
+                break;
+            case 2:
+                _playerSlider2.value = value;
+                if (isUseStaminaOver)
+                    _playerSlider2Image.color = _playerSliderImageColor_over;
+                else
+                    _playerSlider2Image.color = _playerSliderImageColor_original;
+                break;
+        }
     }
 
     private void OnEnable()
