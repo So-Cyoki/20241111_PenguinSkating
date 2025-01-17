@@ -91,7 +91,15 @@ public abstract class ItemBase : MonoBehaviour
                 _itemState = ItemState.ORIGINAL;
         }
     }
-    protected virtual void LateUpdate() { }
+    protected virtual void LateUpdate()
+    {
+        //因为在抓取和放下的时候会切换物理组件，但是有时候物理组件会错误的无法打开，这里做一个补充
+        if (_rb.useGravity == false
+            && !transform.parent.CompareTag("Player"))
+        {
+            _rb.useGravity = true;
+        }
+    }
 
     /// <summary>
     /// 初始化

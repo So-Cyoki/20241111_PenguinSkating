@@ -31,23 +31,27 @@ public class CatchCollision : MonoBehaviour
         switch (_playerCS._playerIndex)
         {
             case 1:
-                if (_inputActions.GamePlay.Catch.WasPressedThisFrame() && _lastCatchObj != null)
+                if (_inputActions.GamePlay.Catch.WasPressedThisFrame()
+                && _lastCatchObj != null
+                && !_isCatch)
                 {
-                    if (!_isCatch)
-                        CatchThing();
+                    CatchThing();
                 }
-                if (_inputActions.GamePlay.Drop.WasPressedThisFrame() && _isCatch)
+                if (_inputActions.GamePlay.Drop.WasPressedThisFrame()
+                && _isCatch)
                 {
                     DropThing();
                 }
                 break;
             case 2:
-                if (_inputActions.GamePlay2.Catch.WasPressedThisFrame() && _lastCatchObj != null)
+                if (_inputActions.GamePlay2.Catch.WasPressedThisFrame()
+                && _lastCatchObj != null
+                && !_isCatch)
                 {
-                    if (!_isCatch)
-                        CatchThing();
+                    CatchThing();
                 }
-                if (_inputActions.GamePlay2.Drop.WasPressedThisFrame() && _isCatch)
+                if (_inputActions.GamePlay2.Drop.WasPressedThisFrame()
+                && _isCatch)
                 {
                     DropThing();
                 }
@@ -62,7 +66,8 @@ public class CatchCollision : MonoBehaviour
     private void FixedUpdate()
     {
         //移动抓取目标到Offset位置
-        if (_catchTrans != null && _catchTrans.localPosition != _catchPosOffset)
+        if (_catchTrans != null && _isCatch
+        && (_catchTrans.localPosition - _catchPosOffset).sqrMagnitude > 0.1f)
             _catchTrans.localPosition = Vector3.MoveTowards(_catchTrans.localPosition, _catchPosOffset, _catchSpeed);
     }
 
