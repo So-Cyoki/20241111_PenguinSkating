@@ -32,6 +32,7 @@ public class Item_kid : ItemBase
 
     protected override void Start()
     {
+        base.Start();
         _sprite2DForLookAtCS = _spriteRen.GetComponent<Sprite2dForLookAt>();
         _isHunger = false;
         _randHungerTime = UnityEngine.Random.Range(_hungerTime.x, _hungerTime.y);

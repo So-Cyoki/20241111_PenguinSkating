@@ -11,6 +11,7 @@ TagManager:
   - Item_icePlane
   - Item_kid
   - SeaWave
+  - Item_smallIce
   layers:
   - Default
   - TransparentFX

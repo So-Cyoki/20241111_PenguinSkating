@@ -60,7 +60,8 @@ public class ItemManager : MonoBehaviour
                         || hit.collider.CompareTag("Ice")
                         || hit.collider.CompareTag("Item_icePlane")
                         || hit.collider.CompareTag("Item_kid")
-                        || hit.collider.CompareTag("Item_fish"))
+                        || hit.collider.CompareTag("Item_fish")
+                        || hit.collider.CompareTag("Item_smallIce"))
                         {
                             continue; //重新随机位置
                         }

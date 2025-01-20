@@ -9375,16 +9375,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTrans: {fileID: 1499860299}
   _itemParent: {fileID: 314603147}
-  _creatLength: {x: 50, y: 100}
+  _creatLength: {x: 60, y: 130}
   _creatTime: 0.8
   _creatMax: 100
   _itemList:
   - item: {fileID: 8834793320488654762, guid: 7ce5872e059ec2f41bf850e5cee8d643, type: 3}
-    probability: 50
+    probability: 30
   - item: {fileID: 7575405519901952921, guid: 2ceab56f9e8887d48b73628fdbe9a932, type: 3}
     probability: 5
   - item: {fileID: 7923133012633337132, guid: 1b3f1879e1cd1c743bb5469b13d8cf12, type: 3}
-    probability: 15
+    probability: 20
+  - item: {fileID: 7927509518316971881, guid: 0d81a8a33db1c7f4a90babb80ff7d249, type: 3}
+    probability: 25
 --- !u!1 &873052861
 GameObject:
   m_ObjectHideFlags: 0
