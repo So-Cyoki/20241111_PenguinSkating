@@ -109,8 +109,30 @@
                 },
                 {
                     "name": "",
+                    "id": "1ec24148-be1d-40d2-b014-38630bfecb9a",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "50a40695-1d89-4c9c-a313-a37ca716ba09",
                     "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34c84f17-6c6f-4208-9694-582e88bed598",
+                    "path": "<XInputController>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -131,6 +153,17 @@
                 },
                 {
                     "name": "",
+                    "id": "8cf10641-4251-4dd4-9e3c-12c715317cf6",
+                    "path": "<XInputController>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Catch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "29198fa4-f706-46fc-8074-2df401745e1a",
                     "path": "<Keyboard>/k",
                     "interactions": "",
@@ -142,8 +175,30 @@
                 },
                 {
                     "name": "",
+                    "id": "3968080d-83c8-4f57-8799-297e96f4500e",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "56ad9729-43c6-4dae-b2e5-5bdcfc7ba67f",
                     "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "03f3dd4c-839d-4efd-a521-584821a415bc",
+                    "path": "<XInputController>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -5149,7 +5149,7 @@ MonoBehaviour:
   _destoryLength: 300
   _addMassM: 1
   _itemState: 0
-  _sizeRange: {x: 2, y: 4}
+  _sizeRange: {x: 1, y: 3}
   _bigStartTime: 1
   _angleSpeedRange: {x: -20, y: 20}
   _touchForce: 3

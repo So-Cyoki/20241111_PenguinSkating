@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -8,8 +9,10 @@ public class Player : MonoBehaviour
 
     [Tooltip("P1:1,P2:2")] public int _playerIndex = 1;
     PlayerInputActions _inputActions;
+    PlayerInput _playerInput;
     [HideInInspector] public CatchCollision _catchCollisionCS;
     public Transform _startPos;
+    public ParticleSystem _particle;
     float _submergedVolume;//浮力
     public float _speed;
     public float _jumpForce;
@@ -26,6 +29,10 @@ public class Player : MonoBehaviour
     public Transform _arrowMark;
     public Vector3 _arrowStandPosOffset;
     public Vector3 _arrowWaterPosOffset;
+    [Header("手柄震动")]
+    public float _lowFrequency = 0.2f;
+    public float _highFrequency = 0.2f;
+    public float _time_Rumble = 0.1f;
 
     Vector3 _originalPos;
     Quaternion _originalRotation;
@@ -38,6 +45,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _inputActions = new PlayerInputActions();
+        _playerInput = GetComponent<PlayerInput>();
         _rb = GetComponent<Rigidbody>();
         _waterObject = GetComponent<NWH.DWP2.WaterObjects.WaterObject>();
         _originalPos = transform.position;
@@ -112,8 +120,12 @@ public class Player : MonoBehaviour
 
         float currentSpeed = _speed;
         bool isUseStamina = false;
-        //冲刺
         if (_inputActions.GamePlay.Run.IsPressed())
+        {
+            Debug.Log("Run");
+        }
+        //冲刺
+        if (_playerInput.actions.FindAction("Run").triggered)
         {
             if (_currentStamina > 0 && !_isUseStaminaOver)
             {
@@ -123,6 +135,7 @@ public class Player : MonoBehaviour
                 isUseStamina = true;
                 if (_currentStamina <= 0)
                     _isUseStaminaOver = true;
+                _particle.Play();//粒子效果
             }
         }
         if (moveDir.magnitude > 0.1f)
@@ -174,6 +187,7 @@ public class Player : MonoBehaviour
                 isUseStamina = true;
                 if (_currentStamina <= 0)
                     _isUseStaminaOver = true;
+                _particle.Play();//粒子效果
             }
         }
         if (moveDir.magnitude > 0.1f)
@@ -189,6 +203,7 @@ public class Player : MonoBehaviour
         {
             _rb.AddForce(_rb.mass * _jumpForce * Vector3.up, ForceMode.Impulse);
             _isJump = true;
+            StartCoroutine(GamepadRumble(_lowFrequency, _highFrequency, _time_Rumble));
         }
         //恢复体力
         if (!isUseStamina)
@@ -206,6 +221,16 @@ public class Player : MonoBehaviour
             if (_isUseStaminaOver && _currentStamina >= _maxStamina * _staminaRecoverRun)
                 _isUseStaminaOver = false;
         }
+    }
+
+    //手柄震动
+    System.Collections.IEnumerator GamepadRumble(float low, float high, float time)
+    {
+        if (Gamepad.current == null)
+            yield break;
+        Gamepad.current.SetMotorSpeeds(low, high);// 设置震动频率
+        yield return new WaitForSecondsRealtime(time);
+        Gamepad.current.SetMotorSpeeds(0, 0); // 停止震动
     }
 
     private void OnCollisionEnter(Collision other)

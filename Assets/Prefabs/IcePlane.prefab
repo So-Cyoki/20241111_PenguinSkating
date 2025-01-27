@@ -4994,7 +4994,7 @@ MonoBehaviour:
   ReferenceWaterObject: {fileID: 0}
   emit: 1
   renderQueue: 2700
-  surfaceElevation: 0.02
+  surfaceElevation: 1
   startSize: 3.5
   sleepThresholdVelocity: 1
   initialVelocityModifier: 0
