@@ -3,9 +3,9 @@ using UnityEngine.InputSystem;
 
 public class CatchCollision : MonoBehaviour
 {
-    PlayerInputActions _inputActions;
     public Transform _itemParent;
     Player _playerCS;
+    public ParticleSystem _particleDrop;
 
     public Vector3 _catchPosOffset;
     public float _catchSpeed;
@@ -23,40 +23,25 @@ public class CatchCollision : MonoBehaviour
 
     private void Awake()
     {
-        _inputActions = new();
+
         _playerCS = transform.parent.GetComponent<Player>();
     }
     private void Update()
     {
-        switch (_playerCS._playerIndex)
+
+        if (_playerCS._playerInput.actions.FindAction("Catch").WasPressedThisFrame()
+        && _lastCatchObj != null
+        && !_isCatch)
         {
-            case 1:
-                if (_inputActions.GamePlay.Catch.WasPressedThisFrame()
-                && _lastCatchObj != null
-                && !_isCatch)
-                {
-                    CatchThing();
-                }
-                if (_inputActions.GamePlay.Drop.WasPressedThisFrame()
-                && _isCatch)
-                {
-                    DropThing();
-                }
-                break;
-            case 2:
-                if (_inputActions.GamePlay2.Catch.WasPressedThisFrame()
-                && _lastCatchObj != null
-                && !_isCatch)
-                {
-                    CatchThing();
-                }
-                if (_inputActions.GamePlay2.Drop.WasPressedThisFrame()
-                && _isCatch)
-                {
-                    DropThing();
-                }
-                break;
+            CatchThing();
         }
+        if (_playerCS._playerInput.actions.FindAction("Drop").WasPressedThisFrame()
+        && _isCatch)
+        {
+            DropThing();
+            _particleDrop.Play();
+        }
+
         //如果物体已经消失，那么就重置为空手状态
         if (_isCatch && _catchObj == null)
         {
@@ -177,12 +162,10 @@ public class CatchCollision : MonoBehaviour
 
     private void OnEnable()
     {
-        _inputActions.Enable();
         Item_kid.OnEatFood += CatchThingEat;
     }
     private void OnDisable()
     {
-        _inputActions.Disable();
         Item_kid.OnEatFood += CatchThingEat;
     }
 }

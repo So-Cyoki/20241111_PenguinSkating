@@ -44,7 +44,6 @@ public class UIManager : MonoBehaviour
     int _score;
     int _kidCount;
     float _currentArrowGoTime;
-    float _currentArrowGoTime_effect;
 
     bool _isArrowGo;
 
@@ -113,15 +112,8 @@ public class UIManager : MonoBehaviour
             if (_currentArrowGoTime > _arrowGoTime)
             {
                 _currentArrowGoTime = 0;
-                _currentArrowGoTime_effect = 0;
                 _arrowGo.SetActive(false);
                 _isArrowGo = false;
-            }
-            _currentArrowGoTime_effect += Time.deltaTime;
-            if (_currentArrowGoTime_effect > 0.5f)
-            {
-                _arrowGo.SetActive(_arrowGo.activeSelf == true ? false : true);
-                _currentArrowGoTime_effect = 0;
             }
         }
     }
@@ -159,7 +151,7 @@ public class UIManager : MonoBehaviour
         _scoreText.transform.parent.gameObject.SetActive(true);
         _playerSlider.transform.parent.gameObject.SetActive(true);
         _kidCount = 0;
-        _scoreText.text = "0000000000 m";
+        _scoreText.text = "0000000000";
         _kidNumText.text = "X00";
         _arrowGo.SetActive(true);
         _isArrowGo = true;
@@ -201,7 +193,7 @@ public class UIManager : MonoBehaviour
     {
         //游戏中界面
         string scoreText = score.ToString("D10");
-        _scoreText.text = scoreText + " m";
+        _scoreText.text = scoreText;
         _score = score;
     }
     void KidCountUpdate(int count)

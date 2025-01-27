@@ -5,6 +5,7 @@ public class Item_kid : ItemBase
 {
     [Header("基础属性")]
     [HideInInspector] public Sprite2dForLookAt _sprite2DForLookAtCS;
+    public ParticleSystem _dropWaterParticle;
     public Vector2 _speedForce;
     [Tooltip("输入角度")] public Vector3 _angleRun;//随机转多少角度移动
     [Tooltip("边缘减速倍率")] public float _slowlyMultiply;

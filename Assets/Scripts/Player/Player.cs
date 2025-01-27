@@ -8,11 +8,10 @@ public class Player : MonoBehaviour
     NWH.DWP2.WaterObjects.WaterObject _waterObject;//水插件脚本
 
     [Tooltip("P1:1,P2:2")] public int _playerIndex = 1;
-    PlayerInputActions _inputActions;
-    PlayerInput _playerInput;
+    [HideInInspector] public PlayerInput _playerInput;
     [HideInInspector] public CatchCollision _catchCollisionCS;
     public Transform _startPos;
-    public ParticleSystem _particle;
+    public ParticleSystem _particleWater;
     float _submergedVolume;//浮力
     public float _speed;
     public float _jumpForce;
@@ -44,7 +43,6 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        _inputActions = new PlayerInputActions();
         _playerInput = GetComponent<PlayerInput>();
         _rb = GetComponent<Rigidbody>();
         _waterObject = GetComponent<NWH.DWP2.WaterObjects.WaterObject>();
@@ -60,16 +58,7 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        //其实应该用PlayerInput的组件的方式，但是我懒得弄了，2P就直接这样用Move2
-        switch (_playerIndex)
-        {
-            case 1:
-                Move();
-                break;
-            case 2:
-                Move_2P();
-                break;
-        }
+        Move();
     }
     private void FixedUpdate()
     {
@@ -96,14 +85,6 @@ public class Player : MonoBehaviour
             OnScoreUpdate?.Invoke(_highScore);
         }
     }
-    private void OnEnable()
-    {
-        _inputActions.Enable();
-    }
-    private void OnDisable()
-    {
-        _inputActions.Disable();
-    }
 
     public void Inital()
     {
@@ -115,17 +96,14 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        Vector2 dir = _inputActions.GamePlay.Move.ReadValue<Vector2>();
+
+        Vector2 dir = _playerInput.actions.FindAction("Move").ReadValue<Vector2>();
         Vector3 moveDir = new Vector3(dir.x, 0, dir.y).normalized;
 
         float currentSpeed = _speed;
         bool isUseStamina = false;
-        if (_inputActions.GamePlay.Run.IsPressed())
-        {
-            Debug.Log("Run");
-        }
         //冲刺
-        if (_playerInput.actions.FindAction("Run").triggered)
+        if (_playerInput.actions.FindAction("Run").IsPressed())
         {
             if (_currentStamina > 0 && !_isUseStaminaOver)
             {
@@ -135,7 +113,7 @@ public class Player : MonoBehaviour
                 isUseStamina = true;
                 if (_currentStamina <= 0)
                     _isUseStaminaOver = true;
-                _particle.Play();//粒子效果
+                _particleWater.Play();//粒子效果
             }
         }
         if (moveDir.magnitude > 0.1f)
@@ -147,63 +125,10 @@ public class Player : MonoBehaviour
             _rb.velocity = new(moveDir.x * currentSpeed, _rb.velocity.y, moveDir.z * currentSpeed);
         }
         //跳跃
-        if (_inputActions.GamePlay.Jump.WasPressedThisFrame() && !_isJump)
+        if (_playerInput.actions.FindAction("Jump").WasPressedThisFrame() && !_isJump)
         {
             _rb.AddForce(_rb.mass * _jumpForce * Vector3.up, ForceMode.Impulse);
             _isJump = true;
-        }
-        //恢复体力
-        if (!isUseStamina)
-        {
-            if (_currentStamina < _maxStamina)
-            {
-                _currentStamina += _addStamina;
-                OnStaminaUpdate?.Invoke(_playerIndex, _maxStamina, _currentStamina, _isUseStaminaOver);
-            }
-            else
-            {
-                _currentStamina = _maxStamina;
-                OnStaminaUpdate?.Invoke(_playerIndex, _maxStamina, _currentStamina, _isUseStaminaOver);
-            }
-            if (_isUseStaminaOver && _currentStamina >= _maxStamina * _staminaRecoverRun)
-                _isUseStaminaOver = false;
-        }
-    }
-    void Move_2P()
-    {
-        Vector2 dir = _inputActions.GamePlay2.Move.ReadValue<Vector2>();
-        Vector3 moveDir = new Vector3(dir.x, 0, dir.y).normalized;
-
-        float currentSpeed = _speed;
-        bool isUseStamina = false;
-        //冲刺
-        if (_inputActions.GamePlay2.Run.IsPressed())
-        {
-            if (_currentStamina > 0 && !_isUseStaminaOver)
-            {
-                currentSpeed = _runSpeed;
-                _currentStamina -= _runStamina;
-                OnStaminaUpdate?.Invoke(_playerIndex, _maxStamina, _currentStamina, _isUseStaminaOver);
-                isUseStamina = true;
-                if (_currentStamina <= 0)
-                    _isUseStaminaOver = true;
-                _particle.Play();//粒子效果
-            }
-        }
-        if (moveDir.magnitude > 0.1f)
-        {
-            //旋转
-            Quaternion targetRotation = Quaternion.LookRotation(moveDir, Vector3.up);
-            transform.rotation = targetRotation;
-            //移动
-            _rb.velocity = new(moveDir.x * currentSpeed, _rb.velocity.y, moveDir.z * currentSpeed);
-        }
-        //跳跃
-        if (_inputActions.GamePlay2.Jump.WasPressedThisFrame() && !_isJump)
-        {
-            _rb.AddForce(_rb.mass * _jumpForce * Vector3.up, ForceMode.Impulse);
-            _isJump = true;
-            StartCoroutine(GamepadRumble(_lowFrequency, _highFrequency, _time_Rumble));
         }
         //恢复体力
         if (!isUseStamina)

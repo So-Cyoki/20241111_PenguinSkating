@@ -9,6 +9,7 @@ public class Kid_dropWater : KidStatesBase
         Item_kid main = GetKidMain(animator);
 
         //main._spriteRen.color = Color.red;
+        main._dropWaterParticle.Stop();
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -28,6 +29,11 @@ public class Kid_dropWater : KidStatesBase
         {
             animator.SetBool("isCatch", true);
         }
+        //粒子效果
+        if (!main._dropWaterParticle.isPlaying)
+        {
+            main._dropWaterParticle.Play();
+        }
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -35,5 +41,6 @@ public class Kid_dropWater : KidStatesBase
         Item_kid main = GetKidMain(animator);
 
         //main._spriteRen.color = Color.white;
+        main._dropWaterParticle.Stop();
     }
 }
