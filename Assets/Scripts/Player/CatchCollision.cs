@@ -85,8 +85,10 @@ public class CatchCollision : MonoBehaviour
         _catchRb.useGravity = true;
         _catchRb.velocity = Vector3.zero;
         _catchRb.angularVelocity = Vector3.zero;
-        Vector3 dir = (Quaternion.Euler(_throwAngle) * Vector3.forward).normalized;
-        _catchRb.AddForce(_throwForce * _catchRb.mass * dir, ForceMode.Impulse);
+
+        //Vector3 dir = (Quaternion.Euler(_throwAngle) * transform.forward).normalized;
+        Vector3 dir = (Quaternion.LookRotation(transform.forward) * Quaternion.Euler(_throwAngle) * Vector3.forward).normalized;
+        _catchRb.AddForce(_throwForce * dir, ForceMode.VelocityChange);
         _catchTrans.SetParent(_itemParent);
         _catchTrans.localScale = _catchScale;
 

@@ -3,17 +3,25 @@ using UnityEngine;
 
 public class Item_kid : ItemBase
 {
-    [Header("基础属性")]
     [HideInInspector] public Sprite2dForLookAt _sprite2DForLookAtCS;
+    [Header("基础属性")]
     public ParticleSystem _dropWaterParticle;
     public Vector2 _speedForce;
     [Tooltip("输入角度")] public Vector3 _angleRun;//随机转多少角度移动
     [Tooltip("边缘减速倍率")] public float _slowlyMultiply;
     public Vector2 _idleTime;
     public float _sitDownTime;
+
+    [Header("饥饿属性")]
     public Vector2 _hungerTime;
     public float _hungerDeadTime;
     public float _hungerGodTime;//防止从别的状态计入饥饿状态，因为时间已经0的情况下立马死亡
+    public Vector2 _hungerForce;
+    public float _findFoodRadius;
+    public float _findFoodTime;
+    public bool _isDrawFindFoodRadius;
+    Collider[] _findFoodColliders;
+
     float _currentHungerTime;
     float _randHungerTime;//每次都会随机一个饥饿时间，吃饭后重置
     [HideInInspector] public float _currentHungerDeadTime;
@@ -30,7 +38,11 @@ public class Item_kid : ItemBase
 
     public static event Action OnEatFood;
 
-
+    protected override void Awake()
+    {
+        base.Awake();
+        _findFoodColliders = new Collider[20];
+    }
     protected override void Start()
     {
         base.Start();
@@ -65,6 +77,51 @@ public class Item_kid : ItemBase
                 _animator.SetTrigger("tDropWater");
             }
             _preState = GetState();
+        }
+    }
+
+    //肚子饿的时候定时寻找食物
+    void HungerFindFood()
+    {
+        int colliderCount = Physics.OverlapSphereNonAlloc(transform.position, _findFoodRadius, _findFoodColliders);
+        if (colliderCount <= 0)
+            return;
+
+        foreach (Collider collider in _findFoodColliders)
+        {
+            if (collider == null)
+                continue;
+            Debug.Log(collider.name);
+
+            if (collider.CompareTag("Item_fish"))
+            {
+                Debug.Log("第一步");
+                if (collider.GetComponent<Item_fish>().GetState() == ItemState.ICE)
+                {
+                    Debug.Log("第二步");
+                    Vector3 dir = collider.transform.position - transform.position;
+                    _rb.AddForce(dir.normalized * UnityEngine.Random.Range(_hungerForce.x, _hungerForce.y), ForceMode.VelocityChange);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void SetHungerFindFood(bool flag)
+    {
+        if (flag)
+            InvokeRepeating(nameof(HungerFindFood), 0, _findFoodTime);
+        else
+            CancelInvoke(nameof(HungerFindFood));
+    }
+
+    private void OnDrawGizmos()
+    {
+        // 在场景视图中显示寻找食物的扫描范围
+        if (_isDrawFindFoodRadius)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, _findFoodRadius);
         }
     }
 

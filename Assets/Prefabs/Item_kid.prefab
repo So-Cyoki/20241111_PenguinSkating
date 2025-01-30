@@ -5154,9 +5154,13 @@ MonoBehaviour:
   _slowlyMultiply: 0.5
   _idleTime: {x: 3, y: 5}
   _sitDownTime: 5
-  _hungerTime: {x: 40, y: 60}
+  _hungerTime: {x: 30, y: 50}
   _hungerDeadTime: 30
-  _hungerGodTime: 3
+  _hungerGodTime: 5
+  _hungerForce: {x: 4, y: 4}
+  _findFoodRadius: 3
+  _findFoodTime: 1
+  _isDrawFindFoodRadius: 0
   _currentHungerDeadTime: 0
   _originOffset: {x: 0, y: 0, z: 0}
   _rayDir: {x: 0, y: -0.7, z: 1}

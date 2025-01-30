@@ -37,7 +37,6 @@ public class Kid_dropWater : KidStatesBase
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
         Item_kid main = GetKidMain(animator);
 
         //main._spriteRen.color = Color.white;
