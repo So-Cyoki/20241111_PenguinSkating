@@ -10,6 +10,7 @@ public class Kid_dropWater : KidStatesBase
 
         //main._spriteRen.color = Color.red;
         main._dropWaterParticle.Stop();
+        main.PlayAudio(main._clipDropWater);
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -41,5 +42,6 @@ public class Kid_dropWater : KidStatesBase
 
         //main._spriteRen.color = Color.white;
         main._dropWaterParticle.Stop();
+        main._audio.Stop();
     }
 }

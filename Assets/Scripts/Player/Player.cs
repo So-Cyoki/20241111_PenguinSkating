@@ -32,6 +32,10 @@ public class Player : MonoBehaviour
     public float _lowFrequency = 0.2f;
     public float _highFrequency = 0.2f;
     public float _time_Rumble = 0.1f;
+    [Header("音乐")]
+    public AudioSource _audio;
+    public AudioClip _clipCatch;
+    public AudioClip _clipDrop;
 
     Vector3 _originalPos;
     Quaternion _originalRotation;
@@ -156,6 +160,12 @@ public class Player : MonoBehaviour
         Gamepad.current.SetMotorSpeeds(low, high);// 设置震动频率
         yield return new WaitForSecondsRealtime(time);
         Gamepad.current.SetMotorSpeeds(0, 0); // 停止震动
+    }
+    //音乐播放
+    public void PlayAudio(AudioClip clip)
+    {
+        _audio.clip = clip;
+        _audio.Play();
     }
 
     private void OnCollisionEnter(Collision other)

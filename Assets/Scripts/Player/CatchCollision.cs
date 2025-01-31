@@ -6,6 +6,7 @@ public class CatchCollision : MonoBehaviour
     public Transform _itemParent;
     Player _playerCS;
     public ParticleSystem _particleDrop;
+    public ParticleSystem _particleCatch;
 
     public Vector3 _catchPosOffset;
     public float _catchSpeed;
@@ -34,11 +35,14 @@ public class CatchCollision : MonoBehaviour
         && !_isCatch)
         {
             CatchThing();
+            _playerCS.PlayAudio(_playerCS._clipCatch);
+            _particleCatch.Play();
         }
         if (_playerCS._playerInput.actions.FindAction("Drop").WasPressedThisFrame()
         && _isCatch)
         {
             DropThing();
+            _playerCS.PlayAudio(_playerCS._clipDrop);
             _particleDrop.Play();
         }
 

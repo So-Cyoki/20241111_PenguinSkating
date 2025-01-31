@@ -34,6 +34,11 @@ public class Item_kid : ItemBase
     public LayerMask _targetLayer;
     public bool _isDrawRay;
 
+    [Header("音乐")]
+    public AudioSource _audio;
+    public AudioClip _clipDropWater;
+
+
     [HideInInspector] public bool _isHunger;
 
     public static event Action OnEatFood;
@@ -91,14 +96,11 @@ public class Item_kid : ItemBase
         {
             if (collider == null)
                 continue;
-            Debug.Log(collider.name);
 
             if (collider.CompareTag("Item_fish"))
             {
-                Debug.Log("第一步");
                 if (collider.GetComponent<Item_fish>().GetState() == ItemState.ICE)
                 {
-                    Debug.Log("第二步");
                     Vector3 dir = collider.transform.position - transform.position;
                     _rb.AddForce(dir.normalized * UnityEngine.Random.Range(_hungerForce.x, _hungerForce.y), ForceMode.VelocityChange);
                     break;
@@ -114,6 +116,12 @@ public class Item_kid : ItemBase
         else
             CancelInvoke(nameof(HungerFindFood));
     }
+    //音乐播放
+    public void PlayAudio(AudioClip clip)
+    {
+        _audio.clip = clip;
+        _audio.Play();
+    }
 
     private void OnDrawGizmos()
     {
@@ -124,7 +132,6 @@ public class Item_kid : ItemBase
             Gizmos.DrawWireSphere(transform.position, _findFoodRadius);
         }
     }
-
     protected override void OnCollisionEnter(Collision other)
     {
         base.OnCollisionEnter(other);
