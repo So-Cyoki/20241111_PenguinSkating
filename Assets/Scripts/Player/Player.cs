@@ -100,14 +100,22 @@ public class Player : MonoBehaviour
 
     void Move()
     {
+        //获取当前的控制输入 
+        InputActionMap currentActionMap = _playerInput.actions.FindActionMap(_playerInput.currentActionMap.name);//获取当前的ActionMap(因为是双人游戏，所以必须先获取当前的ActionMap)
+        InputAction moveAction = currentActionMap.FindAction("Move");//根据当前的ActionMap来分配Action
+        InputAction runAction = currentActionMap.FindAction("Run");
+        InputAction jumpAction = currentActionMap.FindAction("Jump");
+        //最后把Action转成最终的按键
+        Vector2 dir = moveAction.ReadValue<Vector2>();
+        bool isRunPressed = runAction.IsPressed();
+        bool isJumpPressed = jumpAction.WasPressedThisFrame();
 
-        Vector2 dir = _playerInput.actions.FindAction("Move").ReadValue<Vector2>();
         Vector3 moveDir = new Vector3(dir.x, 0, dir.y).normalized;
 
         float currentSpeed = _speed;
         bool isUseStamina = false;
         //冲刺
-        if (_playerInput.actions.FindAction("Run").IsPressed())
+        if (isRunPressed)
         {
             if (_currentStamina > 0 && !_isUseStaminaOver)
             {
@@ -129,7 +137,7 @@ public class Player : MonoBehaviour
             _rb.velocity = new(moveDir.x * currentSpeed, _rb.velocity.y, moveDir.z * currentSpeed);
         }
         //跳跃
-        if (_playerInput.actions.FindAction("Jump").WasPressedThisFrame() && !_isJump)
+        if (isJumpPressed && !_isJump)
         {
             _rb.AddForce(_rb.mass * _jumpForce * Vector3.up, ForceMode.Impulse);
             _isJump = true;

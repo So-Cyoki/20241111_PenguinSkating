@@ -29,17 +29,20 @@ public class CatchCollision : MonoBehaviour
     }
     private void Update()
     {
+        //获取输入
+        InputActionMap currentActionMap = _playerCS._playerInput.actions.FindActionMap(_playerCS._playerInput.currentActionMap.name);
+        InputAction catchAction = currentActionMap.FindAction("Catch");
+        InputAction dropAction = currentActionMap.FindAction("Drop");
+        bool isCatchPressed = catchAction.WasPressedThisFrame();
+        bool isDropPressed = dropAction.WasPressedThisFrame();
 
-        if (_playerCS._playerInput.actions.FindAction("Catch").WasPressedThisFrame()
-        && _lastCatchObj != null
-        && !_isCatch)
+        if (isCatchPressed && _lastCatchObj != null && !_isCatch)
         {
             CatchThing();
             _playerCS.PlayAudio(_playerCS._clipCatch);
             _particleCatch.Play();
         }
-        if (_playerCS._playerInput.actions.FindAction("Drop").WasPressedThisFrame()
-        && _isCatch)
+        if (isDropPressed && _isCatch)
         {
             DropThing();
             _playerCS.PlayAudio(_playerCS._clipDrop);

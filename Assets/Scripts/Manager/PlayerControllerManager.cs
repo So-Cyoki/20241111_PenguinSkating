@@ -3,93 +3,27 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerControllerManager : MonoBehaviour
-{
-    public GameObject player1Object; // 玩家1对象
-    public GameObject player2Object; // 玩家2对象
+{// 手动拖拽场景中的 Player1 和 Player2 对象到这两个字段
+    public PlayerInput player1Input;
+    public PlayerInput player2Input;
 
-    Dictionary<int, PlayerInput> playerBindings = new(); // 玩家绑定
-    Dictionary<int, Gamepad> gamepadBindings = new(); // 手柄绑定
-
-    void Start()
+    private void Start()
     {
-        // 初始化玩家绑定
-        playerBindings[1] = player1Object.GetComponent<PlayerInput>();
-        playerBindings[2] = player2Object.GetComponent<PlayerInput>();
-
-        // 初始化手柄绑定为null
-        gamepadBindings[1] = null;
-        gamepadBindings[2] = null;
-
-        // 手动检查已连接的手柄
-        UpdateGamepadBindings();
-    }
-
-    void OnEnable()
-    {
-        InputSystem.onDeviceChange += OnDeviceChange; // 监听设备连接和断开
-    }
-
-    void OnDisable()
-    {
-        InputSystem.onDeviceChange -= OnDeviceChange;
-    }
-
-    private void OnDeviceChange(InputDevice device, InputDeviceChange change)
-    {
-        if (device is Gamepad gamepad)
-        {
-            if (change == InputDeviceChange.Added)
-            {
-                Debug.Log($"手柄连接：{gamepad.name}");
-                AssignGamepad(gamepad); // 绑定手柄到玩家
-            }
-            else if (change == InputDeviceChange.Removed)
-            {
-                Debug.Log($"手柄断开：{gamepad.name}");
-                UnassignGamepad(gamepad); // 解绑手柄
-            }
-        }
-    }
-
-    // 将手柄绑定到固定的玩家
-    private void AssignGamepad(Gamepad gamepad)
-    {
-        for (int playerIndex = 1; playerIndex <= 2; playerIndex++)
-        {
-            if (gamepadBindings[playerIndex] == null)
-            {
-                gamepadBindings[playerIndex] = gamepad; // 绑定手柄到玩家
-                playerBindings[playerIndex].SwitchCurrentControlScheme("Gamepad", new InputDevice[] { gamepad });
-                Debug.Log($"手柄 {gamepad.name} 绑定到 Player{playerIndex}");
-                return;
-            }
-        }
-
-        Debug.Log($"手柄 {gamepad.name} 没有空闲的玩家可绑定");
-    }
-
-    // 解绑手柄
-    private void UnassignGamepad(Gamepad gamepad)
-    {
-        for (int playerIndex = 1; playerIndex <= 2; playerIndex++)
-        {
-            if (gamepadBindings[playerIndex] == gamepad)
-            {
-                gamepadBindings[playerIndex] = null; // 解绑手柄
-                playerBindings[playerIndex].SwitchCurrentControlScheme("None", null); // 移除绑定
-                Debug.Log($"手柄 {gamepad.name} 从 Player{playerIndex} 解绑");
-                return;
-            }
-        }
-    }
-
-    // 手动检查已连接的手柄并更新绑定
-    private void UpdateGamepadBindings()
-    {
+        // 获取所有已连接的 Gamepad 设备
         var gamepads = Gamepad.all;
-        foreach (var gamepad in gamepads)
+
+        // 为 Player1 分配第一个手柄
+        if (gamepads.Count >= 1)
         {
-            AssignGamepad(gamepad);
+            player1Input.SwitchCurrentControlScheme("Gamepad1", gamepads[0]);
+            Debug.Log("Player1 绑定到手柄: " + gamepads[0].name);
+        }
+
+        // 为 Player2 分配第二个手柄
+        if (gamepads.Count >= 2)
+        {
+            player2Input.SwitchCurrentControlScheme("Gamepad2", gamepads[1]);
+            Debug.Log("Player2 绑定到手柄: " + gamepads[1].name);
         }
     }
 }
