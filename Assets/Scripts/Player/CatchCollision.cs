@@ -146,6 +146,8 @@ public class CatchCollision : MonoBehaviour
     //判断当前物体是否被Player拿着
     bool IsCatchThing(GameObject obj)
     {
+        if (obj == null)
+            return false;
         Transform parent = obj.transform.parent;
         if (parent.CompareTag("Player"))
             return true;
