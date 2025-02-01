@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
     Quaternion _originalRotation;
 
     bool _isJump;
+    bool _isWater;
 
     public static event Action<int> OnScoreUpdate;
     public static event Action<int, float, float, bool> OnStaminaUpdate;
@@ -77,6 +78,7 @@ public class Player : MonoBehaviour
         _submergedVolume = _waterObject.submergedVolume;
         if (_submergedVolume > 1f && _rb.velocity != Vector3.zero)
         {
+            _isWater = true;
             _arrowMark.position = new(_arrowMark.position.x + _arrowWaterPosOffset.x, _arrowWaterPosOffset.y, _arrowMark.position.z + _arrowWaterPosOffset.z);
             PlayAudio(_clipDropWater, 2);
             if (_rb.velocity.y < 0)
@@ -130,9 +132,20 @@ public class Player : MonoBehaviour
                 isUseStamina = true;
                 if (_currentStamina <= 0)
                     _isUseStaminaOver = true;
-                _particleWater.Play();//粒子效果
+                if (!_particleWater.isPlaying && _isWater)
+                    _particleWater.Play();//粒子效果(不知道为什么不循环就会出现粒子效果不显示的问题)
                 GamepadRumble(_runRumble, _runRumble, _runRumbleTime);//手柄震动
             }
+            else
+            {
+                if (_particleWater.isPlaying)
+                    _particleWater.Stop();
+            }
+        }
+        else
+        {
+            if (_particleWater.isPlaying)
+                _particleWater.Stop();
         }
         if (moveDir.magnitude > 0.1f)
         {
@@ -202,8 +215,11 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Ice") || other.gameObject.CompareTag("Item_icePlane"))
+        if (other.gameObject.CompareTag("Ice")
+            || other.gameObject.CompareTag("Item_icePlane")
+            || other.gameObject.CompareTag("IceMountain"))
         {
+            _isWater = false;
             if (_rb.velocity.y < 0)
                 _isJump = false;
         }

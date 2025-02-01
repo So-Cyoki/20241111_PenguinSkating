@@ -62,7 +62,13 @@ public class CatchCollision : MonoBehaviour
         //移动抓取目标到Offset位置
         if (_catchTrans != null && _isCatch
         && (_catchTrans.localPosition - _catchPosOffset).sqrMagnitude > 0.001f)
+        {
             _catchTrans.localPosition = Vector3.MoveTowards(_catchTrans.localPosition, _catchPosOffset, _catchSpeed);
+            _catchRb.velocity = Vector3.zero;
+            _catchRb.angularVelocity = Vector3.zero;
+            //_catchTrans.localPosition = Vector3.Lerp(_catchTrans.localPosition, _catchPosOffset, _catchSpeed * Time.fixedDeltaTime);
+            //_catchRb.MovePosition(Vector3.MoveTowards(_catchTrans.position, transform.position, _catchSpeed));
+        }
     }
 
     void CatchThing()

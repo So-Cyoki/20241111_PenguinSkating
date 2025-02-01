@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Item_kid : ItemBase
 {
-    [HideInInspector] public Sprite2dForLookAt _sprite2DForLookAtCS;
     [Header("基础属性")]
     public ParticleSystem _dropWaterParticle;
     public Vector2 _speedForce;
@@ -55,7 +54,6 @@ public class Item_kid : ItemBase
     protected override void Start()
     {
         base.Start();
-        _sprite2DForLookAtCS = _spriteRen.GetComponent<Sprite2dForLookAt>();
         _isHunger = false;
         _randHungerTime = UnityEngine.Random.Range(_hungerTime.x, _hungerTime.y);
     }

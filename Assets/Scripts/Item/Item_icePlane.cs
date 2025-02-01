@@ -5,6 +5,7 @@ using UnityEngine;
 public class Item_icePlane : ItemBase
 {
     NWH.DWP2.WaterObjects.MassFromVolume _waterObjectMass;//用来自动计算出质量的脚本
+    public ParticleSystem _meltParticle;
     public Vector2 _startSize = new(5, 10);//随机的大小
     public float _minimizeValue;//单次减少的值
     [Tooltip("多久减少一次")] public float _uptakeTime;
@@ -71,6 +72,12 @@ public class Item_icePlane : ItemBase
                         _isDead = true;
                         _meltingSize = _maxSmallSize;
                     }
+                    //缩小的粒子特效
+                    if (_meltParticle.transform.localScale.x > 0.5f)
+                        _meltParticle.transform.localScale = new Vector3(_meltingSize, _meltingSize, _meltingSize);
+                    else
+                        _meltParticle.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    _meltParticle.Play();
                 }
                 _currentUptakeTime = _uptakeTime;
             }

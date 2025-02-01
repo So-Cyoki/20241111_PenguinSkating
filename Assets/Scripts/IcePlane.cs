@@ -7,6 +7,7 @@ public class IcePlane : MonoBehaviour
     AudioSource _audio;
     NWH.DWP2.WaterObjects.MassFromVolume _waterObjectMass;//用来自动计算出质量的脚本
     SpringJoint _spJoint;
+    public ParticleSystem _meltParticle;
 
     [Header("自动融化")]
     [Tooltip("单次融化减少多少")] public float _meltingValue;
@@ -89,6 +90,12 @@ public class IcePlane : MonoBehaviour
                     _meltingSize = _maxSmallSize;
                 }
                 _currentMeltingTime = 0;
+                //缩小的粒子特效
+                if (_meltParticle.transform.localScale.x > 0.5f)
+                    _meltParticle.transform.localScale = new Vector3(_meltingSize, _meltingSize, _meltingSize);
+                else
+                    _meltParticle.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                _meltParticle.Play();
             }
         }
         //吸收增加大小
