@@ -71,9 +71,8 @@ public class SeaWave : MonoBehaviour
         || other.gameObject.CompareTag("Item_kid")
         || other.gameObject.CompareTag("Item_icePlane"))
         {
-            float distance = Mathf.Abs(other.transform.position.x - _forwardPos.position.x);
-            Debug.Log(distance);
-            float t = Mathf.Clamp01(distance / _waveDistance);
+            float distance = other.transform.position.x - _forwardPos.position.x;
+            float t = Mathf.Clamp01(-distance / _waveDistance);
             float angle = Mathf.Lerp(_minAngle, _maxAngle, t);
             float rad = angle * Mathf.Deg2Rad;
             Vector3 force = new(-_waveForce * Mathf.Cos(rad), _waveForce * Mathf.Sin(rad), 0);

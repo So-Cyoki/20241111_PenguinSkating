@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Fish_run : FishStatesBase
 {
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        var main = GetFishMain(animator);
+
+        //main._runPar.Play();
+    }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
         var main = GetFishMain(animator);

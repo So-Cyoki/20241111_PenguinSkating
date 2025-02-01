@@ -3434,7 +3434,7 @@ MonoBehaviour:
   - item: {fileID: 7923133012633337132, guid: 1b3f1879e1cd1c743bb5469b13d8cf12, type: 3}
     probability: 20
   - item: {fileID: 7927509518316971881, guid: 0d81a8a33db1c7f4a90babb80ff7d249, type: 3}
-    probability: 25
+    probability: 15
 --- !u!1 &959411652
 GameObject:
   m_ObjectHideFlags: 3
@@ -7469,7 +7469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteObj: {fileID: 23037310}
   _playerTrans: {fileID: 9197967392934833194}
-  _lerpSpeed: 0.0015
+  _lerpSpeed: 0
   _forwardPos: {fileID: 778884802}
   _waveDistance: 40
   _minAngle: 20

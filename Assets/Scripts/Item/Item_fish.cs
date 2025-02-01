@@ -5,6 +5,7 @@ using UnityEngine;
 public class Item_fish : ItemBase
 {
     public ParticleSystem _deadPar;
+    public ParticleSystem _runPar;
     public Vector2 _speedForce;
     public Vector2 _idleTime;
     [Tooltip("输入角度")] public Vector3 _angleRun;//随机转多少角度移动
