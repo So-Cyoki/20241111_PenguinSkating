@@ -4,6 +4,7 @@ using UnityEngine;
 public class IcePlane : MonoBehaviour
 {
     Rigidbody _rb;
+    AudioSource _audio;
     NWH.DWP2.WaterObjects.MassFromVolume _waterObjectMass;//用来自动计算出质量的脚本
     SpringJoint _spJoint;
 
@@ -40,6 +41,7 @@ public class IcePlane : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _audio = GetComponent<AudioSource>();
         _spJoint = GetComponent<SpringJoint>();
         _waterObjectMass = GetComponent<NWH.DWP2.WaterObjects.MassFromVolume>();
         if (_waterObjectMass == null)
@@ -154,6 +156,17 @@ public class IcePlane : MonoBehaviour
             _spJoint.connectedBody = other.rigidbody;
             _spJoint.spring = _originalSpring;
             _spJoint.damper = _originalDamper;
+        }
+        //播放声音
+        if (other.gameObject.CompareTag("Item_fish")
+        || other.gameObject.CompareTag("Item_kid")
+        || other.gameObject.CompareTag("Item_icePlane")
+        || other.gameObject.CompareTag("Item_smallIce")
+        || other.gameObject.CompareTag("IceMountain")
+        || other.gameObject.CompareTag("Player"))
+        {
+            _audio.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+            //_audio.Play();
         }
     }
     private void OnCollisionExit(Collision other)

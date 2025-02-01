@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class UIManager : MonoBehaviour
     public Color _playerSliderImageColor_over;
     Color _playerSliderImageColor_original;
     public GameObject _player2JoinMessage;
+    Coroutine _player2JoinMessageCoroutine;
     public GameObject _arrowGo;
     public float _arrowGoTime;
     [Header("游戏开始的对象")]
@@ -38,6 +40,10 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI _endUI_scoreLength;
     public TextMeshProUGUI _endUI_scoreKidCount;
     public TextMeshProUGUI _endUI_scoreResult;
+    [Header("音乐")]
+    public AudioClip _clipBottom;
+    public AudioClip _clipPlayer2Join;
+    AudioSource _audio;
 
     Vector3 _start_SeaWave_originalPos;
     int _highScore;
@@ -50,6 +56,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         _inputActions = new PlayerInputActions();
+        _audio = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -83,6 +90,7 @@ public class UIManager : MonoBehaviour
         {
             GameRestart();
             _uiHelp.SetActive(false);
+            PlayAudio(_clipBottom);
         }
         //游戏开始
         if (_uiStart.activeSelf
@@ -90,6 +98,7 @@ public class UIManager : MonoBehaviour
         {
             _uiHelp.SetActive(true);
             _uiStart.SetActive(false);
+            PlayAudio(_clipBottom);
         }
         //游戏中
         if (_scoreText.transform.parent.gameObject.activeSelf
@@ -97,6 +106,7 @@ public class UIManager : MonoBehaviour
         && _inputActions.GamePlay2.JoinGame.WasPressedThisFrame())
         {
             Player2Start();
+            PlayAudio(_clipPlayer2Join);
         }
         //游戏结束
         if (_uiGameOver.activeSelf
@@ -104,6 +114,7 @@ public class UIManager : MonoBehaviour
         {
             _uiHelp.SetActive(true);
             _uiGameOver.SetActive(false);
+            PlayAudio(_clipBottom);
         }
         //ArrowGo的指引
         if (_isArrowGo)
@@ -156,6 +167,9 @@ public class UIManager : MonoBehaviour
         _arrowGo.SetActive(true);
         _isArrowGo = true;
         _player2JoinMessage.SetActive(true);
+        if (_player2JoinMessageCoroutine != null)
+            StopCoroutine(_player2JoinMessageCoroutine);
+        _player2JoinMessageCoroutine = StartCoroutine(EnumTimeObjOff(_player2JoinMessage, 10));
         //打开Player和重置
         _start_player.SetActive(true);
         CatchCollision catchCS = _start_player.transform.Find("CatchCollison").GetComponent<CatchCollision>();
@@ -222,6 +236,20 @@ public class UIManager : MonoBehaviour
                     _playerSlider2Image.color = _playerSliderImageColor_original;
                 break;
         }
+    }
+    IEnumerator EnumTimeObjOff(GameObject obj, float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        if (obj != null)
+            obj.SetActive(false);
+    }
+    void PlayAudio(AudioClip clip)
+    {
+        if (_audio == null)
+            return;
+        _audio.Stop();
+        _audio.clip = clip;
+        _audio.Play();
     }
 
     private void OnEnable()

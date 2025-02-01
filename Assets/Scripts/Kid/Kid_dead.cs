@@ -9,6 +9,7 @@ public class Kid_dead : KidStatesBase
         Item_kid main = GetKidMain(animator);
 
         main._rb.AddForce(main._speedForce.y * new Vector3(0.3f, 1, 0), ForceMode.VelocityChange);
+        main.PlayAudio(main._clipDead, false);
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

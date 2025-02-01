@@ -36,7 +36,11 @@ public class Item_kid : ItemBase
 
     [Header("音乐")]
     public AudioSource _audio;
+    public AudioSource _audioLoop;
     public AudioClip _clipDropWater;
+    public AudioClip _clipEat;
+    public AudioClip _clipSos;
+    public AudioClip _clipDead;
 
 
     [HideInInspector] public bool _isHunger;
@@ -117,10 +121,20 @@ public class Item_kid : ItemBase
             CancelInvoke(nameof(HungerFindFood));
     }
     //音乐播放
-    public void PlayAudio(AudioClip clip)
+    public void PlayAudio(AudioClip clip, bool isLoop)
     {
-        _audio.clip = clip;
-        _audio.Play();
+        if (!isLoop)
+        {
+            _audio.Stop();
+            _audio.clip = clip;
+            _audio.Play();
+        }
+        else
+        {
+            _audioLoop.clip = clip;
+            if (!_audioLoop.isPlaying)
+                _audioLoop.Play();
+        }
     }
 
     private void OnDrawGizmos()
@@ -147,6 +161,7 @@ public class Item_kid : ItemBase
             _randHungerTime = UnityEngine.Random.Range(_hungerTime.x, _hungerTime.y);
             _animator.SetTrigger("tIdle");
             _isHunger = false;
+            PlayAudio(_clipEat, false);
         }
     }
 }

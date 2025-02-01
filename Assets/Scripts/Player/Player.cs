@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
@@ -29,13 +30,19 @@ public class Player : MonoBehaviour
     public Vector3 _arrowStandPosOffset;
     public Vector3 _arrowWaterPosOffset;
     [Header("手柄震动")]
-    public float _lowFrequency = 0.2f;
-    public float _highFrequency = 0.2f;
-    public float _time_Rumble = 0.1f;
+    public float _catchRumble = 0.2f;
+    public float _catchRumbleTime = 0.1f;
+    public float _jumpRumble = 0.2f;
+    public float _jumpRumbleTime = 0.1f;
+    public float _runRumble = 0.2f;
+    public float _runRumbleTime = 0.01f;
+    [HideInInspector] public Coroutine _coroutineRumble;
     [Header("音乐")]
     public AudioSource _audio;
+    public AudioSource _audio2;
     public AudioClip _clipCatch;
     public AudioClip _clipDrop;
+    public AudioClip _clipDropWater;
 
     Vector3 _originalPos;
     Quaternion _originalRotation;
@@ -64,13 +71,14 @@ public class Player : MonoBehaviour
     {
         Move();
     }
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        _submergedVolume = _waterObject.submergedVolume;
         //是否进入水中判断
+        _submergedVolume = _waterObject.submergedVolume;
         if (_submergedVolume > 1f && _rb.velocity != Vector3.zero)
         {
             _arrowMark.position = new(_arrowMark.position.x + _arrowWaterPosOffset.x, _arrowWaterPosOffset.y, _arrowMark.position.z + _arrowWaterPosOffset.z);
+            PlayAudio(_clipDropWater, 2);
             if (_rb.velocity.y < 0)
                 _isJump = false;//跳跃
         }
@@ -78,9 +86,6 @@ public class Player : MonoBehaviour
         {
             _arrowMark.localPosition = _arrowStandPosOffset;
         }
-    }
-    private void LateUpdate()
-    {
         //传输距离为分数
         int length = (int)(transform.position - _startPos.position).magnitude;
         if (_highScore < length)
@@ -126,6 +131,7 @@ public class Player : MonoBehaviour
                 if (_currentStamina <= 0)
                     _isUseStaminaOver = true;
                 _particleWater.Play();//粒子效果
+                GamepadRumble(_runRumble, _runRumble, _runRumbleTime);//手柄震动
             }
         }
         if (moveDir.magnitude > 0.1f)
@@ -139,8 +145,9 @@ public class Player : MonoBehaviour
         //跳跃
         if (isJumpPressed && !_isJump)
         {
-            _rb.AddForce(_rb.mass * _jumpForce * Vector3.up, ForceMode.Impulse);
             _isJump = true;
+            _rb.AddForce(_jumpForce * Vector3.up, ForceMode.VelocityChange);
+            GamepadRumble(_jumpRumble, _jumpRumble, _jumpRumbleTime);//手柄震动
         }
         //恢复体力
         if (!isUseStamina)
@@ -161,7 +168,13 @@ public class Player : MonoBehaviour
     }
 
     //手柄震动
-    System.Collections.IEnumerator GamepadRumble(float low, float high, float time)
+    public void GamepadRumble(float low, float high, float time)
+    {
+        if (_coroutineRumble != null)
+            StopCoroutine(_coroutineRumble);
+        _coroutineRumble = StartCoroutine(EnumGamepadRumble(low, high, time));
+    }
+    IEnumerator EnumGamepadRumble(float low, float high, float time)
     {
         if (Gamepad.current == null)
             yield break;
@@ -170,17 +183,29 @@ public class Player : MonoBehaviour
         Gamepad.current.SetMotorSpeeds(0, 0); // 停止震动
     }
     //音乐播放
-    public void PlayAudio(AudioClip clip)
+    public void PlayAudio(AudioClip clip, int index)
     {
-        _audio.clip = clip;
-        _audio.Play();
+        switch (index)
+        {
+            case 1:
+                _audio.Stop();
+                _audio.clip = clip;
+                _audio.Play();
+                break;
+            case 2:
+                _audio2.Stop();
+                _audio2.clip = clip;
+                _audio2.Play();
+                break;
+        }
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Ice") && _rb.velocity.y < 0)
+        if (other.gameObject.CompareTag("Ice") || other.gameObject.CompareTag("Item_icePlane"))
         {
-            _isJump = false;
+            if (_rb.velocity.y < 0)
+                _isJump = false;
         }
         //如果在水中碰到冰块，就是想要推冰块的时候，稍微调整一下Player的Y坐标
         //但是实现出来的效果不是特别好，先不使用吧

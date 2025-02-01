@@ -39,13 +39,15 @@ public class CatchCollision : MonoBehaviour
         if (isCatchPressed && _lastCatchObj != null && !_isCatch)
         {
             CatchThing();
-            _playerCS.PlayAudio(_playerCS._clipCatch);
+            _playerCS.GamepadRumble(_playerCS._catchRumble, _playerCS._catchRumble, _playerCS._catchRumbleTime);
+            _playerCS.PlayAudio(_playerCS._clipCatch, 1);
             _particleCatch.Play();
         }
         if (isDropPressed && _isCatch)
         {
             DropThing();
-            _playerCS.PlayAudio(_playerCS._clipDrop);
+            _playerCS.GamepadRumble(_playerCS._catchRumble, _playerCS._catchRumble, _playerCS._catchRumbleTime);
+            _playerCS.PlayAudio(_playerCS._clipDrop, 1);
             _particleDrop.Play();
         }
 

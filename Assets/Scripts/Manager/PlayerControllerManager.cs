@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerControllerManager : MonoBehaviour
-{// 手动拖拽场景中的 Player1 和 Player2 对象到这两个字段
+{
     public PlayerInput player1Input;
     public PlayerInput player2Input;
 
