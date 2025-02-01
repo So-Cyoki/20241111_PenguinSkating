@@ -96,6 +96,7 @@ public class IcePlane : MonoBehaviour
                 else
                     _meltParticle.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 _meltParticle.Play();
+                _audio.Play();//播放声音
             }
         }
         //吸收增加大小
@@ -165,16 +166,16 @@ public class IcePlane : MonoBehaviour
             _spJoint.damper = _originalDamper;
         }
         //播放声音
-        if (other.gameObject.CompareTag("Item_fish")
-        || other.gameObject.CompareTag("Item_kid")
-        || other.gameObject.CompareTag("Item_icePlane")
-        || other.gameObject.CompareTag("Item_smallIce")
-        || other.gameObject.CompareTag("IceMountain")
-        || other.gameObject.CompareTag("Player"))
-        {
-            _audio.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
-            //_audio.Play();
-        }
+        // if (other.gameObject.CompareTag("Item_fish")
+        // || other.gameObject.CompareTag("Item_kid")
+        // || other.gameObject.CompareTag("Item_icePlane")
+        // || other.gameObject.CompareTag("Item_smallIce")
+        // || other.gameObject.CompareTag("IceMountain")
+        // || other.gameObject.CompareTag("Player"))
+        // {
+        //     _audio.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+        //     _audio.Play();
+        // }
     }
     private void OnCollisionExit(Collision other)
     {

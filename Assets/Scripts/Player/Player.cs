@@ -40,15 +40,19 @@ public class Player : MonoBehaviour
     [Header("音乐")]
     public AudioSource _audio;
     public AudioSource _audio2;
+    public AudioSource _audio3;
     public AudioClip _clipCatch;
     public AudioClip _clipDrop;
     public AudioClip _clipDropWater;
+    public AudioClip _clipJump;
+    public AudioClip _clipRush;
 
     Vector3 _originalPos;
     Quaternion _originalRotation;
 
     bool _isJump;
     bool _isWater;
+    bool _isRun;
 
     public static event Action<int> OnScoreUpdate;
     public static event Action<int, float, float, bool> OnStaminaUpdate;
@@ -135,15 +139,20 @@ public class Player : MonoBehaviour
                 if (!_particleWater.isPlaying && _isWater)
                     _particleWater.Play();//粒子效果(不知道为什么不循环就会出现粒子效果不显示的问题)
                 GamepadRumble(_runRumble, _runRumble, _runRumbleTime);//手柄震动
+                if (!_isRun)
+                    PlayAudio(_clipRush, 3);
+                _isRun = true;
             }
             else
             {
+                _isRun = false;
                 if (_particleWater.isPlaying)
                     _particleWater.Stop();
             }
         }
         else
         {
+            _isRun = false;
             if (_particleWater.isPlaying)
                 _particleWater.Stop();
         }
@@ -160,6 +169,7 @@ public class Player : MonoBehaviour
         {
             _isJump = true;
             _rb.AddForce(_jumpForce * Vector3.up, ForceMode.VelocityChange);
+            PlayAudio(_clipJump, 1);
             GamepadRumble(_jumpRumble, _jumpRumble, _jumpRumbleTime);//手柄震动
         }
         //恢复体力
@@ -209,6 +219,11 @@ public class Player : MonoBehaviour
                 _audio2.Stop();
                 _audio2.clip = clip;
                 _audio2.Play();
+                break;
+            case 3:
+                _audio3.Stop();
+                _audio3.clip = clip;
+                _audio3.Play();
                 break;
         }
     }

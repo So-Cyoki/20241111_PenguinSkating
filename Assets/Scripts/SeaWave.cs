@@ -8,6 +8,10 @@ public class SeaWave : MonoBehaviour
 
     [Header("基础属性")]
     public float _lerpSpeed;
+    public Transform _forwardPos;
+    public float _waveDistance;//最开始到结束的卷起距离
+    public float _minAngle;//一开始被卷起的角度
+    public float _maxAngle;//最大卷起的角度
     public float _waveForce;
 
     [Header("画图属性")]
@@ -67,8 +71,13 @@ public class SeaWave : MonoBehaviour
         || other.gameObject.CompareTag("Item_kid")
         || other.gameObject.CompareTag("Item_icePlane"))
         {
-            Vector3 dir = new(-1, 1, 0);
-            other.attachedRigidbody.AddForce(dir * _waveForce, ForceMode.Acceleration);
+            float distance = Mathf.Abs(other.transform.position.x - _forwardPos.position.x);
+            Debug.Log(distance);
+            float t = Mathf.Clamp01(distance / _waveDistance);
+            float angle = Mathf.Lerp(_minAngle, _maxAngle, t);
+            float rad = angle * Mathf.Deg2Rad;
+            Vector3 force = new(-_waveForce * Mathf.Cos(rad), _waveForce * Mathf.Sin(rad), 0);
+            other.attachedRigidbody.AddForce(force, ForceMode.Acceleration);
         }
     }
     private void OnCollisionEnter(Collision other)
@@ -78,6 +87,7 @@ public class SeaWave : MonoBehaviour
         {
             //碰到Player和主要的冰块游戏就失败了
             Debug.Log("Player被浪冲走了!游戏失败!");
+            //StopCoroutine(_enumForce);
             OnGameOver?.Invoke();
         }
         else

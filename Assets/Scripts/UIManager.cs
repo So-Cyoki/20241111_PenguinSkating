@@ -43,6 +43,7 @@ public class UIManager : MonoBehaviour
     [Header("音乐")]
     public AudioClip _clipBottom;
     public AudioClip _clipPlayer2Join;
+    public AudioClip _clipGameOver;
     AudioSource _audio;
 
     Vector3 _start_SeaWave_originalPos;
@@ -138,6 +139,7 @@ public class UIManager : MonoBehaviour
         _player2JoinMessage.SetActive(false);
         _start_player.SetActive(false);
         _start_player2.SetActive(false);
+        PlayAudio(_clipGameOver);//播放音效
         //游戏结束分数
         int resultScore = _score * _kidCount;
         _endUI_scoreLength.text = _score + " m";

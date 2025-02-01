@@ -40,6 +40,7 @@ public class Item_kid : ItemBase
     public AudioClip _clipEat;
     public AudioClip _clipSos;
     public AudioClip _clipDead;
+    public AudioClip _clipHungry;
 
 
     [HideInInspector] public bool _isHunger;

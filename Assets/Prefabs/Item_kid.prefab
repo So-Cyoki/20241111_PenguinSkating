@@ -5149,7 +5149,6 @@ MonoBehaviour:
   _destoryLength: 300
   _addMassM: 7
   _itemState: 0
-  _sprite2DForLookAtCS: {fileID: 0}
   _dropWaterParticle: {fileID: 1216238100411331939}
   _speedForce: {x: 3, y: 6}
   _angleRun: {x: 0, y: 180, z: 0}
@@ -5177,6 +5176,7 @@ MonoBehaviour:
   _clipEat: {fileID: 8300000, guid: 2b8b3d2a3c43efb4aaef259da4f70b88, type: 3}
   _clipSos: {fileID: 8300000, guid: 5f7547d005ccd9f4da7afcf29bf5f754, type: 3}
   _clipDead: {fileID: 8300000, guid: 5421de497c5e5984dbf290ea525c2bdb, type: 3}
+  _clipHungry: {fileID: 8300000, guid: a34950999017d374dacb4c20d2dcd650, type: 3}
   _isHunger: 0
 --- !u!82 &1777557421517684172
 AudioSource:

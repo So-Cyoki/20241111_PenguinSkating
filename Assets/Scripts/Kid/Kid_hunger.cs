@@ -13,6 +13,7 @@ public class Kid_hunger : KidStatesBase
             main._currentHungerDeadTime = main._hungerGodTime;
         //一定范围内循环寻找附近的食物
         main.SetHungerFindFood(true);
+        main.PlayAudio(main._clipHungry, false);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
