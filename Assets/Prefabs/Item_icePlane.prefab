@@ -9977,7 +9977,7 @@ MonoBehaviour:
   _addMassM: 0
   _itemState: 0
   _meltParticle: {fileID: 2548525123650924071}
-  _startSize: {x: 0.6, y: 1.6}
+  _startSize: {x: 0.5, y: 1.5}
   _minimizeValue: 0.15
   _uptakeTime: 0.1
   _meltingLerp: 0.01

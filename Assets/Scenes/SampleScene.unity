@@ -7191,6 +7191,10 @@ MonoBehaviour:
   - {fileID: 5873726290965156512, guid: e60014977565b9645a78819163000550, type: 3}
   _seaWaveObj: {fileID: 1878526766}
   _addWaveSpeed: 0.0005
+  _shapeFFT: {fileID: 739541190}
+  _addShapeWeight: 0.2
+  _addShapeWind: 0.1
+  _shapeLerpSpeed: 0.05
 --- !u!1 &1808083357
 GameObject:
   m_ObjectHideFlags: 0
@@ -8751,6 +8755,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4715584030408794148, guid: f72657f91b67b69468974ca54e6a780c, type: 3}
+      propertyPath: _speed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715584030408794148, guid: f72657f91b67b69468974ca54e6a780c, type: 3}
       propertyPath: _startPos
       value: 
       objectReference: {fileID: 693084477}
@@ -8821,7 +8829,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7943022860376339126, guid: fc0857913d624134abbbe408056df5fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7943022860376339126, guid: fc0857913d624134abbbe408056df5fa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8879,21 +8887,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 784900913}
     m_Modifications:
-    - target: {fileID: 4073632360041063741, guid: e60014977565b9645a78819163000550, type: 3}
-      propertyPath: _isStartMap
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5512243473788697626, guid: e60014977565b9645a78819163000550, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5873726290965156512, guid: e60014977565b9645a78819163000550, type: 3}
       propertyPath: m_Name
       value: IceMountainMap
-      objectReference: {fileID: 0}
-    - target: {fileID: 5873726290965156512, guid: e60014977565b9645a78819163000550, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6182811634476045767, guid: e60014977565b9645a78819163000550, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8933,10 +8929,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6182811634476045767, guid: e60014977565b9645a78819163000550, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8133668033343785756, guid: e60014977565b9645a78819163000550, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
