@@ -33,8 +33,10 @@ public class SeaWave : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        //海浪移动
         Vector3 targetPos = new(_playerTrans.position.x, 0, _playerTrans.position.z);
-        transform.position = Vector3.Lerp(transform.position, targetPos, _lerpSpeed);
+        if (_playerTrans.position.x - transform.position.x >= 0)
+            transform.position = Vector3.Lerp(transform.position, targetPos, _lerpSpeed);
     }
     void DrawSprite()
     {

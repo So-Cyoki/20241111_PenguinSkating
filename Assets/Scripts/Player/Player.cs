@@ -231,7 +231,11 @@ public class Player : MonoBehaviour
 
     private void OnDisable()
     {
-        Gamepad.current?.SetMotorSpeeds(0, 0); // 停止震动
+        var gamepads = Gamepad.all;
+        if (gamepads.Count <= 0)
+            return;
+        foreach (var gamepad in gamepads)
+            gamepad.SetMotorSpeeds(0, 0); // 停止震动
     }
     private void OnCollisionEnter(Collision other)
     {
