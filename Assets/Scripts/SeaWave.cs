@@ -23,9 +23,12 @@ public class SeaWave : MonoBehaviour
 
     public static event Action OnGameOver;//游戏结束
 
-    private void Start()
+    private void Awake()
     {
         _lerpSpeed_original = _lerpSpeed;
+    }
+    private void Start()
+    {
         DrawSprite();
     }
     private void FixedUpdate()
