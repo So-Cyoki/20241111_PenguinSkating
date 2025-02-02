@@ -9,6 +9,9 @@ public class IceMountainManager : MonoBehaviour
     [Tooltip("最开始的地图位置")] public Vector3 _startPos;
     List<GameObject> _waitDestoryMap = new();//等待删除的地图块
     public List<GameObject> _iceMountainMapList;//存储地图块
+    [Header("难度增加")]
+    public SeaWave _seaWaveObj;
+    public float _addWaveSpeed;
 
     void CreatNewMap(Vector3 startPos)
     {
@@ -18,6 +21,9 @@ public class IceMountainManager : MonoBehaviour
         newMap.transform.position = startPos;
         //储存新建的地图块，用以一会删除
         _waitDestoryMap.Add(newMap);
+
+        //增加难度，让海浪加速
+        _seaWaveObj._lerpSpeed += _addWaveSpeed;
     }
     public void ResetMap()
     {

@@ -189,7 +189,6 @@ public class Player : MonoBehaviour
                 _isUseStaminaOver = false;
         }
     }
-
     //手柄震动
     public void GamepadRumble(float low, float high, float time)
     {
@@ -228,6 +227,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        Gamepad.current?.SetMotorSpeeds(0, 0); // 停止震动
+    }
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Ice")

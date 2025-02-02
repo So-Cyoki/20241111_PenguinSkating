@@ -13,6 +13,7 @@ public class SeaWave : MonoBehaviour
     public float _minAngle;//一开始被卷起的角度
     public float _maxAngle;//最大卷起的角度
     public float _waveForce;
+    float _lerpSpeed_original;
 
     [Header("画图属性")]
     [Tooltip("画图的横竖多少列")] public Vector2 _drawNums;
@@ -24,6 +25,7 @@ public class SeaWave : MonoBehaviour
 
     private void Start()
     {
+        _lerpSpeed_original = _lerpSpeed;
         DrawSprite();
     }
     private void FixedUpdate()
@@ -63,6 +65,11 @@ public class SeaWave : MonoBehaviour
             }
         }
     }
+    public void Inital()
+    {
+        _lerpSpeed = _lerpSpeed_original;
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player")

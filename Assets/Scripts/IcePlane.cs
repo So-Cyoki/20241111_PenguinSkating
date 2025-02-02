@@ -12,6 +12,8 @@ public class IcePlane : MonoBehaviour
     [Header("自动融化")]
     [Tooltip("单次融化减少多少")] public float _meltingValue;
     [Tooltip("多久融化一次")] public float _meltingTime;
+    [Tooltip("按照冰块的尺寸，动态的按照曲线来调整融化时间")] public AnimationCurve _meltingTimeCurve;
+    float _autoMeltingTime;//曲线计算后的动态的融化时间
     float _currentMeltingTime;
     [Tooltip("单次融化Lerp值")] public float _meltingLerp;
     public float _maxSmallSize;
@@ -54,6 +56,7 @@ public class IcePlane : MonoBehaviour
     }
     private void Start()
     {
+        _autoMeltingTime = _meltingTime;
         _currentMeltingTime = 0;
         _currentUptakeTime = 0;
         _meltingSize = transform.localScale.x;
@@ -81,7 +84,7 @@ public class IcePlane : MonoBehaviour
         if (!_isDead)
         {
             _currentMeltingTime += Time.deltaTime;
-            if (_currentMeltingTime > _meltingTime)
+            if (_currentMeltingTime > _autoMeltingTime)
             {
                 _meltingSize -= _meltingValue;
                 if (_meltingSize < _maxSmallSize)
@@ -116,11 +119,19 @@ public class IcePlane : MonoBehaviour
             _size = Mathf.Lerp(_size, _meltingSize, _meltingLerp);
         if (_size <= _meltingSize)
             _size = Mathf.Lerp(_size, _meltingSize, _uptakeLerp);
-        //同步大小
+
         if (_size != transform.localScale.x)
         {
+            //同步大小
             transform.localScale = new Vector3(_size, transform.localScale.y, _size);
-            SetMassFromMaterial();//同步质量
+            //同步质量
+            SetMassFromMaterial();
+
+            //最后按照大小，动态调整融化时间
+            float normalizedSize = Mathf.InverseLerp(_maxSmallSize, _maxBigSize, transform.localScale.x);
+            float shrinkInterval = _meltingTimeCurve.Evaluate(normalizedSize);
+            _autoMeltingTime = _meltingTime * shrinkInterval;
+            Debug.Log(_autoMeltingTime);
         }
     }
     void SetMassFromMaterial()

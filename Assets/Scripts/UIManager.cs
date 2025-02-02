@@ -188,6 +188,7 @@ public class UIManager : MonoBehaviour
         itemBase.Initial(_start_kid_originalPos, _start_player.transform);
         //重置SeaWave的位置
         _start_SeaWave.SetActive(true);
+        _start_SeaWave.GetComponent<SeaWave>().Inital();
         _start_SeaWave.transform.SetPositionAndRotation(_start_SeaWave_originalPos, Quaternion.Euler(0, 90, 0));
         //重置整个冰山地图
         _start_iceMountainManagerCS.ResetMap();
