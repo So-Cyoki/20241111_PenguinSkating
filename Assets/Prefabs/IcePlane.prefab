@@ -10368,6 +10368,30 @@ MonoBehaviour:
   _meltParticle: {fileID: 7961757392749504495}
   _meltingValue: 0.1
   _meltingTime: 16
+  _meltingTimeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.3507846
+      inSlope: -2
+      outSlope: -2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _meltingLerp: 0.07
   _maxSmallSize: 0.4
   _addValue: 0.05
@@ -10430,7 +10454,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.8
+      value: 0.4
       inSlope: 0
       outSlope: 0
       tangentMode: 0

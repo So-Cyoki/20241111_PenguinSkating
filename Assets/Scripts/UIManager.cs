@@ -104,7 +104,8 @@ public class UIManager : MonoBehaviour
         //游戏中
         if (_scoreText.transform.parent.gameObject.activeSelf
         && _start_player2.activeSelf == false
-        && _inputActions.GamePlay2.JoinGame.WasPressedThisFrame())
+        && _inputActions.GamePlay2.JoinGame.WasPressedThisFrame()
+        && Gamepad.all.Count >= 2)
         {
             Player2Start();
             PlayAudio(_clipPlayer2Join);
@@ -139,6 +140,7 @@ public class UIManager : MonoBehaviour
         _player2JoinMessage.SetActive(false);
         _start_player.SetActive(false);
         _start_player2.SetActive(false);
+        _start_icePlane.SetActive(false);
         PlayAudio(_clipGameOver);//播放音效
         //游戏结束分数
         int resultScore = _score * _kidCount;
@@ -186,7 +188,7 @@ public class UIManager : MonoBehaviour
         GameObject itemKid = Instantiate(_start_kidPrefabs, _start_kid_originalPos, Quaternion.Euler(0, -90, 0), _end_Item);
         ItemBase itemBase = itemKid.GetComponent<ItemBase>();
         itemBase.Initial(_start_kid_originalPos, _start_player.transform);
-        //重置SeaWave的位置
+        //重置SeaWave
         _start_SeaWave.SetActive(true);
         _start_SeaWave.GetComponent<SeaWave>().Inital();
         _start_SeaWave.transform.SetPositionAndRotation(_start_SeaWave_originalPos, Quaternion.Euler(0, 90, 0));

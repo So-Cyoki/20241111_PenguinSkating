@@ -14906,10 +14906,10 @@ MonoBehaviour:
   _spriteRen: {fileID: 5625528403318449072}
   _playerTrans: {fileID: 0}
   _destoryLength: 300
-  _addMassM: 10
+  _addMassM: 15
   _itemState: 0
   _deadPar: {fileID: 2673932290011203675}
   _runPar: {fileID: 6599652531300695616}
-  _speedForce: {x: 5, y: 10}
-  _idleTime: {x: 1.5, y: 3}
+  _speedForce: {x: 7, y: 12}
+  _idleTime: {x: 1, y: 3}
   _angleRun: {x: 30, y: 90, z: 0}

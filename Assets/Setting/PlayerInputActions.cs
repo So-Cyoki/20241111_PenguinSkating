@@ -384,17 +384,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""ee3d469a-4c4d-41a8-b1b6-9474e2caf0de"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad1"",
-                    ""action"": ""Enter"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""3ca00dc7-a299-4584-9e7b-29b22c8e9a57"",
                     ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": """",

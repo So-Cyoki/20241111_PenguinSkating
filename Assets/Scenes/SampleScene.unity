@@ -7552,7 +7552,7 @@ MonoBehaviour:
   _forwardPos: {fileID: 778884802}
   _waveDistance: 40
   _minAngle: 20
-  _maxAngle: 120
+  _maxAngle: 100
   _waveForce: 18
   _drawNums: {x: 15, y: 30}
   _drawOffsetPos: {x: 0, y: 3}
@@ -8811,78 +8811,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4323472685603520929, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingCurve.m_PostInfinity
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingTimeCurve.m_PreInfinity
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingCurve.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingTimeCurve.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingCurve.m_Curve.Array.data[1].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingCurve.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingCurve.m_Curve.Array.data[0].inSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingCurve.m_Curve.Array.data[0].outSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingTimeCurve.m_Curve.Array.data[1].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingTimeCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingTimeCurve.m_Curve.Array.data[1].value
-      value: 0.3507846
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingTimeCurve.m_Curve.Array.data[0].inSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingTimeCurve.m_Curve.Array.data[1].inSlope
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingTimeCurve.m_Curve.Array.data[0].outSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingTimeCurve.m_Curve.Array.data[1].outSlope
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingTimeCurve.m_Curve.Array.data[0].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5236351870136407055, guid: fc0857913d624134abbbe408056df5fa, type: 3}
-      propertyPath: _meltingTimeCurve.m_Curve.Array.data[1].tangentMode
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7309511080738924556, guid: fc0857913d624134abbbe408056df5fa, type: 3}
       propertyPath: m_Name
       value: IcePlane
@@ -8893,7 +8821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7943022860376339126, guid: fc0857913d624134abbbe408056df5fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7943022860376339126, guid: fc0857913d624134abbbe408056df5fa, type: 3}
       propertyPath: m_LocalPosition.z

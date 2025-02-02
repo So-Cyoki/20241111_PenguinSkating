@@ -21072,7 +21072,7 @@ MonoBehaviour:
   _particleCatch: {fileID: 8829189084280735}
   _catchPosOffset: {x: 0, y: 1, z: 1}
   _catchSpeed: 0.2
-  _throwForce: 6
+  _throwForce: 7
   _throwAngle: {x: -70, y: 0, z: 0}
   _catchTrans: {fileID: 0}
   _catchObj: {fileID: 0}

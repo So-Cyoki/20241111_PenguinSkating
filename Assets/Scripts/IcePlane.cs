@@ -6,6 +6,7 @@ public class IcePlane : MonoBehaviour
     Rigidbody _rb;
     AudioSource _audio;
     NWH.DWP2.WaterObjects.MassFromVolume _waterObjectMass;//用来自动计算出质量的脚本
+    NWH.DWP2.WaterObjects.WaterObject _waterObject;//水插件脚本
     SpringJoint _spJoint;
     public ParticleSystem _meltParticle;
 
@@ -46,6 +47,7 @@ public class IcePlane : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _audio = GetComponent<AudioSource>();
         _spJoint = GetComponent<SpringJoint>();
+        _waterObject = GetComponent<NWH.DWP2.WaterObjects.WaterObject>();
         _waterObjectMass = GetComponent<NWH.DWP2.WaterObjects.MassFromVolume>();
         if (_waterObjectMass == null)
             Debug.LogWarning("缺少水脚本！！");
@@ -131,7 +133,7 @@ public class IcePlane : MonoBehaviour
             float normalizedSize = Mathf.InverseLerp(_maxSmallSize, _maxBigSize, transform.localScale.x);
             float shrinkInterval = _meltingTimeCurve.Evaluate(normalizedSize);
             _autoMeltingTime = _meltingTime * shrinkInterval;
-            Debug.Log(_autoMeltingTime);
+            //Debug.Log(_autoMeltingTime);
         }
     }
     void SetMassFromMaterial()
@@ -148,6 +150,7 @@ public class IcePlane : MonoBehaviour
         SetMassFromMaterial();
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
+        _waterObject.submergedVolume = 0;
         _currentMeltingTime = 0;
         _currentUptakeTime = 0;
         _kidCount = 0;
