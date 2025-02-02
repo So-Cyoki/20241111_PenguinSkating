@@ -7194,7 +7194,7 @@ MonoBehaviour:
   _shapeFFT: {fileID: 739541190}
   _addShapeWeight: 0.2
   _addShapeWind: 0.1
-  _shapeLerpSpeed: 0.05
+  _shapeLerpSpeed: 0.001
 --- !u!1 &1808083357
 GameObject:
   m_ObjectHideFlags: 0
