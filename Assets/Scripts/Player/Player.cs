@@ -198,11 +198,13 @@ public class Player : MonoBehaviour
     }
     IEnumerator EnumGamepadRumble(float low, float high, float time)
     {
-        if (Gamepad.current == null)
+        var gamepads = Gamepad.all;
+        int index = _playerIndex - 1;
+        if (gamepads[index] == null)
             yield break;
-        Gamepad.current.SetMotorSpeeds(low, high);// 设置震动频率
+        gamepads[index].SetMotorSpeeds(low, high);// 设置震动频率
         yield return new WaitForSecondsRealtime(time);
-        Gamepad.current.SetMotorSpeeds(0, 0); // 停止震动
+        gamepads[index].SetMotorSpeeds(0, 0); // 停止震动
     }
     //音乐播放
     public void PlayAudio(AudioClip clip, int index)

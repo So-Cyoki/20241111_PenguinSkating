@@ -2837,7 +2837,7 @@ MonoBehaviour:
   _overrideGlobalWindSpeed: 0
   _windSpeed: 20
   _respectShallowWaterAttenuation: 1
-  _weight: 0.4
+  _weight: 0.2
   _blendMode: 0
   _queue: 0
   _resolution: 128
